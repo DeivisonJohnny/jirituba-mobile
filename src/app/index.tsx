@@ -7,15 +7,19 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
 import { router } from "expo-router";
-import styled from "styled-components/native";
+import styled, { ThemeProvider } from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
+import themes from "./theme";
 
 interface LoginProps {}
 
 const Login = (props: LoginProps) => {
   const handleLogin = () => {};
+  const deviceTheme = useColorScheme();
+  const theme = themes[deviceTheme] || "dark";
 
   const [fontsLoaded] = useFonts({
     montserrat: require("../../assets/fonts/Montserrat.ttf"),
@@ -28,12 +32,7 @@ const Login = (props: LoginProps) => {
   }
 
   return (
-    <LinearGradient
-      colors={['#000000', '#6000a0']}
-      start={{ x: 0.5, y: 0.5 }}
-      end={{ x: 1, y: 1 }}
-      style={styles.gradient}
-    >
+    <ThemeProvider theme={theme}>
       <BodyContent>
         <Header>
           <TextTitulo>Jirituba Avaliações</TextTitulo>
@@ -48,26 +47,31 @@ const Login = (props: LoginProps) => {
                 <BoxInput>
                   <Label>Usuario</Label>
                   <Input
-                    placeholderTextColor={"#ffffff3d"}
-                    placeholder="Usuario"
                     value={values.usuario}
-                    onChangeText={handleChange('usuario')}
+                    onChangeText={handleChange("usuario")}
                   />
                 </BoxInput>
 
                 <BoxInput>
                   <Label>Senha</Label>
                   <Input
-                    placeholderTextColor={"#ffffff3d"}
-                    placeholder="Senha"
                     value={values.senha}
-                    onChangeText={handleChange('senha')}
+                    onChangeText={handleChange("senha")}
                     secureTextEntry
                   />
                 </BoxInput>
                 <BoxInput>
-                  <ButtomSubmit onPress={()=>router.replace('./dashboard')}>
-                    <Text style={{ textAlign: "center", color: 'white' }}>Acessar</Text>
+                  <ButtomSubmit onPress={() => router.replace("./dashboard")}>
+                    <Text
+                      style={{
+                        textAlign: "center",
+                        color: "white",
+                        fontWeight: "bold",
+                        letterSpacing: 0.5,
+                      }}
+                    >
+                      Acessar
+                    </Text>
                   </ButtomSubmit>
                 </BoxInput>
               </Form>
@@ -79,7 +83,7 @@ const Login = (props: LoginProps) => {
           <FooterTitulo>Dev Johnny</FooterTitulo>
         </Footer>
       </BodyContent>
-    </LinearGradient>
+    </ThemeProvider>
   );
 };
 
@@ -94,18 +98,21 @@ export default Login;
 const BodyContent = styled.View`
   flex: 1;
   justify-content: space-evenly;
+  background-color: ${(props) => props.theme.background};
 `;
 
 const Header = styled.View`
-  height: 35%;
+  height: 25%;
   align-items: center;
   justify-content: center;
 `;
 
 const TextTitulo = styled.Text`
-  color: white;
+  color: ${props => props.theme.color};
   font-size: 30px;
   font-family: "montserrat";
+  font-weight: bold;
+  letter-spacing: 2px;
 `;
 
 const Main = styled.View`
@@ -115,34 +122,39 @@ const Main = styled.View`
 
 const Form = styled.View`
   flex-direction: column;
+  gap: 12px;
 `;
 
 const BoxInput = styled.View`
-display: flex;
-flex-direction: column;
-gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   margin-bottom: 20px;
 `;
 
 const Label = styled.Text`
   color: white;
-  font-size: 17px;
+  font-size: 14px;
   padding-left: 4px;
+  color: #666680;
+  font-weight: bold;
 `;
 
 const Input = styled.TextInput`
-  border: 1px solid gray;
-  padding: 10px;
-  border-radius: 4px;
-  background-color: #4d4d4d3b;
+  border: 1.7px solid #353542;
+  padding: 15px 10px;
+  border-radius: 17px;
+  background-color: transparent;
   color: white;
   letter-spacing: 0.8px;
 `;
 
 const ButtomSubmit = styled.TouchableOpacity`
-  padding: 10px;
-  border-radius: 4px;
-  background-color: black;
+  padding: 15px 10px;
+  border-radius: 100%;
+  background-color: ${props => props.theme.login.colorButtonSubmit};
+  border-radius: 17px;
+  box-shadow: ${props => props.theme.login.colorShadowBtnSubmit} 0px 7px 15px;
 `;
 
 const Footer = styled.View`
