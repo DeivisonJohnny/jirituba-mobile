@@ -22,9 +22,9 @@ const Login = (props: LoginProps) => {
   const theme = themes[deviceTheme] || "dark";
 
   const [fontsLoaded] = useFonts({
-    montserrat: require("../../assets/fonts/Montserrat.ttf"),
-    montserratMedium: require("../../assets/fonts/Montserrat-Medium.ttf"),
-    montserratBold: require("../../assets/fonts/Montserrat-Bold.ttf"),
+    montserrat: require("./assets/fonts/Montserrat.ttf"),
+    montserratMedium: require("./assets/fonts/Montserrat-Medium.ttf"),
+    montserratBold: require("./assets/fonts/Montserrat-Bold.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -87,11 +87,7 @@ const Login = (props: LoginProps) => {
   );
 };
 
-const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-  },
-});
+
 
 export default Login;
 
