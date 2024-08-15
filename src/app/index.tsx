@@ -87,8 +87,6 @@ const Login = (props: LoginProps) => {
   );
 };
 
-
-
 export default Login;
 
 const BodyContent = styled.View`
@@ -104,7 +102,7 @@ const Header = styled.View`
 `;
 
 const TextTitulo = styled.Text`
-  color: ${props => props.theme.color};
+  color: ${(props) => props.theme.color};
   font-size: 30px;
   font-family: "montserrat";
   font-weight: bold;
@@ -148,9 +146,9 @@ const Input = styled.TextInput`
 const ButtomSubmit = styled.TouchableOpacity`
   padding: 15px 10px;
   border-radius: 100%;
-  background-color: ${props => props.theme.login.colorButtonSubmit};
+  background-color: ${(props) => props.theme.login.colorButtonSubmit};
   border-radius: 17px;
-  box-shadow: ${props => props.theme.login.colorShadowBtnSubmit} 0px 7px 15px;
+  box-shadow: ${(props) => props.theme.login.colorShadowBtnSubmit} 0px 7px 15px;
 `;
 
 const Footer = styled.View`

@@ -1,10 +1,12 @@
-import * as React from "react";
-import { Text, View, useColorScheme } from "react-native";
+import { Text, useColorScheme } from "react-native";
 import { styled, ThemeProvider } from "styled-components/native";
 import themes from "../theme/index";
 import { useFonts } from "expo-font";
 import { Icon } from "react-native-elements";
 import TableAvaliation from "../components/table/tableAvaliation";
+import { useEffect, useState } from "react";
+import LoandingContent from "../components/loading/placeholder";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Dashboard = () => {
   const deviceTheme = useColorScheme();
@@ -20,15 +22,31 @@ const Dashboard = () => {
   if (!fontLoad) {
     return <Text>Loading...</Text>;
   }
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Simula uma chamada de API com um atraso
+    setTimeout(() => {
+      // Suponha que você obteve dados da API aqui
+      setLoading(false); // Dados carregados
+    }, 3000); // Simula um atraso de 2 segundos
+  }, []);
+
+  console.log(loading);
 
   return (
     <ThemeProvider theme={theme}>
       <Body>
         <BoxStatistics>
-          <ConteinerBox>
-            <TitleBox>N° Avaliações do dia</TitleBox>
-            <ContentText>15</ContentText>
-          </ConteinerBox>
+          {true ? (
+            <LoandingContent height={40} width={'45%'}></LoandingContent>
+          ) : (
+            <ConteinerBox>
+              <TitleBox>N° Avaliações do dia</TitleBox>
+              <ContentText>15</ContentText>
+            </ConteinerBox>
+          )}
 
           <ConteinerBox>
             <TitleBox style={{ color: "white" }}>Nota atendimento</TitleBox>
@@ -39,10 +57,7 @@ const Dashboard = () => {
           </ConteinerBox>
         </BoxStatistics>
 
-
-        <Main>
-          <TableAvaliation></TableAvaliation>
-        </Main>
+        <Main>{/* <TableAvaliation></TableAvaliation> */}</Main>
       </Body>
     </ThemeProvider>
   );
@@ -87,7 +102,7 @@ const ContentNota = styled.View`
   align-items: center;
   flex-direction: row;
   gap: 10px;
-`
+`;
 
 const ContentText = styled.Text`
   font-size: 33px;
@@ -95,8 +110,6 @@ const ContentText = styled.Text`
   text-align: center;
 `;
 
-
 const Main = styled.View`
-    padding: 10px 15px;
-
-`
+  padding: 10px 15px;
+`;
