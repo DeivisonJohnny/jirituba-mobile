@@ -63,7 +63,7 @@ const BoxStatistics = styled.View`
   justify-content: space-evenly;
 `;
 
-const ConteinerBox = styled.View`
+const ConteinerBox = styled.TouchableOpacity`
   background-color: #1c1c23;
 
   padding: 10px;

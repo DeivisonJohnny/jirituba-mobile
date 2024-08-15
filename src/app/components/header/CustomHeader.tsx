@@ -7,23 +7,30 @@ import {
   useColorScheme,
 } from "react-native";
 import { Icon } from "react-native-elements";
-import styled, {ThemeProvider} from "styled-components/native";
+import styled, { ThemeProvider } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
 import themes from "../../theme";
-import { useDerivedValue } from "react-native-reanimated";
-
+import { useFonts } from "expo-font";
 
 const CustomHeader = () => {
   const navigation = useNavigation();
-  const deviceTheme = useColorScheme(); 
+  const deviceTheme = useColorScheme();
 
-  const theme = themes[deviceTheme]
+  const theme = themes[deviceTheme];
+
+  const [fontsLoaded] = useFonts({
+    montserrat: require("../../assets/fonts/Montserrat.ttf"),
+    montserratMedium: require("../../assets/fonts/Montserrat-Medium.ttf"),
+    montserratBold: require("../../assets/fonts/Montserrat-Bold.ttf"),
+  });
 
   return (
     <ThemeProvider theme={theme}>
       <HeaderContainer>
         <ProfileImage source={require("../../assets/img/foto-perfil.jpg")} />
+
+        <TituloHead>Jirituba</TituloHead>
         <ContainerButtons>
           <TouchableOpacity
             onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
@@ -67,5 +74,13 @@ const ContainerButtons = styled.View`
   flex-wrap: nowrap;
   flex-direction: row;
 `;
+
+const TituloHead = styled.Text`
+    color: white;
+    font-family: 'montserrat';
+    font-size: 20px;
+    letter-spacing: 1.2px;
+`;
+
 
 export default CustomHeader;
