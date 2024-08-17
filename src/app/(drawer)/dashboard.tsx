@@ -6,7 +6,6 @@ import { Icon } from "react-native-elements";
 import TableAvaliation from "../components/table/tableAvaliation";
 import { useEffect, useState } from "react";
 import LoandingContent from "../components/loading/placeholder";
-import { LinearGradient } from "expo-linear-gradient";
 
 const Dashboard = () => {
   const deviceTheme = useColorScheme();
@@ -39,8 +38,8 @@ const Dashboard = () => {
     <ThemeProvider theme={theme}>
       <Body>
         <BoxStatistics>
-          {true ? (
-            <LoandingContent height={40} width={'45%'}></LoandingContent>
+          {loading ? (
+            <LoandingContent height={85} width={"45%"}></LoandingContent>
           ) : (
             <ConteinerBox>
               <TitleBox>N° Avaliações do dia</TitleBox>
@@ -48,16 +47,22 @@ const Dashboard = () => {
             </ConteinerBox>
           )}
 
-          <ConteinerBox>
-            <TitleBox style={{ color: "white" }}>Nota atendimento</TitleBox>
-            <ContentNota>
-              <ContentText>5.0</ContentText>
-              <Icon type="ionicon" name="star" color={"yellow"}></Icon>
-            </ContentNota>
-          </ConteinerBox>
+          {loading ? (
+            <LoandingContent height={85} width={"45%"}></LoandingContent>
+          ) : (
+            <ConteinerBox>
+              <TitleBox style={{ color: "white" }}>Nota atendimento</TitleBox>
+              <ContentNota>
+                <ContentText>5.0</ContentText>
+                <Icon type="ionicon" name="star" color={"yellow"}></Icon>
+              </ContentNota>
+            </ConteinerBox>
+          )}
         </BoxStatistics>
 
-        <Main>{/* <TableAvaliation></TableAvaliation> */}</Main>
+        <Main>
+          <TableAvaliation></TableAvaliation>
+        </Main>
       </Body>
     </ThemeProvider>
   );
@@ -112,4 +117,5 @@ const ContentText = styled.Text`
 
 const Main = styled.View`
   padding: 10px 15px;
+  height: 100%;
 `;

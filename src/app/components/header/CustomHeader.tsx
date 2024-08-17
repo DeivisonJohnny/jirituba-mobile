@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Image,
-  Switch,
-  TouchableOpacity,
-  useColorScheme,
-} from "react-native";
+import { Switch, TouchableOpacity, useColorScheme } from "react-native";
 import { Icon } from "react-native-elements";
 import styled, { ThemeProvider } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
@@ -76,11 +70,10 @@ const ContainerButtons = styled.View`
 `;
 
 const TituloHead = styled.Text`
-    color: white;
-    font-family: 'montserrat';
-    font-size: 20px;
-    letter-spacing: 1.2px;
+  color: white;
+  font-family: "montserrat";
+  font-size: 20px;
+  letter-spacing: 1.2px;
 `;
-
 
 export default CustomHeader;

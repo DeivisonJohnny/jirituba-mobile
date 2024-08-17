@@ -66,7 +66,7 @@ const TitleCol = styled.Text`
 `;
 
 const BodyTable = styled.ScrollView`
-  height: 100%;
+
 `;
 
 const Cell = styled.Text`
