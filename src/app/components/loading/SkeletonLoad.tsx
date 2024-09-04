@@ -5,9 +5,10 @@ import { StyleSheet } from "react-native";
 interface propsSkeleton {
   height: number | "auto" | `${number}%`;
   width: number | "auto" | `${number}%`;
+  key?: string;
 }
 
-const LoandingContent = (props: propsSkeleton) => {
+const SkeletonLoad = (props: propsSkeleton) => {
   const Gradient = () => {
     return (
       <LinearGradient
@@ -31,7 +32,7 @@ const LoandingContent = (props: propsSkeleton) => {
   );
 };
 
-export default LoandingContent;
+export default SkeletonLoad;
 
 const styles = StyleSheet.create({
   skeleton: {

@@ -4,8 +4,9 @@ import themes from "../theme/index";
 import { useFonts } from "expo-font";
 import { Icon } from "react-native-elements";
 import TableAvaliation from "../components/table/tableAvaliation";
-import { useEffect, useState } from "react";
-import LoandingContent from "../components/loading/placeholder";
+import { useState } from "react";
+import SkeletonLoad from "../components/loading/SkeletonLoad";
+import { moderateScale } from "react-native-size-matters";
 
 const Dashboard = () => {
   const deviceTheme = useColorScheme();
@@ -17,20 +18,11 @@ const Dashboard = () => {
     montserratMedium: require("../assets/fonts/Montserrat-Medium.ttf"),
     montserratBold: require("../assets/fonts/Montserrat-Bold.ttf"),
   });
-
-  if (!fontLoad) {
-    return <Text>Loading...</Text>;
-  }
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    // Simula uma chamada de API com um atraso
     setTimeout(() => {
-      // Suponha que você obteve dados da API aqui
-      setLoading(false); // Dados carregados
-    }, 3000); // Simula um atraso de 2 segundos
-  }, []);
+      setLoading(false); 
+    }, 3000);
 
   console.log(loading);
 
@@ -39,7 +31,7 @@ const Dashboard = () => {
       <Body>
         <BoxStatistics>
           {loading ? (
-            <LoandingContent height={85} width={"45%"}></LoandingContent>
+            <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
           ) : (
             <ConteinerBox>
               <TitleBox>N° Avaliações do dia</TitleBox>
@@ -48,7 +40,7 @@ const Dashboard = () => {
           )}
 
           {loading ? (
-            <LoandingContent height={85} width={"45%"}></LoandingContent>
+            <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
           ) : (
             <ConteinerBox>
               <TitleBox style={{ color: "white" }}>Nota atendimento</TitleBox>
@@ -97,6 +89,7 @@ const ConteinerBox = styled.TouchableOpacity`
 `;
 
 const TitleBox = styled.Text`
+  font-size: '${moderateScale(12).toFixed(2)}px';
   color: white;
   font-family: "montserrat";
 `;

@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Switch, TouchableOpacity, useColorScheme } from "react-native";
+import React from "react";
+import { TouchableOpacity, useColorScheme} from "react-native";
 import { Icon } from "react-native-elements";
 import styled, { ThemeProvider } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
 import themes from "../../theme";
 import { useFonts } from "expo-font";
+import ProfileCard from "../profile";
 
-const CustomHeader = () => {
+const Header = () => {
   const navigation = useNavigation();
   const deviceTheme = useColorScheme();
 
@@ -15,15 +16,12 @@ const CustomHeader = () => {
 
   const [fontsLoaded] = useFonts({
     montserrat: require("../../assets/fonts/Montserrat.ttf"),
-    montserratMedium: require("../../assets/fonts/Montserrat-Medium.ttf"),
-    montserratBold: require("../../assets/fonts/Montserrat-Bold.ttf"),
   });
 
   return (
     <ThemeProvider theme={theme}>
       <HeaderContainer>
-        <ProfileImage source={require("../../assets/img/foto-perfil.jpg")} />
-
+        <ProfileCard></ProfileCard>
         <TituloHead>Jirituba</TituloHead>
         <ContainerButtons>
           <TouchableOpacity
@@ -51,16 +49,6 @@ const HeaderContainer = styled.View`
   width: 100%;
 `;
 
-const ProfileImage = styled.Image`
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-`;
-
-const ButtonTheme = styled(Switch)`
-  transform: scale(0.7);
-`;
-
 const ContainerButtons = styled.View`
   display: flex;
   gap: 10px;
@@ -76,4 +64,4 @@ const TituloHead = styled.Text`
   letter-spacing: 1.2px;
 `;
 
-export default CustomHeader;
+export default Header;

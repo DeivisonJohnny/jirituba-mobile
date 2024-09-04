@@ -2,11 +2,12 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { StyleSheet } from "react-native";
 import Dashboard from "./dashboard";
 import styled, { ThemeProvider } from "styled-components/native";
-import CustomHeader from "../components/header/CustomHeader";
+import Header from "../components/header/Header";
 import themes from "../theme/index";
 import { useColorScheme } from "react-native";
 import SettingsUser from "./pages/settings";
 import Profile from "./pages/profile";
+import ListEmployees from "./pages/list-employees";
 
 export default function HeaderMenu() {
   const Drawer = createDrawerNavigator();
@@ -18,7 +19,7 @@ export default function HeaderMenu() {
     <ThemeProvider theme={theme}>
       <Drawer.Navigator
         screenOptions={{
-          header: () => <CustomHeader></CustomHeader>,
+          header: () => <Header></Header>,
           drawerPosition: "right",
           drawerStyle: styles.drawer,
           drawerItemStyle: styles.itemDrawer,
@@ -28,6 +29,7 @@ export default function HeaderMenu() {
         <Drawer.Screen name="Home" component={Dashboard} />
         <Drawer.Screen name="Settings" component={SettingsUser} />
         <Drawer.Screen name="Perfil" component={Profile} />
+        <Drawer.Screen name="Lista de funcionarios" component={ListEmployees} />
       </Drawer.Navigator>
     </ThemeProvider>
   );
@@ -43,9 +45,3 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-
-const ProfileImage = styled.Image`
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-`;

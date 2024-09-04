@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 
 interface TableValidationProps {}
@@ -14,7 +14,7 @@ const TableValidation = (props: TableValidationProps) => {
           <TitleCol>Data</TitleCol>
         </HeadRow>
       </HeadTable>
-      <BodyTable>
+      <ScrollView>
         {Array.from({ length: 20 }, (_, index) => (
           <Row key={index} index={index}>
             <Cell>34</Cell>
@@ -22,7 +22,7 @@ const TableValidation = (props: TableValidationProps) => {
             <Cell>28/08/2024</Cell>
           </Row>
         ))}
-      </BodyTable>
+      </ScrollView>
     </Table>
   );
 };
@@ -63,10 +63,6 @@ const TitleCol = styled.Text`
   color: white;
   text-align: center;
   font-size: 14px;
-`;
-
-const BodyTable = styled.ScrollView`
-
 `;
 
 const Cell = styled.Text`
