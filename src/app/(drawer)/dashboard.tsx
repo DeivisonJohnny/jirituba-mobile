@@ -20,9 +20,9 @@ const Dashboard = () => {
   });
   const [loading, setLoading] = useState(true);
 
-    setTimeout(() => {
-      setLoading(false); 
-    }, 3000);
+  setTimeout(() => {
+    setLoading(false);
+  }, 3000);
 
   console.log(loading);
 
@@ -51,10 +51,7 @@ const Dashboard = () => {
             </ConteinerBox>
           )}
         </BoxStatistics>
-
-        <Main>
-          <TableAvaliation></TableAvaliation>
-        </Main>
+        <TableAvaliation width={93} height={70}></TableAvaliation>
       </Body>
     </ThemeProvider>
   );
@@ -67,12 +64,17 @@ const Body = styled.View`
   height: 100%;
   background-color: ${(props) => props.theme.background};
   padding: 20px 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
 `;
 
 const BoxStatistics = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 100%;
 `;
 
 const ConteinerBox = styled.TouchableOpacity`
@@ -89,7 +91,7 @@ const ConteinerBox = styled.TouchableOpacity`
 `;
 
 const TitleBox = styled.Text`
-  font-size: '${moderateScale(12).toFixed(2)}px';
+  font-size: "${moderateScale(12).toFixed(2)}px";
   color: white;
   font-family: "montserrat";
 `;
@@ -111,4 +113,5 @@ const ContentText = styled.Text`
 const Main = styled.View`
   padding: 10px 15px;
   height: 100%;
+  width: 100%;
 `;

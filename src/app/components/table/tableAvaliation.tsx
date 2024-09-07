@@ -2,11 +2,14 @@ import * as React from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 
-interface TableValidationProps {}
+interface TableValidationProps {
+  width?: number | string;
+  height?: number | string;
+}
 
 const TableValidation = (props: TableValidationProps) => {
   return (
-    <Table>
+    <Table width={props.width ? props.width : "90%"} height={props.height ? props.height : "50%"}>
       <HeadTable>
         <HeadRow>
           <TitleCol>Ṇ Quarto</TitleCol>
@@ -29,10 +32,11 @@ const TableValidation = (props: TableValidationProps) => {
 
 export default TableValidation;
 
-const Table = styled.View`
-  border-radius: 5px;
+const Table = styled.View<{ width: string | number,  height: string | number }>`
   border: 1px solid #353542;
-  max-height: 70%;
+  border-radius: 7px;
+  width: ${({ width }) => (typeof width === "number" ? `${width}%` : width)};
+  height: ${({ height }) => (typeof height === "number" ? `${height}%` : height)};
 `;
 
 const HeadTable = styled.View`
@@ -48,6 +52,7 @@ const HeadRow = styled.View`
   justify-content: space-evenly;
   padding: 10px 0px;
 `;
+
 const Row = styled.TouchableOpacity<{ index: number }>`
   display: flex;
   align-items: center;
