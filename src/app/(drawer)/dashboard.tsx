@@ -91,7 +91,7 @@ const ConteinerBox = styled.TouchableOpacity`
 `;
 
 const TitleBox = styled.Text`
-  font-size: "${moderateScale(12).toFixed(2)}px";
+  font-size: 14px;
   color: white;
   font-family: "montserrat";
 `;

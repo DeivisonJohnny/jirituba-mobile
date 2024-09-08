@@ -24,12 +24,12 @@ export default ProfileCard;
 
 const ProfileImage = styled.TouchableOpacity`
   padding: 2px;
-  border-radius: 100%;
+  /* border-radius: 100%; */
   border: 2px solid gray;
   width: fit-content;
 `;
 const ImageUser = styled.Image`
   width: 40px;
   height: 40px;
-  border-radius: 100%;
+  /* border-radius: 100%; */
 `;
