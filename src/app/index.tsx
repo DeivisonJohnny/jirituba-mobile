@@ -3,23 +3,17 @@ import { Formik } from "formik";
 import * as React from "react";
 import {
   Text,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
   useColorScheme,
 } from "react-native";
 import { router } from "expo-router";
-import styled, { ThemeProvider } from "styled-components/native";
-import { LinearGradient } from "expo-linear-gradient";
-import themes from "./theme";
+import styled from "styled-components/native";
+
 
 interface LoginProps {}
 
 const Login = (props: LoginProps) => {
   const handleLogin = () => {};
   const deviceTheme = useColorScheme();
-  const theme = themes[deviceTheme] || "dark";
 
   const [fontsLoaded] = useFonts({
     montserrat: require("./assets/fonts/Montserrat.ttf"),
@@ -32,7 +26,6 @@ const Login = (props: LoginProps) => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
       <BodyContent>
         <Header>
           <TextTitulo>Jirituba Avaliações</TextTitulo>
@@ -83,7 +76,6 @@ const Login = (props: LoginProps) => {
           <FooterTitulo>Dev Johnny</FooterTitulo>
         </Footer>
       </BodyContent>
-    </ThemeProvider>
   );
 };
 
@@ -92,7 +84,7 @@ export default Login;
 const BodyContent = styled.View`
   flex: 1;
   justify-content: space-evenly;
-  background-color: ${(props) => props.theme.background};
+  background-color:#1c1c23;
 `;
 
 const Header = styled.View`
@@ -102,7 +94,7 @@ const Header = styled.View`
 `;
 
 const TextTitulo = styled.Text`
-  color: ${(props) => props.theme.color};
+  color: white;
   font-size: 30px;
   font-family: "montserrat";
   font-weight: bold;
@@ -146,9 +138,9 @@ const Input = styled.TextInput`
 const ButtomSubmit = styled.TouchableOpacity`
   padding: 15px 10px;
   border-radius: 100%;
-  background-color: ${(props) => props.theme.login.colorButtonSubmit};
+  background-color: #ff7966;
   border-radius: 17px;
-  box-shadow: ${(props) => props.theme.login.colorShadowBtnSubmit} 0px 7px 15px;
+  box-shadow: #ff78667a 0px 7px 15px;
 `;
 
 const Footer = styled.View`

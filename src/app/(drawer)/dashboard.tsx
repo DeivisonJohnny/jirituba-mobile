@@ -1,12 +1,9 @@
-import { Text, useColorScheme } from "react-native";
-import { styled, ThemeProvider } from "styled-components/native";
-import themes from "../theme/index";
+import { styled } from "styled-components/native";
 import { useFonts } from "expo-font";
 import { Icon } from "react-native-elements";
 import TableAvaliation from "../components/table/tableAvaliation";
 import { useState } from "react";
 import SkeletonLoad from "../components/loading/SkeletonLoad";
-import { moderateScale } from "react-native-size-matters";
 
 const Dashboard = () => {
 
@@ -58,7 +55,7 @@ export default Dashboard;
 const Body = styled.View`
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.background};
+  background-color: #0E0E12;
   padding: 20px 10px;
   display: flex;
   align-items: center;
@@ -87,7 +84,7 @@ const ConteinerBox = styled.TouchableOpacity`
 `;
 
 const TitleBox = styled.Text`
-  font-size: 14px;
+  font-size: 12px;
   color: white;
   font-family: "montserrat";
 `;

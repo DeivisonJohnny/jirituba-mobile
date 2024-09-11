@@ -65,11 +65,12 @@ const LastAvaliation = styled.View`
   width: 85%;
   height: 20%;
   border-radius: 10px 10px;
-  border: 1px solid #1c1c23;
+  border: 1px solid #2a2a34;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
+  background-color: #1b1b23;
 `;
 
 const TitleBox = styled.Text`
