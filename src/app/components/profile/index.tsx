@@ -7,12 +7,18 @@ interface ProfileCardProps {
 
 const ProfileCard = (props: ProfileCardProps) => {
   return (
-    <ProfileImage>
+    <ProfileImage style={{borderRadius: 100}}>
       <ImageUser
         style={
-          props.size
-            ? { width: props.size, height: props.size }
-            : { width: 40, height: 40 }
+          [
+            props.size
+              ? { width: props.size, height: props.size }
+              : { width: 40, height: 40 }
+            ,
+
+            {borderRadius: 100}
+          ]
+            
         }
         source={require("../../assets/img/foto-perfil.jpg")}
       />
@@ -24,12 +30,10 @@ export default ProfileCard;
 
 const ProfileImage = styled.TouchableOpacity`
   padding: 2px;
-  /* border-radius: 100%; */
   border: 2px solid gray;
   width: fit-content;
-`;
+  `;
 const ImageUser = styled.Image`
   width: 40px;
   height: 40px;
-  /* border-radius: 100%; */
 `;

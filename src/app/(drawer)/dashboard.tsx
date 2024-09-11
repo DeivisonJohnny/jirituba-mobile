@@ -9,9 +9,7 @@ import SkeletonLoad from "../components/loading/SkeletonLoad";
 import { moderateScale } from "react-native-size-matters";
 
 const Dashboard = () => {
-  const deviceTheme = useColorScheme();
 
-  const theme = themes[deviceTheme] || "dark";
 
   const [fontLoad] = useFonts({
     montserrat: require("../assets/fonts/Montserrat.ttf"),
@@ -27,7 +25,6 @@ const Dashboard = () => {
   console.log(loading);
 
   return (
-    <ThemeProvider theme={theme}>
       <Body>
         <BoxStatistics>
           {loading ? (
@@ -53,7 +50,6 @@ const Dashboard = () => {
         </BoxStatistics>
         <TableAvaliation width={93} height={70}></TableAvaliation>
       </Body>
-    </ThemeProvider>
   );
 };
 
