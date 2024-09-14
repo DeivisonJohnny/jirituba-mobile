@@ -6,6 +6,7 @@ import { Icon } from "react-native-elements";
 import Input from "./components/input";
 import { ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { Text } from "react-native";
 
 interface RegisterEmployeesProps {}
 
@@ -19,7 +20,7 @@ const RegisterEmployees = (props: RegisterEmployeesProps) => {
       aspect: [4, 4],
       quality: 1,
     });
-    
+
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -123,6 +124,9 @@ const RegisterEmployees = (props: RegisterEmployeesProps) => {
                     </BoxInput>
                   </BoxContainer>
                 </BoxMain>
+                <ButtonSubmit style={{borderRadius: 100}} >
+                  <TextSubmit>Cadastrar</TextSubmit>
+                </ButtonSubmit>
               </Container>
             </>
           )}
@@ -209,4 +213,17 @@ const BoxContainer = styled.View`
 
 const BoxInput = styled.View`
   width: 49%;
+`;
+
+const ButtonSubmit = styled.TouchableOpacity`
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #ff7966;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TextSubmit = styled.Text`
+  color: white;
 `;
