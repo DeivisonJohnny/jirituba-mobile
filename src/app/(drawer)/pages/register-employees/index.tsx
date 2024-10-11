@@ -7,6 +7,7 @@ import Input from "./components/input";
 import { ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Text } from "react-native";
+import Select from "./components/modal-select";
 
 interface RegisterEmployeesProps {}
 
@@ -109,11 +110,9 @@ const RegisterEmployees = (props: RegisterEmployeesProps) => {
 
                   <BoxContainer>
                     <BoxInput>
-                      <Input
-                        label="Setor"
-                        value={values.sector}
-                        onChange={handleChange}
-                      ></Input>
+                      <Select label="Setor" initialValue="Selecionar">
+
+                      </Select>
                     </BoxInput>
                     <BoxInput>
                       <Input
