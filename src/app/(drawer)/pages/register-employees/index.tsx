@@ -1,134 +1,274 @@
-import * as React from "react";
 import styled from "styled-components/native";
-import ButtonUpload from "./components/button-upload";
 import { Formik } from "formik";
 import { Icon } from "react-native-elements";
 import Input from "./components/input";
 import { ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { Text } from "react-native";
 import Select from "./components/modal-select";
+import { useState } from "react";
+import { object, string } from "yup";
 
-interface RegisterEmployeesProps {}
+export type RegisterEmployees = {
+  imgProfile: string | null;
+  name: string | null;
+  surname: string | null;
+  cpf: string | null;
+  roles: string | null;
+  shift: string | null;
+  sector: string | null;
+  assessable: string | null;
+};
 
-const RegisterEmployees = (props: RegisterEmployeesProps) => {
-  const [image, setImage] = React.useState<string | null>(null);
+const RegisterEmployees = () => {
+  const [image, setImage] = useState<string | null>(null);
 
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 4],
-      quality: 1,
-    });
+  const [optionsSector] = useState([
+    { id: "asdasasd", value: "java" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    // Adicione mais opções conforme necessário
+  ]);
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
+  const [roles] = useState([
+    { id: "id1", value: "maçã" },
+    { id: "id2", value: "banana" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "asdasg56d3", value: "js" },
+    { id: "id2", value: "banana" },
+    { id: "id2", value: "banana" },
+    { id: "id2", value: "banana" },
+    // Adicione mais opções conforme necessário
+  ]);
 
-  function handleSubmit() {
-    console.log("submit");
+  const shift = [
+    { id: "asdj23", value: "Manhã" },
+    { id: "asd", value: "Tarde" },
+    { id: "asddfdgj23", value: "Noite" },
+  ];
+
+  const validateForm = object().shape({
+    imgProfile: string().min(10, "Selecione foto").required("Selecione foto"),
+    name: string()
+      .min(3, "O campo deve ter ao menos 3 caracteres")
+      .when("$isSubmitting", {
+        is: true,
+        then: (schema) => schema.required("O campo deve ser preenchido"),
+      }),
+    surname: string()
+      .min(3, "O Campo deve ter ao menos 3 caracteres")
+      .required("O campo deve ser preenchido"),
+
+    cpf: string()
+      .min(14, "O Campo deve ter ao menos 11 caracteres")
+      .required("O campo deve ser preenchido"),
+    roles: string().required("O campo deve ser preenchido"),
+    shift: string().required("O campo deve ser preenchido"),
+    sector: string().required("O campo deve ser preenchido"),
+    assessable: string().required("O campo deve ser preenchido"),
+  });
+
+  function handleSubmit(values: RegisterEmployees) {
+    console.log("submit", values);
   }
-
   return (
     <Container>
       <ScrollView style={{ width: "100%" }}>
         <Formik
           initialValues={{
-            imgProfile: "",
-            name: "",
-            surname: "",
-            cpf: "",
-            roles: "",
-            shift: "",
-            sector: "",
-            assessable: "",
+            imgProfile: null,
+            name: null,
+            surname: null,
+            cpf: null,
+            roles: null,
+            shift: null,
+            sector: null,
+            assessable: null,
           }}
-          onSubmit={handleSubmit}
+          validationSchema={validateForm}
+          onSubmit={(value: RegisterEmployees) => {
+            if (
+              (value.assessable != null && value.cpf != null,
+              value.imgProfile != null &&
+                value.name != null &&
+                value.roles != null &&
+                value.sector != null &&
+                value.shift != null &&
+                value.surname != null)
+            ) {
+              handleSubmit(value);
+              return;
+            }
+          }}
+          context={{ isSubmitting: true }}
         >
-          {({ values, errors, handleChange }) => (
-            <>
-              <Container>
-                <BoxPrimary>
-                  {!image ? (
-                    <ButtonContainer onPress={pickImage}>
-                      <Icon
-                        type="octicon"
-                        name="upload"
-                        size={35}
-                        color={"#373746"}
+          {({ values, errors, handleChange, handleSubmit }) => {
+            return (
+              <>
+                <Container>
+                  <BoxPrimary>
+                    {!image ? (
+                      <BoxContainerImage>
+                        <ButtonContainer
+                          onPress={async () => {
+                            const result =
+                              await ImagePicker.launchImageLibraryAsync({
+                                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                                allowsEditing: true,
+                                aspect: [4, 4],
+                                quality: 1,
+                              });
+
+                            if (!result.canceled) {
+                              setImage(result.assets[0].uri);
+                              values.imgProfile = result.assets[0].uri;
+                            }
+                          }}
+                        >
+                          <Icon
+                            type="octicon"
+                            name="upload"
+                            size={35}
+                            color={"#373746"}
+                          />
+                        </ButtonContainer>
+                        <ErrorText>
+                          {errors.imgProfile && errors.imgProfile}
+                        </ErrorText>
+                      </BoxContainerImage>
+                    ) : (
+                      <BoxImage
+                        onPress={async () => {
+                          const result =
+                            await ImagePicker.launchImageLibraryAsync({
+                              mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                              allowsEditing: true,
+                              aspect: [4, 4],
+                              quality: 1,
+                            });
+
+                          if (!result.canceled) {
+                            setImage(result.assets[0].uri);
+                            values.imgProfile = result.assets[0].uri;
+                          }
+                        }}
+                      >
+                        <ImageProfile
+                          source={{ uri: image as string }}
+                        ></ImageProfile>
+                      </BoxImage>
+                    )}
+
+                    <BoxName>
+                      <BoxInputError>
+                        <Input
+                          label="Nome"
+                          value={values.name as string}
+                          onChange={handleChange("name")}
+                          placeholder="Ex: Deivison"
+                        />
+                        <ErrorText>{errors.name && errors.name}</ErrorText>
+                      </BoxInputError>
+
+                      <BoxInputError>
+                        <Input
+                          label="Sobrenome"
+                          value={values.surname as string}
+                          onChange={handleChange("surname")}
+                          placeholder="Ex: Johnny"
+                        />
+                        <ErrorText>
+                          {errors.surname && errors.surname}
+                        </ErrorText>
+                      </BoxInputError>
+                    </BoxName>
+                  </BoxPrimary>
+
+                  <BoxTwo>
+                    <BoxInputError>
+                      <Input
+                        label="CPF"
+                        value={values.cpf as string}
+                        onChange={handleChange("cpf")}
+                        isCpf={true}
+                        placeholder="111.222.333-54"
                       />
-                    </ButtonContainer>
-                  ) : (
-                    <BoxImage onPress={pickImage}>
-                      <ImageProfile
-                        source={{ uri: image as string }}
-                      ></ImageProfile>
-                    </BoxImage>
-                  )}
+                      <ErrorText>{errors.cpf && errors.cpf}</ErrorText>
+                    </BoxInputError>
+                  </BoxTwo>
 
-                  <BoxName>
-                    <Input
-                      label="Nome"
-                      value={values.name}
-                      onChange={handleChange}
-                    ></Input>
-                    <Input
-                      label="Sobrenome"
-                      value={values.surname}
-                      onChange={handleChange}
-                    ></Input>
-                  </BoxName>
-                </BoxPrimary>
+                  <BoxMain>
+                    <BoxContainer>
+                      <BoxInput>
+                        <BoxInputError>
+                          <Select
+                            label="Função"
+                            options={roles}
+                            onChange={handleChange("roles")}
+                          />
+                          <ErrorText>{errors.roles && errors.roles}</ErrorText>
+                        </BoxInputError>
+                      </BoxInput>
+                      <BoxInput>
+                        <Select
+                          label="Turno"
+                          options={shift}
+                          onChange={handleChange("shift")}
+                        />
+                        <ErrorText>{errors.shift && errors.shift}</ErrorText>
+                      </BoxInput>
+                    </BoxContainer>
 
-                <BoxTwo>
-                  <Input
-                    label="CPF"
-                    value={values.cpf}
-                    onChange={handleChange}
-                  ></Input>
-                </BoxTwo>
-
-                <BoxMain>
-                  <BoxContainer>
-                    <BoxInput>
-                      <Input
-                        label="Função"
-                        value={values.roles}
-                        onChange={handleChange}
-                      ></Input>
-                    </BoxInput>
-                    <BoxInput>
-                      <Input
-                        label="Turno"
-                        value={values.shift}
-                        onChange={handleChange}
-                      ></Input>
-                    </BoxInput>
-                  </BoxContainer>
-
-                  <BoxContainer>
-                    <BoxInput>
-                      <Select label="Setor" initialValue="Selecionar">
-
-                      </Select>
-                    </BoxInput>
-                    <BoxInput>
-                      <Input
-                        label="Avaliavel"
-                        value={values.assessable}
-                        onChange={handleChange}
-                      ></Input>
-                    </BoxInput>
-                  </BoxContainer>
-                </BoxMain>
-                <ButtonSubmit style={{borderRadius: 100}} >
-                  <TextSubmit>Cadastrar</TextSubmit>
-                </ButtonSubmit>
-              </Container>
-            </>
-          )}
+                    <BoxContainer>
+                      <BoxInput>
+                        <BoxInputError>
+                          <Select
+                            label="Setor"
+                            options={optionsSector}
+                            onChange={handleChange("sector")}
+                          />
+                          <ErrorText>
+                            {errors.sector && errors.sector}
+                          </ErrorText>
+                        </BoxInputError>
+                      </BoxInput>
+                      <BoxInput>
+                        <BoxInputError>
+                          <Select
+                            label="Avaliavel"
+                            options={[{ value: "Sim" }, { value: "Não" }]}
+                            onChange={handleChange("assessable")}
+                          />
+                          <ErrorText>
+                            {errors.assessable && errors.assessable}
+                          </ErrorText>
+                        </BoxInputError>
+                      </BoxInput>
+                    </BoxContainer>
+                  </BoxMain>
+                  <ButtonSubmit
+                    style={{ borderRadius: 100 }}
+                    onPress={() => handleSubmit()}
+                  >
+                    <TextSubmit>Cadastrar</TextSubmit>
+                  </ButtonSubmit>
+                </Container>
+              </>
+            );
+          }}
         </Formik>
       </ScrollView>
     </Container>
@@ -136,6 +276,14 @@ const RegisterEmployees = (props: RegisterEmployeesProps) => {
 };
 
 export default RegisterEmployees;
+
+const BoxContainerImage = styled.View`
+  transition: all 300ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+`;
 
 const BoxImage = styled.TouchableOpacity`
   border-radius: 7px;
@@ -159,7 +307,6 @@ const Container = styled.View`
   flex-direction: column;
   align-items: center;
   padding: 0px 10px;
-  gap: 40px;
 `;
 
 const BoxPrimary = styled.View`
@@ -175,7 +322,11 @@ const BoxName = styled.View`
   align-items: center;
   flex-direction: column;
   width: 60%;
-  gap: 10px;
+`;
+
+const ErrorText = styled.Text`
+  color: red;
+  font-size: 12px;
 `;
 
 const ButtonContainer = styled.TouchableOpacity`
@@ -199,7 +350,6 @@ const BoxMain = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
 `;
 
 const BoxContainer = styled.View`
@@ -214,6 +364,10 @@ const BoxInput = styled.View`
   width: 49%;
 `;
 
+const BoxInputError = styled.View`
+  width: 100%;
+`;
+
 const ButtonSubmit = styled.TouchableOpacity`
   width: 100%;
   padding: 10px 15px;
@@ -221,6 +375,7 @@ const ButtonSubmit = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 `;
 
 const TextSubmit = styled.Text`

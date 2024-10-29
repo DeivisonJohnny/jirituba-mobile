@@ -2,6 +2,7 @@ import { useFonts } from "expo-font";
 import { Formik } from "formik";
 import * as React from "react";
 import {
+  StatusBar,
   Text,
   useColorScheme,
 } from "react-native";
@@ -27,6 +28,7 @@ const Login = (props: LoginProps) => {
 
   return (
       <BodyContent>
+        <StatusBar barStyle={"dark-content"} showHideTransition={"slide"} translucent={true} ></StatusBar>
         <Header>
           <TextTitulo>Jirituba Avaliações</TextTitulo>
         </Header>

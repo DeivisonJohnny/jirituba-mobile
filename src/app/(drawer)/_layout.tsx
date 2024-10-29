@@ -1,5 +1,5 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import Dashboard from "./dashboard";
 import Header from "../components/header/Header";
 import SettingsUser from "./pages/settings";
@@ -7,11 +7,13 @@ import Profile from "./pages/profile";
 import ListEmployees from "./pages/list-employees";
 import RegisterUser from "./pages/register-employees";
 
+
 export default function HeaderMenu() {
   const Drawer = createDrawerNavigator();
 
-
   return (
+    <>
+      <StatusBar barStyle={"dark-content"} />
       <Drawer.Navigator
         screenOptions={{
           header: () => <Header></Header>,
@@ -20,14 +22,14 @@ export default function HeaderMenu() {
           drawerItemStyle: styles.itemDrawer,
           drawerLabelStyle: { color: "white" },
         }}
-
-      >
-        <Drawer.Screen  name="Home" component={Dashboard} />
+        >
+        <Drawer.Screen name="Home" component={Dashboard} />
         <Drawer.Screen name="Settings" component={SettingsUser} />
         <Drawer.Screen name="Perfil" component={Profile} />
         <Drawer.Screen name="Lista de funcionarios" component={ListEmployees} />
         <Drawer.Screen name="Cadastrar Funcionario" component={RegisterUser} />
       </Drawer.Navigator>
+    </>
   );
 }
 

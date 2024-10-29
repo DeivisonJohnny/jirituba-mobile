@@ -1,59 +1,40 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Alert, FlatList, Modal } from "react-native";
+import { Alert, FlatList } from "react-native";
 import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
 
+type OptionsShift = {
+  shift: String;
+};
+
+type OptionsValues = {
+  id?: String;
+  value: String | OptionsShift[];
+};
+
 interface SelectProps {
   label: string;
-  initialValue: string;
-  listModal?: string[]
+  options?: OptionsValues[];
+  onChange: (value: string) => void;
 }
 
 const Select = (props: SelectProps) => {
   const [visible, setVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(props.initialValue);
+  const [selectedValue, setSelectedValue] = useState<any>(null);
 
   const handleSelect = (value: string) => {
     setSelectedValue(value);
     setVisible(false);
+    props.onChange(value);
   };
-
-  const [options] = useState([
-    { key: "asdh1", value: "java" },
-    { key: "asd2h", value: "js" },
-    { key: "asrdh", value: "python" },
-    { key: "asdfeh", value: "cpp" },
-    { key: "asfegdh", value: "java" },
-    { key: "asdg4h", value: "js" },
-    { key: "as4ddh", value: "python" },
-    { key: "assdrdh", value: "cpp" },
-    { key: "asf4dh", value: "java" },
-    { key: "assss4vsdh", value: "js" },
-    { key: "asvsdh", value: "python" },
-    { key: "asv42dh", value: "cpp" },
-    { key: "asss35dh", value: "java" },
-    { key: "asd53gh", value: "js" },
-    { key: "a453sdh", value: "python" },
-    { key: "asd345345545h", value: "cpp" },
-    { key: "as53df543dh", value: "java" },
-    { key: "asd353dfh", value: "js" },
-    { key: "a345fsdh", value: "python" },
-    { key: "a30dsdh", value: "cpp" },
-    { key: "as44ldh", value: "java" },
-    { key: "asmnsdfjdh", value: "js" },
-    { key: "as452232dh", value: "python" },
-    { key: "asd5425h", value: "cpp" },
-    { key: "asosd9f0dh", value: "java" },
-    { key: "asd345h", value: "js" },
-    { key: "asd3450h", value: "python" },
-    { key: "assdhfjsdh", value: "cpp" },
-  ]);
 
   return (
     <Container>
       <Label>{props.label}</Label>
       <ButtonSelect onPress={() => setVisible(true)}>
-        <ValueInitial style={{ borderRadius: 5 }}>{selectedValue}</ValueInitial>
+        <ValueInitial style={{ borderRadius: 5 }}>
+          {selectedValue ? selectedValue : "Selecionar"}
+        </ValueInitial>
       </ButtonSelect>
 
       <ModalSelect
@@ -75,13 +56,24 @@ const Select = (props: SelectProps) => {
               ></IconClose>
             </ButtonClose>
             <FlatList
-              data={options}
-              keyExtractor={(item) => item.key}
-              renderItem={({ item }) => (
-                <SelectOptions onPress={() => handleSelect(item.value)}>
-                  <NameOptions>{item.value}</NameOptions>
-                </SelectOptions>
-              )}
+              data={props.options as any}
+              keyExtractor={(item, index) =>
+                (item.id ? ` ${item.id}-${index}` : index) as any
+              }
+              renderItem={({ item, index }) => {
+                return (
+                  <SelectOptions
+                    onPress={() => handleSelect(item.value)}
+                    style={
+                      index === 0 || index % 2 === 0
+                        ? { backgroundColor: "#33384426" }
+                        : { backgroundColor: "transparent" }
+                    }
+                  >
+                    <NameOptions value={item.value} onChangeText={props.onChange} editable={false} />
+                  </SelectOptions>
+                );
+              }}
               contentContainerStyle={{ padding: 10 }}
               initialNumToRender={10}
               maxToRenderPerBatch={10}
@@ -110,7 +102,7 @@ const Label = styled.Text`
 
 const ValueInitial = styled.Text`
   background-color: #1c1c23;
-  padding: 8px 10px;
+  padding: 10px 10px;
   width: 100%;
   border: 1.4px solid #353542;
   border-radius: 5px;
@@ -136,17 +128,19 @@ const ContainerSelect = styled.View`
 `;
 
 const BoxSelect = styled.View`
+  scroll-behavior: smooth;
   background-color: #282c36;
   border-radius: 10px;
   width: 80%;
   max-height: 50%;
+  padding: 10px 0px;
 `;
 
 const ButtonClose = styled.TouchableOpacity`
   position: relative;
   width: 30px;
   height: 30px;
-  top: 10px;
+  top: 0px;
   left: 89%;
 `;
 
@@ -159,6 +153,6 @@ const SelectOptions = styled.TouchableOpacity`
   padding: 15px 20px;
 `;
 
-const NameOptions = styled.Text`
+const NameOptions = styled.TextInput`
   color: white;
 `;

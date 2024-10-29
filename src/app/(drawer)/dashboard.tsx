@@ -19,8 +19,6 @@ const Dashboard = () => {
     setLoading(false);
   }, 3000);
 
-  console.log(loading);
-
   return (
       <Body>
         <BoxStatistics>

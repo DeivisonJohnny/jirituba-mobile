@@ -1,22 +1,52 @@
-import * as React from "react";
+import { useState } from "react";
 import styled from "styled-components/native";
 
 interface InputProps {
   label: string;
   value: string | number;
-  onChange: (text: string) => void; // Corrigido para aceitar um argumento
+  onChange: (text: string) => void;
+  placeholder?: string;
+  placeholderColor?: string;
+  isCpf?: boolean;
 }
 
 const Input = (props: InputProps) => {
-  const handleChange = (text: string) => {
-    props.onChange(text);
+  const [value, setValue] = useState("");
+
+  const formatCpf = (text: string) => {
+    let cpfCleaned = text.replace(/\D/g, "");
+
+    if (cpfCleaned.length >= 12) {
+      return value;
+    }
+
+    let cpfFormatted = cpfCleaned.replace(/(\d{3})(\d)/, "$1.$2");
+    cpfFormatted = cpfFormatted.replace(/(\d{3})(\d)/, "$1.$2");
+    cpfFormatted = cpfFormatted.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    return cpfFormatted;
+  };
+
+  const handleOnChange = (text: string) => {
+    if (props.isCpf) {
+      const valueCpf = formatCpf(text);
+      setValue(valueCpf);
+      props.onChange(valueCpf)
+      return;
+    }
+    setValue(text);
+    props.onChange(text)
   };
 
   return (
     <Box>
       <Label>{props.label}</Label>
       <InputText
-        onChangeText={handleChange} 
+        onChangeText={handleOnChange}
+        placeholder={props.placeholder || ""}
+        placeholderTextColor={props.placeholderColor || "gray"}
+        value={value}
+        keyboardType={props.isCpf ? 'numeric' : 'default'}
       />
     </Box>
   );
