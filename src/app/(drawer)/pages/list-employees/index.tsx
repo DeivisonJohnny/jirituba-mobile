@@ -1,7 +1,9 @@
 import * as React from "react";
 import CardEmployee from "../../../components/card-employee/CardEmployee";
 import SkeletonLoad from "../../../components/loading/SkeletonLoad";
-import { ScrollView } from "react-native";
+import { ScrollView} from "react-native";
+import { Icon } from "react-native-elements";
+import styled from "styled-components/native";
 
 interface ListEmployeesProps {}
 
@@ -12,35 +14,98 @@ const ListEmployees = (props: ListEmployeesProps) => {
     setLoading(false);
   }, 3000);
 
+  function handleSearch() {
+    console.log("search");
+  }
+
   return (
-    <ScrollView
-      contentContainerStyle={{
-        alignItems: "center",
-        gap: 10,
-        paddingVertical: 10,
-      }}
-      style={{backgroundColor: "#0e0e12"}}
-    >
-      {isLoading
-        ? Array.from({ length: 10 }).map((_, index) => (
-            <SkeletonLoad
+     <BoxMain>
+          <BoxInputSearch>
+            <InputSearch placeholder="Nome, função, setor, cpf..." placeholderTextColor={'#63636889'} ></InputSearch>
+            <ButtonSearch onPress={handleSearch}>
+              <Icon type="ionicon" name="search" color={'white'} size={18}></Icon>
+            </ButtonSearch>
+          </BoxInputSearch>
+          <BoxScroll>
+
+      <ScrollView
+        contentContainerStyle={{
+          alignItems: "center",
+          gap: 10,
+          width: "100%",
+        }}
+        style={{ backgroundColor: "#0e0e12" }}
+        >
+        {isLoading
+          ? Array.from({ length: 40 }).map((_, index) => (
+              <SkeletonLoad
               key={index.toString()}
-              height={50}
-              width={"90%"}
-            ></SkeletonLoad>
-          ))
-        : Array.from({ length: 20 }).map((_, index) => (
-            <CardEmployee
-              key={index.toString()}
-              name="Deivison Johnny"
-              roles="Recepcionista"
-              score={4.9}
-              
-            ></CardEmployee>
-          ))}
-    </ScrollView>
+                height={50}
+                width={"90%"}
+              ></SkeletonLoad>
+            ))
+            : Array.from({ length: 40 }).map((_, index) => (
+              <CardEmployee
+                key={index.toString()}
+                name="Deivison Johnny"
+                roles="Recepcionista"
+                score={4.9}
+              ></CardEmployee>
+            ))}
+      </ScrollView>
+            </BoxScroll>
+     </BoxMain>
   );
 };
 
 export default ListEmployees;
+const BoxMain = styled.View`
+  background-color: #0e0e12;
+  width: 100%;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  `;
 
+const BoxInputSearch = styled.View`
+  width: 90%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: absolute;
+  top: 0px;
+  z-index:2;
+  background-color: #0e0e12;
+`;
+
+const BoxScroll = styled.View`
+width: 100%;
+margin-top: 40px;
+padding: 10px 0px 0px 0px;
+`
+
+const InputSearch = styled.TextInput`
+  background-color: #1C1C23;
+  padding: 10px 5px;
+  border-radius: 5px 0px 0px 5px;
+  width: 90%;
+  height: 100%;
+  border: 1.5px solid #2B2B35;
+  color: white;
+  letter-spacing: 0.8px;
+`;
+
+const ButtonSearch = styled.TouchableOpacity`
+  background-color: #666680;
+  width: 10%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0px 5px 5px 0px;
+`;
