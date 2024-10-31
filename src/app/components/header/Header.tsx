@@ -1,9 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
-import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
-import { useNavigation } from "@react-navigation/native";
-import { DrawerActions } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import ProfileCard from "../profile";
 
@@ -16,8 +12,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <ProfileCard></ProfileCard>
-      <TituloHead>Jirituba</TituloHead>
-      <ContainerButtons></ContainerButtons>
+      <TituloHead>DJ</TituloHead>
     </HeaderContainer>
   );
 };

@@ -8,41 +8,82 @@ import ListEmployees from "./pages/list-employees";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../context/theme-context";
 import Settings from "./pages/settings";
+import { BlurView } from "expo-blur";
 
+const Tabs = createBottomTabNavigator();
 const Layout = () => {
-  const Tabs = createBottomTabNavigator();
   const { theme, setTheme } = useContext(ThemeContext);
-  console.log("🚀 ~ Layout ~ theme:", theme);
-  const [iconSize, setIconSize] = useState(17);
+  const [iconSize, setIconSize] = useState(16);
+  const [colorIcon, setcolorIcon] = useState("white");
+
+  const TabBargGradient = () => {
+    return (
+      <BlurView
+        intensity={5}
+        blurReductionFactor={100}
+        experimentalBlurMethod="dimezisBlurView"
+        tint="default"
+      ></BlurView>
+    );
+  };
 
   return (
     <ContainerMain>
       <Header></Header>
       <Tabs.Navigator
         screenOptions={{
+          headerShadowVisible: false,
           headerShown: false,
           tabBarStyle: {
+            borderTopWidth: 1,
+            borderRightWidth: 1,
+            borderBottomWidth: 1,
+            borderLeftWidth: 1,
             position: "absolute",
             left: "auto",
-            right: 'auto',
-            bottom: 10,
+            right: "auto",
+            bottom: "3%",
             width: "87%",
             marginHorizontal: "auto",
             borderRadius: 10,
             alignSelf: "center",
+            borderWidth: 1,
+            borderTopColor: "#ff9789",
+            borderRightColor: "#ff9789",
+            borderBottomColor: "#ff9789",
+            borderLeftColor: "#ff9789",
+            shadowColor: "#ff9789ca",
+            shadowOpacity: 0.3,
+            shadowOffset: { height: 4, width: 0 },
+            backgroundColor: "#262630",
           },
+          tabBarActiveTintColor: "#ffbdb5",
+
           tabBarIconStyle: {
             fontSize: 10,
-            height: 10,
+            maxHeight: 25,
           },
+          tabBarItemStyle: {
+            height: "auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          },
+          tabBarBackground: TabBargGradient,
         }}
       >
         <Tabs.Screen
           name="Home"
           component={Dashboard}
           options={{
-            tabBarIcon: () => (
-              <Icon name="home" size={iconSize} type="ionicon" />
+            tabBarIcon: (props) => (
+              <Icon
+                name="home"
+                size={iconSize}
+                type="ionicon"
+                color={props.color}
+              />
             ),
           }}
         />
@@ -50,8 +91,13 @@ const Layout = () => {
           name="Registrar"
           component={RegisterEmployees}
           options={{
-            tabBarIcon: () => (
-              <Icon name="person-add" size={iconSize} type="ionicon" />
+            tabBarIcon: (props) => (
+              <Icon
+                name="person-add"
+                size={iconSize}
+                type="ionicon"
+                color={props.color}
+              />
             ),
           }}
         />
@@ -59,8 +105,14 @@ const Layout = () => {
           name="Funcionarios"
           component={ListEmployees}
           options={{
-            tabBarIcon: () => (
-              <Icon name="person" size={iconSize} type="ionicon" />
+            tabBarIcon: (props) => (
+              <Icon
+                name="person"
+                size={iconSize}
+                type="ionicon"
+                color={props.color}
+                aria-hidden={false}
+              />
             ),
           }}
         />
@@ -68,8 +120,13 @@ const Layout = () => {
           name="Config"
           component={Settings}
           options={{
-            tabBarIcon: () => (
-              <Icon name="settings" size={iconSize} type="ionicon" />
+            tabBarIcon: (props) => (
+              <Icon
+                name="settings"
+                size={iconSize}
+                type="ionicon"
+                color={props.color}
+              />
             ),
           }}
         />

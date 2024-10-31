@@ -12,7 +12,7 @@ const TableValidation = (props: TableValidationProps) => {
     <Table width={props.width ? props.width : "90%"} height={props.height ? props.height : "50%"}>
       <HeadTable>
         <HeadRow>
-          <TitleCol>Ṇ Quarto</TitleCol>
+            <TitleCol>Nº Quarto</TitleCol>
           <TitleCol>Nota</TitleCol>
           <TitleCol>Data</TitleCol>
         </HeadRow>
