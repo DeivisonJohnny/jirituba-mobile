@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, useColorScheme} from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
@@ -8,29 +8,17 @@ import { useFonts } from "expo-font";
 import ProfileCard from "../profile";
 
 const Header = () => {
-  const navigation = useNavigation();
   useFonts({
     montserrat: require("../../assets/fonts/Montserrat.ttf"),
     montserratMedium: require("../../assets/fonts/Montserrat-Medium.ttf"),
   });
 
   return (
-      <HeaderContainer>
-        <ProfileCard></ProfileCard>
-        <TituloHead>Jirituba</TituloHead>
-        <ContainerButtons>
-          <TouchableOpacity
-            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          >
-            <Icon
-              name="menu-outline"
-              color={'white'}
-              size={28}
-              type="ionicon"
-            />
-          </TouchableOpacity>
-        </ContainerButtons>
-      </HeaderContainer>
+    <HeaderContainer>
+      <ProfileCard></ProfileCard>
+      <TituloHead>Jirituba</TituloHead>
+      <ContainerButtons></ContainerButtons>
+    </HeaderContainer>
   );
 };
 
@@ -39,7 +27,7 @@ const HeaderContainer = styled.View`
   align-items: center;
   justify-content: space-between;
   padding: 15px 25px;
-  background-color:#0E0E12;
+  background-color: #0e0e12;
   width: 100%;
 `;
 

@@ -66,7 +66,7 @@ const Label = styled.Text`
 
 const InputText = styled.TextInput`
   background-color: #1c1c23;
-  padding: 5px 10px;
+  padding: 10px 10px;
   width: 100%;
   border: 1.4px solid #353542;
   border-radius: 5px;

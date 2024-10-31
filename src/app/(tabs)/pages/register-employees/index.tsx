@@ -22,6 +22,20 @@ export type RegisterEmployees = {
 const RegisterEmployees = () => {
   const [image, setImage] = useState<string | null>(null);
 
+  const handleCollectPhoto = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      return result.assets[0].uri;
+    }
+  };
+
   const [optionsSector] = useState([
     { id: "asdasasd", value: "java" },
     { id: "asdasg56d3", value: "js" },
@@ -124,18 +138,8 @@ const RegisterEmployees = () => {
                       <BoxContainerImage>
                         <ButtonContainer
                           onPress={async () => {
-                            const result =
-                              await ImagePicker.launchImageLibraryAsync({
-                                mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                                allowsEditing: true,
-                                aspect: [4, 4],
-                                quality: 1,
-                              });
-
-                            if (!result.canceled) {
-                              setImage(result.assets[0].uri);
-                              values.imgProfile = result.assets[0].uri;
-                            }
+                            const photo = await handleCollectPhoto();
+                            values.imgProfile = photo as string;
                           }}
                         >
                           <Icon
@@ -152,18 +156,8 @@ const RegisterEmployees = () => {
                     ) : (
                       <BoxImage
                         onPress={async () => {
-                          const result =
-                            await ImagePicker.launchImageLibraryAsync({
-                              mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                              allowsEditing: true,
-                              aspect: [4, 4],
-                              quality: 1,
-                            });
-
-                          if (!result.canceled) {
-                            setImage(result.assets[0].uri);
-                            values.imgProfile = result.assets[0].uri;
-                          }
+                          const photo = await handleCollectPhoto();
+                          values.imgProfile = photo as string;
                         }}
                       >
                         <ImageProfile
