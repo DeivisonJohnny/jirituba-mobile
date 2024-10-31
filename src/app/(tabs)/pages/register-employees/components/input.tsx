@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Platform } from "react-native";
 import styled from "styled-components/native";
 
 interface InputProps {
@@ -9,9 +10,11 @@ interface InputProps {
   placeholderColor?: string;
   isCpf?: boolean;
 }
+const deviceType = Platform.OS;
 
 const Input = (props: InputProps) => {
   const [value, setValue] = useState("");
+  console.log("🚀 ~ Input ~ deviceType:", deviceType);
 
   const formatCpf = (text: string) => {
     let cpfCleaned = text.replace(/\D/g, "");
@@ -31,11 +34,11 @@ const Input = (props: InputProps) => {
     if (props.isCpf) {
       const valueCpf = formatCpf(text);
       setValue(valueCpf);
-      props.onChange(valueCpf)
+      props.onChange(valueCpf);
       return;
     }
     setValue(text);
-    props.onChange(text)
+    props.onChange(text);
   };
 
   return (
@@ -46,7 +49,7 @@ const Input = (props: InputProps) => {
         placeholder={props.placeholder || ""}
         placeholderTextColor={props.placeholderColor || "gray"}
         value={value}
-        keyboardType={props.isCpf ? 'numeric' : 'default'}
+        keyboardType={props.isCpf ? "numeric" : "default"}
       />
     </Box>
   );
@@ -66,7 +69,7 @@ const Label = styled.Text`
 
 const InputText = styled.TextInput`
   background-color: #1c1c23;
-  padding: 10px 10px;
+  padding: ${deviceType == "ios" ? "7px" : "5px"};
   width: 100%;
   border: 1.4px solid #353542;
   border-radius: 5px;
