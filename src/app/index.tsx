@@ -1,12 +1,15 @@
 import styled from "styled-components/native";
 import AppThemeContext from "./context/theme-context";
 import Login from "./login";
+import SplashScreen from "./components/splash-screen";
 
 const App = () => {
   return (
-      <AppThemeContext>
+    <AppThemeContext>
+      <SplashScreen>
         <Login></Login>
-      </AppThemeContext>
+      </SplashScreen>
+    </AppThemeContext>
   );
 };
 

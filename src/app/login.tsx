@@ -23,7 +23,7 @@ const Login = (props: LoginProps) => {
   });
 
   if (!fontsLoaded) {
-    return <Text>Loading...</Text>;
+    return ;
   }
 
   return (
