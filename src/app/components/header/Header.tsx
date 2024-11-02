@@ -18,15 +18,15 @@ const Header = () => {
   return (
     <HeaderContainer>
       <ProfileCard></ProfileCard>
-      <BoxLogout>
+      <ButtonLogout onPress={logout}>
         <Icon
           name="log-out-outline"
           type="ionicon"
           size={23}
           color={"white"}
         ></Icon>
-        <TextLogout onPress={logout}>Sair</TextLogout>
-      </BoxLogout>
+        <TextLogout>Sair</TextLogout>
+      </ButtonLogout>
     </HeaderContainer>
   );
 };
@@ -40,7 +40,7 @@ const HeaderContainer = styled.View`
   width: 100%;
 `;
 
-const BoxLogout = styled.TouchableOpacity`
+const ButtonLogout = styled.TouchableOpacity`
   color: white;
   font-family: "montserratMedium";
   font-size: 20px;

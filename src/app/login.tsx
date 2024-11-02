@@ -86,7 +86,7 @@ export default Login;
 const BodyContent = styled.View`
   flex: 1;
   justify-content: space-evenly;
-  background-color:#1c1c23;
+  background-color:#0e0e12;
 `;
 
 const Header = styled.View`
@@ -125,22 +125,23 @@ const Label = styled.Text`
   font-size: 14px;
   padding-left: 4px;
   color: #666680;
-  font-weight: bold;
 `;
 
 const Input = styled.TextInput`
-  border: 1.7px solid #353542;
-  padding: 15px 10px;
-  border-radius: 17px;
+  border: 1px solid #353542;
+  padding: 8px 10px;
+  border-radius: 10px;
   background-color: transparent;
   color: white;
   letter-spacing: 0.8px;
+  font-size: 14px;
+  font-weight: normal;
 `;
 
 const ButtomSubmit = styled.TouchableOpacity`
-  padding: 15px 10px;
+  padding: 12px 10px;
   border-radius: 100%;
-  background-color: #ff7966;
+  background-color: #ff6e5b;
   border-radius: 17px;
   box-shadow: #ff78667a 0px 7px 15px;
 `;
