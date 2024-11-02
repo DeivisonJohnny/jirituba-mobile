@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components/native";
 import { useFonts } from "expo-font";
 import ProfileCard from "../profile";
+import { Icon } from "react-native-elements";
+import { router } from "expo-router";
 
 const Header = () => {
   useFonts({
@@ -9,10 +11,22 @@ const Header = () => {
     montserratMedium: require("../../assets/fonts/Montserrat-Medium.ttf"),
   });
 
+  const logout = () => {
+    router.replace("../../login");
+  };
+
   return (
     <HeaderContainer>
       <ProfileCard></ProfileCard>
-      <TituloHead>DJ</TituloHead>
+      <BoxLogout>
+        <Icon
+          name="log-out-outline"
+          type="ionicon"
+          size={23}
+          color={"white"}
+        ></Icon>
+        <TextLogout onPress={logout}>Sair</TextLogout>
+      </BoxLogout>
     </HeaderContainer>
   );
 };
@@ -26,19 +40,21 @@ const HeaderContainer = styled.View`
   width: 100%;
 `;
 
-const ContainerButtons = styled.View`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: nowrap;
-  flex-direction: row;
-`;
-
-const TituloHead = styled.Text`
+const BoxLogout = styled.TouchableOpacity`
   color: white;
   font-family: "montserratMedium";
   font-size: 20px;
   letter-spacing: 1.2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30px;
+`;
+
+const TextLogout = styled.Text`
+  color: white;
+  font-size: 9px;
+  margin-right: 4px;
 `;
 
 export default Header;

@@ -91,13 +91,14 @@ padding: 10px 0px 0px 0px;
 
 const InputSearch = styled.TextInput`
   background-color: #1C1C23;
-  padding: 10px 5px;
+  padding: 5px 5px;
   border-radius: 5px 0px 0px 5px;
   width: 90%;
   height: 100%;
-  border: 1.5px solid #2B2B35;
+  border: 1px solid #2B2B35;
   color: white;
   letter-spacing: 0.8px;
+  font-weight: normal;
 `;
 
 const ButtonSearch = styled.TouchableOpacity`
