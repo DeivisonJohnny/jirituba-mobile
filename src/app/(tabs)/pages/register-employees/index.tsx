@@ -1,12 +1,12 @@
 import styled from "styled-components/native";
 import { Formik } from "formik";
 import { Icon } from "react-native-elements";
-import Input from "./components/input";
 import { ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import Select from "./components/modal-select";
+import Select from "../../../../components/register-employees/modal-select";
 import { useState } from "react";
 import { object, string } from "yup";
+import Input from "../../../../components/register-employees/input";
 
 export type RegisterEmployees = {
   imgProfile: string | null;

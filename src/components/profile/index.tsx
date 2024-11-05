@@ -20,7 +20,7 @@ const ProfileCard = (props: ProfileCardProps) => {
           ]
             
         }
-        source={require("../../assets/img/foto-perfil.jpg")}
+        source={require("../../app/assets/img/foto-perfil.jpg")}
       />
     </ProfileImage>
   );

@@ -1,6 +1,6 @@
 import * as React from "react";
-import CardEmployee from "../../../components/card-employee/CardEmployee";
-import SkeletonLoad from "../../../components/loading/SkeletonLoad";
+import CardEmployee from "../../../../components/card-employee/CardEmployee";
+import SkeletonLoad from "../../../../components/loading/SkeletonLoad";
 import { ScrollView} from "react-native";
 import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
@@ -8,7 +8,7 @@ import styled from "styled-components/native";
 interface ListEmployeesProps {}
 
 const ListEmployees = (props: ListEmployeesProps) => {
-  const [isLoading, setLoading] = React.useState(true);
+  const [isLoading, setLoading] = React.useState(false);
 
   setTimeout(() => {
     setLoading(false);

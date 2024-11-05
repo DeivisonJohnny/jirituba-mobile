@@ -2,6 +2,7 @@ import * as React from "react";
 import ProfileCard from "../profile";
 import styled from "styled-components/native";
 import { useFonts } from "expo-font";
+import { useRouter } from "expo-router";
 
 interface CardEmployeeProps {
   key: string;
@@ -12,16 +13,20 @@ interface CardEmployeeProps {
 
 const CardEmployee = (props: CardEmployeeProps) => {
   const [fontsLoaded] = useFonts({
-    montserratMedium: require("../../assets/fonts/Montserrat-Medium.ttf"),
+    montserratMedium: require("../../app/assets/fonts/Montserrat-Medium.ttf"),
   });
 
+  const router = useRouter();
+
   return (
-    <Container>
-      <ProfileCard></ProfileCard>
+    <Container onPress={
+      () => router.push({pathname: '/pages/details-user/'})
+    } >
+      <ProfileCard />
       <BoxCenter>
         <BoxTitle>
           <Title>Nome:</Title>
-          <Name> {props.name} </Name>
+          <Name>{props.name}</Name>
         </BoxTitle>
 
         <BoxTitle>
@@ -31,7 +36,7 @@ const CardEmployee = (props: CardEmployeeProps) => {
       </BoxCenter>
       <Box>
         <TitleNota>Nota</TitleNota>
-        <Nota> {props.score} </Nota>
+        <Nota>{props.score}</Nota>
       </Box>
     </Container>
   );
@@ -73,6 +78,7 @@ const Box = styled.View`
   gap: 10px;
   margin-right: 10px;
 `;
+
 const Title = styled.Text`
   font-family: "montserratMedium";
   color: #818181;

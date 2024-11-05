@@ -1,14 +1,9 @@
 import { useFonts } from "expo-font";
 import { Formik } from "formik";
 import * as React from "react";
-import {
-  StatusBar,
-  Text,
-  useColorScheme,
-} from "react-native";
+import { StatusBar, Text, useColorScheme, View } from "react-native";
 import { router } from "expo-router";
 import styled from "styled-components/native";
-
 
 interface LoginProps {}
 
@@ -23,61 +18,76 @@ const Login = (props: LoginProps) => {
   });
 
   if (!fontsLoaded) {
-    return ;
+    return (
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "#ff6e5b",
+          position: "absolute",
+          left: 0,
+          top: 0,
+        }}
+      ></View>
+    );
   }
 
   return (
-      <BodyContent>
-        <StatusBar barStyle={"dark-content"} showHideTransition={"slide"} translucent={true} ></StatusBar>
-        <Header>
-          <TextTitulo>Jirituba Avaliações</TextTitulo>
-        </Header>
-        <Main>
-          <Formik
-            initialValues={{ usuario: "", senha: "" }}
-            onSubmit={handleLogin}
-          >
-            {({ values, handleChange, handleSubmit }) => (
-              <Form>
-                <BoxInput>
-                  <Label>Usuario</Label>
-                  <Input
-                    value={values.usuario}
-                    onChangeText={handleChange("usuario")}
-                  />
-                </BoxInput>
+    <BodyContent>
+      <StatusBar
+        barStyle={"dark-content"}
+        showHideTransition={"slide"}
+        translucent={true}
+      ></StatusBar>
+      <Header>
+        <TextTitulo>Jirituba Avaliações</TextTitulo>
+      </Header>
+      <Main>
+        <Formik
+          initialValues={{ usuario: "", senha: "" }}
+          onSubmit={handleLogin}
+        >
+          {({ values, handleChange, handleSubmit }) => (
+            <Form>
+              <BoxInput>
+                <Label>Usuario</Label>
+                <Input
+                  value={values.usuario}
+                  onChangeText={handleChange("usuario")}
+                />
+              </BoxInput>
 
-                <BoxInput>
-                  <Label>Senha</Label>
-                  <Input
-                    value={values.senha}
-                    onChangeText={handleChange("senha")}
-                    secureTextEntry
-                  />
-                </BoxInput>
-                <BoxInput>
-                  <ButtomSubmit onPress={() => router.replace("./dashboard")}>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        color: "white",
-                        fontWeight: "bold",
-                        letterSpacing: 0.5,
-                      }}
-                    >
-                      Acessar
-                    </Text>
-                  </ButtomSubmit>
-                </BoxInput>
-              </Form>
-            )}
-          </Formik>
-        </Main>
+              <BoxInput>
+                <Label>Senha</Label>
+                <Input
+                  value={values.senha}
+                  onChangeText={handleChange("senha")}
+                  secureTextEntry
+                />
+              </BoxInput>
+              <BoxInput>
+                <ButtomSubmit onPress={() => router.replace("./dashboard")}>
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: "white",
+                      fontWeight: "bold",
+                      letterSpacing: 0.5,
+                    }}
+                  >
+                    Acessar
+                  </Text>
+                </ButtomSubmit>
+              </BoxInput>
+            </Form>
+          )}
+        </Formik>
+      </Main>
 
-        <Footer>
-          <FooterTitulo>Dev Johnny</FooterTitulo>
-        </Footer>
-      </BodyContent>
+      <Footer>
+        <FooterTitulo>Dev Johnny</FooterTitulo>
+      </Footer>
+    </BodyContent>
   );
 };
 
@@ -86,7 +96,7 @@ export default Login;
 const BodyContent = styled.View`
   flex: 1;
   justify-content: space-evenly;
-  background-color:#0e0e12;
+  background-color: #0e0e12;
 `;
 
 const Header = styled.View`

@@ -7,8 +7,8 @@ import { router } from "expo-router";
 
 const Header = () => {
   useFonts({
-    montserrat: require("../../assets/fonts/Montserrat.ttf"),
-    montserratMedium: require("../../assets/fonts/Montserrat-Medium.ttf"),
+    montserrat: require("../../app/assets/fonts/Montserrat.ttf"),
+    montserratMedium: require("../../app/assets/fonts/Montserrat-Medium.ttf"),
   });
 
   const logout = () => {

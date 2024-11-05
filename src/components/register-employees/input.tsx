@@ -50,6 +50,7 @@ const Input = (props: InputProps) => {
         placeholderTextColor={props.placeholderColor || "gray"}
         value={value}
         keyboardType={props.isCpf ? "numeric" : "default"}
+        maxLength={props.isCpf ? 14 : 200}
       />
     </Box>
   );

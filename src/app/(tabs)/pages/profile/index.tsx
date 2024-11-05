@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components/native";
-import ProfileCard from "../../../components/profile";
+import ProfileCard from "../../../../components/profile";
 import { useFonts } from "expo-font";
-import TableValidation from "../../../components/table/tableAvaliation";
+import TableValidation from "../../../../components/table/tableAvaliation";
 
 interface ProfileProps {}
 
@@ -17,10 +17,7 @@ const Profile = (props: ProfileProps) => {
 
       <LastAvaliation>
         <TitleBox>Última Avaliação</TitleBox>
-
         <Box>
-
-
         <BoxContent>
           <BoxTitle>
             <TitleContent>Quarto</TitleContent>

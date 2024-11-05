@@ -15,7 +15,7 @@ const SplashScreen = ({ children }: any) => {
     <>
       {!animationFinished ? (
         <Splash
-          source={require("../../assets/splashscreen.json")}
+          source={require("../../app/assets/splashscreen.json")}
           autoPlay
           loop={false}
           resizeMode="cover"

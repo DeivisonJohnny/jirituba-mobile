@@ -1,9 +1,9 @@
 import { styled } from "styled-components/native";
 import { useFonts } from "expo-font";
 import { Icon } from "react-native-elements";
-import TableAvaliation from "../components/table/tableAvaliation";
+import TableAvaliation from "../../components/table/tableAvaliation";
 import { useState } from "react";
-import SkeletonLoad from "../components/loading/SkeletonLoad";
+import SkeletonLoad from "../../components/loading/SkeletonLoad";
 
 const Dashboard = () => {
 
