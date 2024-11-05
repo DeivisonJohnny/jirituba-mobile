@@ -126,7 +126,7 @@ const Layout = () => {
         }}
       />
 
-      <Tabs.Screen name="pages/details-user/index" options={{ href: null }} />
+      <Tabs.Screen name="pages/details-user/[id]" options={{ href: null }} />
       <Tabs.Screen name="pages/profile/index" options={{ href: null }} />
       <Tabs.Screen name="pages/users/index" options={{ href: null }} />
     </ContainerMain>

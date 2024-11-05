@@ -20,7 +20,9 @@ const CardEmployee = (props: CardEmployeeProps) => {
 
   return (
     <Container onPress={
-      () => router.push({pathname: '/pages/details-user/'})
+      () => router.push({pathname: '../../pages/details-user/[id]', params: {
+        id: props.name + 'IDIDIDID'
+      }})
     } >
       <ProfileCard />
       <BoxCenter>
