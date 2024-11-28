@@ -18,6 +18,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <ProfileCard></ProfileCard>
+      <TextLogo>Jirituba</TextLogo>
       <ButtonLogout onPress={logout}>
         <Icon
           name="log-out-outline"
@@ -40,9 +41,15 @@ const HeaderContainer = styled.View`
   width: 100%;
 `;
 
+const TextLogo = styled.Text`
+  color: white;
+  font-size: 18px;
+  font-family: "montserratMedium";
+  letter-spacing: 0.5px;
+`;
+
 const ButtonLogout = styled.TouchableOpacity`
   color: white;
-  font-family: "montserratMedium";
   font-size: 20px;
   letter-spacing: 1.2px;
   display: flex;

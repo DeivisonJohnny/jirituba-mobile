@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import * as React from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
@@ -5,21 +6,34 @@ import styled from "styled-components/native";
 interface TableValidationProps {
   width?: number | string;
   height?: number | string;
+  href?: string;
 }
 
 const TableValidation = (props: TableValidationProps) => {
+  const directPage = () => {
+    router.push({
+      pathname: props.href as string,
+      params: {
+        id: "Parameto que será o ID recebido do banco de dados",
+      },
+    });
+  };
+
   return (
-    <Table width={props.width ? props.width : "90%"} height={props.height ? props.height : "50%"}>
+    <Table
+      width={props.width ? props.width : "90%"}
+      height={props.height ? props.height : "50%"}
+    >
       <HeadTable>
         <HeadRow>
-            <TitleCol>Nº Quarto</TitleCol>
+          <TitleCol>Nº Quarto</TitleCol>
           <TitleCol>Nota</TitleCol>
           <TitleCol>Data</TitleCol>
         </HeadRow>
       </HeadTable>
       <ScrollView>
         {Array.from({ length: 20 }, (_, index) => (
-          <Row key={index} index={index}>
+          <Row key={index} index={index} onPress={directPage}>
             <Cell>34</Cell>
             <Cell>4.5</Cell>
             <Cell>28/08/2024</Cell>
@@ -32,11 +46,12 @@ const TableValidation = (props: TableValidationProps) => {
 
 export default TableValidation;
 
-const Table = styled.View<{ width: string | number,  height: string | number }>`
+const Table = styled.View<{ width: string | number; height: string | number }>`
   border: 1px solid #353542;
   border-radius: 7px;
   width: ${({ width }) => (typeof width === "number" ? `${width}%` : width)};
-  height: ${({ height }) => (typeof height === "number" ? `${height}%` : height)};
+  height: ${({ height }) =>
+    typeof height === "number" ? `${height}%` : height};
 `;
 
 const HeadTable = styled.View`

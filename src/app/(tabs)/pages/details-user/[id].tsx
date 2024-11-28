@@ -1,23 +1,223 @@
 import * as React from "react";
-import { Text } from "react-native";
 import styled from "styled-components/native";
 import { useLocalSearchParams } from "expo-router";
+import { Icon } from "react-native-elements";
+import TableValidation from "../../../../components/table/tableAvaliation";
 
 interface DetailsUserProps {}
 
 const DetailsUser = () => {
   const { id } = useLocalSearchParams();
-  console.log("🚀 ~ DetailsUser ~ id:", id);
-
-  console.log("id params collectr");
 
   return (
     <ContainerMain>
-      <Text> {id} </Text>
+      <BoxEmployee>
+        <ImageProfile
+          source={require("../../../assets/img/foto-perfil.jpg")}
+        ></ImageProfile>
+        <ContentData>
+          <BoxName>
+            <Label>Nome</Label>
+            <Name>Deivison Johnny</Name>
+          </BoxName>
+          <BoxCpf>
+            <Label>CPF</Label>
+            <Cpf>102.584.434.30</Cpf>
+          </BoxCpf>
+          <BoxAssessable>
+            <Assessable>Perfil avaliável</Assessable>
+          </BoxAssessable>
+        </ContentData>
+        <BoxActions>
+          <BoxScore>
+            <Score>4.5</Score>
+            <Icon type="ionicon" name="star" size={15} color={"yellow"} />
+          </BoxScore>
+          <BoxButtons>
+            <Button>
+              <Icon
+                type="ionicon"
+                name="trash-outline"
+                size={20}
+                color={"red"}
+              />
+            </Button>
+            <Button>
+              <Icon
+                type="ionicon"
+                name="create-outline"
+                size={20}
+                color="#7b9aff"
+              />
+            </Button>
+          </BoxButtons>
+        </BoxActions>
+      </BoxEmployee>
+      <ContainerAttributes>
+        <ProfessionalAttributes>
+          <LabelContainer>Atributos Profissionais</LabelContainer>
+        </ProfessionalAttributes>
+        <BoxAttributes>
+          <Attribute>
+            <LabelAttribute>Função</LabelAttribute>
+            <TextAttribute>Recepcionista</TextAttribute>
+          </Attribute>
+          <Attribute>
+            <LabelAttribute>Setor</LabelAttribute>
+            <TextAttribute>Atendimento</TextAttribute>
+          </Attribute>
+          <Attribute>
+            <LabelAttribute>Turno</LabelAttribute>
+            <TextAttribute>Noite</TextAttribute>
+          </Attribute>
+        </BoxAttributes>
+      </ContainerAttributes>
     </ContainerMain>
   );
 };
 
 export default DetailsUser;
 
-const ContainerMain = styled.View``;
+const ContainerMain = styled.ScrollView`
+  display: flex;
+  flex-direction: column;
+  background-color: #0e0e12;
+  color: white;
+  padding: 0px 20px;
+  height: fit-content;
+`;
+
+const ImageProfile = styled.Image`
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+`;
+
+const BoxEmployee = styled.View`
+  width: 100%;
+  height: 105px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  padding: 0px 20px;
+  gap: 20px;
+`;
+
+const BoxName = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+const ContentData = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 45%;
+  height: 100%;
+`;
+
+const Label = styled.Text`
+  font-size: 10px;
+  color: #4d4d4d;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+`;
+const Name = styled.Text`
+  font-size: 14px;
+  color: white;
+`;
+
+const BoxCpf = styled.View`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const Cpf = styled.Text`
+  font-size: 14px;
+  color: white;
+`;
+
+const BoxAssessable = styled.View`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+`;
+
+const Assessable = styled.Text`
+  font-size: 10px;
+  color: #53baff;
+`;
+
+const BoxActions = styled.View`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+const BoxScore = styled.View`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+`;
+
+const Score = styled.Text`
+  font-size: 18px;
+  color: white;
+`;
+
+const BoxButtons = styled.View`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+const Button = styled.TouchableOpacity`
+  padding: 3px;
+  border-radius: 3px;
+`;
+
+const ProfessionalAttributes = styled.View``;
+
+const ContainerAttributes = styled.View`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px 20px;
+`;
+const LabelContainer = styled.Text`
+  font-size: 12px;
+  color: #929292;
+  letter-spacing: 0.3px;
+`;
+
+const BoxAttributes = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+const Attribute = styled.View`
+  display: flex;
+  flex-direction: column;
+`;
+
+const LabelAttribute = styled.Text`
+  font-size: 10px;
+  color: #797979;
+  letter-spacing: 0.5px;
+`;
+
+const TextAttribute = styled.Text`
+  color: white;
+`;
+

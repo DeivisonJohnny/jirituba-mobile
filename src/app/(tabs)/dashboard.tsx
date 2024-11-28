@@ -6,8 +6,6 @@ import { useState } from "react";
 import SkeletonLoad from "../../components/loading/SkeletonLoad";
 
 const Dashboard = () => {
-
-
   const [fontLoad] = useFonts({
     montserrat: require("../assets/fonts/Montserrat.ttf"),
     montserratMedium: require("../assets/fonts/Montserrat-Medium.ttf"),
@@ -20,31 +18,35 @@ const Dashboard = () => {
   }, 3000);
 
   return (
-      <Body>
-        <BoxStatistics>
-          {loading ? (
-            <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
-          ) : (
-            <ConteinerBox>
-              <TitleBox>N° Avaliações do dia</TitleBox>
-              <ContentText>15</ContentText>
-            </ConteinerBox>
-          )}
+    <Body>
+      <BoxStatistics>
+        {loading ? (
+          <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+        ) : (
+          <ConteinerBox>
+            <TitleBox>N° Avaliações do dia</TitleBox>
+            <ContentText>15</ContentText>
+          </ConteinerBox>
+        )}
 
-          {loading ? (
-            <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
-          ) : (
-            <ConteinerBox>
-              <TitleBox style={{ color: "white" }}>Nota atendimento</TitleBox>
-              <ContentNota>
-                <ContentText>5.0</ContentText>
-                <Icon type="ionicon" name="star" color={"yellow"}></Icon>
-              </ContentNota>
-            </ConteinerBox>
-          )}
-        </BoxStatistics>
-        <TableAvaliation width={93} height={70}></TableAvaliation>
-      </Body>
+        {loading ? (
+          <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+        ) : (
+          <ConteinerBox>
+            <TitleBox style={{ color: "white" }}>Nota atendimento</TitleBox>
+            <ContentNota>
+              <ContentText>5.0</ContentText>
+              <Icon type="ionicon" name="star" color={"yellow"}></Icon>
+            </ContentNota>
+          </ConteinerBox>
+        )}
+      </BoxStatistics>
+      <TableAvaliation
+        width={93}
+        height={70}
+        href="/pages/details-avaliation/[id]"
+      ></TableAvaliation>
+    </Body>
   );
 };
 
@@ -53,12 +55,12 @@ export default Dashboard;
 const Body = styled.View`
   width: 100%;
   height: 100%;
-  background-color: #0E0E12;
+  background-color: #0e0e12;
   padding: 20px 10px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
 `;
 
 const BoxStatistics = styled.View`

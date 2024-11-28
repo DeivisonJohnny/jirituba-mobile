@@ -1,9 +1,10 @@
 import { useFonts } from "expo-font";
 import { Formik } from "formik";
 import * as React from "react";
-import { StatusBar, Text, useColorScheme, View } from "react-native";
+import { Text, useColorScheme, View } from "react-native";
 import { router } from "expo-router";
 import styled from "styled-components/native";
+import { StatusBar } from "expo-status-bar";
 
 interface LoginProps {}
 
@@ -34,11 +35,8 @@ const Login = (props: LoginProps) => {
 
   return (
     <BodyContent>
-      <StatusBar
-        barStyle={"dark-content"}
-        showHideTransition={"slide"}
-        translucent={true}
-      ></StatusBar>
+      <StatusBar style="dark" />
+
       <Header>
         <TextTitulo>Jirituba Avaliações</TextTitulo>
       </Header>

@@ -17,13 +17,18 @@ const CardEmployee = (props: CardEmployeeProps) => {
   });
 
   const router = useRouter();
+  const directionPage = () => {
+    router.push({
+      pathname: "/pages/details-user/[id]",
+      // pathname: "/pages/details-user/[id]",
+      params: {
+        id: props.name + "IDIDIDID",
+      },
+    });
+  };
 
   return (
-    <Container onPress={
-      () => router.push({pathname: '../../pages/details-user/[id]', params: {
-        id: props.name + 'IDIDIDID'
-      }})
-    } >
+    <Container onPress={directionPage}>
       <ProfileCard />
       <BoxCenter>
         <BoxTitle>

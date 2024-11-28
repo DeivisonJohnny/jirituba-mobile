@@ -9,36 +9,45 @@ interface ProfileProps {}
 const Profile = (props: ProfileProps) => {
   const [fontLoad] = useFonts({
     montserrat: require("../../../assets/fonts/Montserrat.ttf"),
+    montserratMedium: require("../../../assets/fonts/Montserrat-Medium.ttf"),
   });
 
   return (
     <Container>
-      <ProfileCard size={100} key={"ksjfkaj3"}></ProfileCard>
+      <ContainerButtons>
+        <IconDelete>
+          <TextActions>Deletar</TextActions>
+        </IconDelete>
+        <IconEdit>
+          <TextActions>Editar</TextActions>
+        </IconEdit>
+      </ContainerButtons>
+      <ProfileCard size={80} key={"ksjfkaj3"}></ProfileCard>
 
       <LastAvaliation>
         <TitleBox>Última Avaliação</TitleBox>
         <Box>
-        <BoxContent>
-          <BoxTitle>
-            <TitleContent>Quarto</TitleContent>
-            <ContentValue>51</ContentValue>
-          </BoxTitle>
-          <BoxTitle>
-            <TitleContent>Nota</TitleContent>
-            <ContentValue>4.8</ContentValue>
-          </BoxTitle>
-          <BoxTitle>
-            <TitleContent>Situação</TitleContent>
-            <ContentValue>Muito Bom</ContentValue>
-          </BoxTitle>
-        </BoxContent>
-        <BoxContentData>
-          <TitleContent>Data</TitleContent>
-          <ContentData>24/09/2023</ContentData>
-          <TitleContent>Hora</TitleContent>
-          <ContentData>12h23</ContentData>
-        </BoxContentData>
-        </Box>      
+          <BoxContent>
+            <BoxTitle>
+              <TitleContent>Quarto</TitleContent>
+              <ContentValue>51</ContentValue>
+            </BoxTitle>
+            <BoxTitle>
+              <TitleContent>Nota</TitleContent>
+              <ContentValue>4.8</ContentValue>
+            </BoxTitle>
+            <BoxTitle>
+              <TitleContent>Situação</TitleContent>
+              <ContentValue>Muito Bom</ContentValue>
+            </BoxTitle>
+          </BoxContent>
+          <BoxContentData>
+            <TitleContent>Data</TitleContent>
+            <ContentData>24/09/2023</ContentData>
+            <TitleContent>Hora</TitleContent>
+            <ContentData>12h23</ContentData>
+          </BoxContentData>
+        </Box>
       </LastAvaliation>
 
       <TableValidation width={85}></TableValidation>
@@ -54,8 +63,43 @@ const Container = styled.View`
   background: #0e0e12;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   padding: 10px 0px 0px 0px;
+`;
+
+const ContainerButtons = styled.View`
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const IconDelete = styled.TouchableOpacity`
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 5px;
+  border: 1px dashed red;
+  border-radius: 3px;
+`;
+const IconEdit = styled.TouchableOpacity`
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 5px;
+  border: 1px dashed blue;
+  border-radius: 3px;
+`;
+
+const TextActions = styled.Text`
+  font-size: 11px;
+  color: white;
+  font-family: "montserratMedium";
 `;
 
 const LastAvaliation = styled.View`
@@ -78,13 +122,11 @@ const TitleBox = styled.Text`
 `;
 
 const Box = styled.View`
-  
-display: flex;
-align-items: center;
-flex-direction: row;
-padding: 0px 10px;
-
-`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 0px 10px;
+`;
 
 const BoxContent = styled.View`
   width: 65%;

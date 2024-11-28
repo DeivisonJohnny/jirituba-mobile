@@ -14,8 +14,7 @@ const deviceType = Platform.OS;
 
 const Input = (props: InputProps) => {
   const [value, setValue] = useState("");
-  console.log("🚀 ~ Input ~ deviceType:", deviceType);
-
+  
   const formatCpf = (text: string) => {
     let cpfCleaned = text.replace(/\D/g, "");
 

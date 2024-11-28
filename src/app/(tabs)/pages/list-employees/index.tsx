@@ -67,7 +67,7 @@ const BoxMain = styled.View`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   `;
 
 const BoxInputSearch = styled.View`
@@ -78,20 +78,20 @@ const BoxInputSearch = styled.View`
   justify-content: center;
   flex-direction: row;
   position: absolute;
-  top: 0px;
+  top: 10px;
   z-index:2;
   background-color: #0e0e12;
 `;
 
 const BoxScroll = styled.View`
 width: 100%;
-margin-top: 40px;
+margin-top: 50px;
 padding: 10px 0px 0px 0px;
 `
 
 const InputSearch = styled.TextInput`
   background-color: #1C1C23;
-  padding: 5px 5px;
+  padding: 0px 5px;
   border-radius: 5px 0px 0px 5px;
   width: 90%;
   height: 100%;
@@ -102,7 +102,7 @@ const InputSearch = styled.TextInput`
 `;
 
 const ButtonSearch = styled.TouchableOpacity`
-  background-color: #666680;
+  background-color: #45455a;
   width: 10%;
   height: 100%;
   display: flex;
