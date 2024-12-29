@@ -48,13 +48,17 @@ const Select = (props: SelectProps) => {
       >
         <ContainerSelect>
           <BoxSelect>
+            <BoxCloseButton>
+
             <ButtonClose onPress={() => setVisible(false)}>
               <IconClose
                 type="ionicon"
                 name="close"
                 color={"white"}
-              ></IconClose>
+                size={20}
+                ></IconClose>
             </ButtonClose>
+                </BoxCloseButton>
             <FlatList
               data={props.options as any}
               keyExtractor={(item, index) =>
@@ -136,12 +140,19 @@ const BoxSelect = styled.View`
   padding: 10px 0px;
 `;
 
-const ButtonClose = styled.TouchableOpacity`
+const BoxCloseButton = styled.View`
+
+  width: 100%;
   position: relative;
-  width: 30px;
-  height: 30px;
+  background-color: blue;
+`
+
+const ButtonClose = styled.TouchableOpacity`
+  position: absolute;
+  width: 25px;
+  height: 25px;
   top: 0px;
-  left: 89%;
+  right: 10px;
 `;
 
 const IconClose = styled(Icon)`

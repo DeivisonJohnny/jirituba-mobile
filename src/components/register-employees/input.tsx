@@ -69,7 +69,7 @@ const Label = styled.Text`
 
 const InputText = styled.TextInput`
   background-color: #1c1c23;
-  padding: ${deviceType == "ios" ? "7px" : "5px"};
+  padding: 2px 5px;
   width: 100%;
   border: 1.4px solid #353542;
   border-radius: 5px;

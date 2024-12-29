@@ -25,7 +25,7 @@ const Layout = () => {
 
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" backgroundColor="#1c1c23"/>
       <ContainerMain
         screenOptions={{
           header: () => <Header></Header>,
@@ -114,13 +114,13 @@ const Layout = () => {
           }}
         />
         <Tabs.Screen
-          name="pages/settings/index"
+          name="pages/menu/index"
           options={{
-            title: "Configurações",
+            title: "More",
 
             tabBarIcon: (props) => (
               <Icon
-                name="settings"
+                name="menu"
                 size={iconSize}
                 type="ionicon"
                 color={props.color}
@@ -141,5 +141,4 @@ export default Layout;
 
 const ContainerMain = styled(Tabs)`
   flex: 1;
-  height: "100%";
 `;

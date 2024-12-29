@@ -281,8 +281,8 @@ const BoxContainerImage = styled.View`
 
 const BoxImage = styled.TouchableOpacity`
   border-radius: 7px;
-  width: 123px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border: 1px solid #373746;
   display: flex;
   align-items: center;
@@ -290,8 +290,8 @@ const BoxImage = styled.TouchableOpacity`
 `;
 const ImageProfile = styled.Image`
   border-radius: 6px;
-  width: 120px;
-  height: 117px;
+  width: 96px;
+  height: 96px;
 `;
 const Container = styled.View`
   background-color: #0e0e12;
@@ -327,8 +327,8 @@ const ButtonContainer = styled.TouchableOpacity`
   padding: 20px;
   background-color: #1c1c23;
   border-radius: 7px;
-  width: 123px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
