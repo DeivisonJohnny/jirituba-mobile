@@ -2,25 +2,56 @@ import * as React from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 import ItemMenu from "../../../../components/menu/ItemMenu";
+import { CategorysMenu, itemMenu, useItemMenu } from "../../../utils/listMenu";
 
 interface MenuProps {}
 
 const Menu = (props: MenuProps) => {
+  const { itensMenu, addItemMenu } = useItemMenu();
+  
+  React.useEffect(() => {
+    Array.from({ length: 5 }, (_, index) => {
+      addItemMenu({
+        title: `Inicio ${index + 1}`,
+        icon: "home",
+        category: "Principal",
+      });
+    });
+  }, []);
+  React.useEffect(() => {
+    Array.from({ length: 5 }, (_, index) => {
+      addItemMenu({
+        title: `Inicio ${index + 1}`,
+        icon: "home",
+        category: "Sobre o App",
+      });
+    });
+  }, []);
+  
+  const groupedItems = itensMenu.reduce((acc, item) => {
+    (acc[item.category] = acc[item.category] || []).push(item);
+    return acc;
+  }, {} as Record<string, itemMenu[]>);
+  
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: "#0e0e12" }}
       contentContainerStyle={{ flexGrow: 1 }}
     >
       <MainMenu>
-        <TitleCategory>Categoria</TitleCategory>
-        {Array.from({ length: 5 }, (_, index) => (
-          <ItemMenu key={index} nameIcon="home" title={`Inicio ${index + 1}`} />
-        ))}
-
-        <Line></Line>
-
-        {Array.from({ length: 5 }, (_, index) => (
-          <ItemMenu key={index} nameIcon="home" title={`Inicio ${index + 1}`} />
+        {Object.keys(groupedItems).map((category) => (
+          <React.Fragment key={category}>
+            <TitleCategory>{category}</TitleCategory>
+            {groupedItems[category].map((item, index) => (
+              <ItemMenu
+                key={index}
+                icon={item.icon}
+                title={item.title}
+                category={item.category}
+              />
+            ))}
+            <Line />
+          </React.Fragment>
         ))}
       </MainMenu>
     </ScrollView>
@@ -42,9 +73,8 @@ const MainMenu = styled.View`
 const TitleCategory = styled.Text`
   color: white;
   margin: 20px 0px;
-  padding: 0px 0px 0px 25px;
+  padding: 0px 0px 0px 20px;
   width: 100%;
-
   font-size: 20px;
 `;
 

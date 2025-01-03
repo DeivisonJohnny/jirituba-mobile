@@ -43,7 +43,7 @@ const Dashboard = () => {
       </BoxStatistics>
       <TableAvaliation
         width={93}
-        height={70}
+        height={60}
         href="/pages/details-avaliation/[id]"
       ></TableAvaliation>
     </Body>

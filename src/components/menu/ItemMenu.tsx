@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
+import { itemMenu } from "../../app/utils/listMenu";
 
 interface ItemMenuProps {
   title: string;
@@ -10,15 +11,16 @@ interface ItemMenuProps {
   sizeIcon?: number;
   widthIcon?: number;
   category?: string;
+  url?: string;
 }
 
-const ItemMenu = (props: ItemMenuProps) => {
+const ItemMenu = (props: itemMenu) => {
   return (
     <BodyItemMenu>
       <Icon
-        name={props.nameIcon + "-sharp"}
+        name={props.icon + "-sharp"}
         size={props.sizeIcon ? props.sizeIcon : 20}
-        color={'white'}
+        color={"white"}
         type="ionicon"
       />
       <Title
