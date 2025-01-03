@@ -38,7 +38,7 @@ const Layout = () => {
             position: "absolute",
             left: "auto",
             right: "auto",
-            bottom: "3%",
+            bottom: "2%",
             width: "87%",
             marginHorizontal: "auto",
             borderRadius: 10,

@@ -3,11 +3,16 @@ import styled from "styled-components/native";
 import { useLocalSearchParams } from "expo-router";
 import { Icon } from "react-native-elements";
 import TableValidation from "../../../../components/table/tableAvaliation";
+import { Dimensions, Text } from "react-native";
+import TextIA from "../../../../components/text-ia";
 
 interface DetailsUserProps {}
 
 const DetailsUser = () => {
   const { id } = useLocalSearchParams();
+
+  const { height } = Dimensions.get("window");
+  const halfHeight = height / 2 - height * 0.15;
 
   return (
     <ContainerMain>
@@ -72,6 +77,26 @@ const DetailsUser = () => {
           </Attribute>
         </BoxAttributes>
       </ContainerAttributes>
+      <ContainerTable>
+        <TitleTable>Histórico de avaliações</TitleTable>
+        <TableValidation width={100} height={`${halfHeight}px`} />
+      </ContainerTable>
+
+      <TextIA>
+        <Text style={{ color: "#fff" }}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+          quia, esse porro dolores ad qui dicta labore vel, consequuntur,
+          consectetur quibusdam. Nihil doloribus quasi sit, facere provident
+          voluptatum soluta recusandae! Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Voluptatibus fuga blanditiis repellat optio at
+          consequatur quod sapiente ab saepe omnis eveniet animi minima
+          temporibus, vero, non illo ducimus distinctio provident. Lorem ipsum
+          dolor sit amet consectetur adipisicing elit. Ullam explicabo in
+          maiores, incidunt sit provident quisquam, laudantium asperiores ex
+          obcaecati consectetur officiis! Modi inventore rerum expedita
+          voluptatem ut nemo aliquam?
+        </Text>
+      </TextIA>
     </ContainerMain>
   );
 };
@@ -221,3 +246,17 @@ const TextAttribute = styled.Text`
   color: white;
 `;
 
+const TitleTable = styled.Text`
+  width: 100%;
+
+  padding: 10px 0px 10px 5px;
+  color: #797979;
+`;
+
+const ContainerTable = styled.View`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 10px 0px 30px 0px;
+`;
