@@ -16,7 +16,7 @@ const Dashboard = () => {
 
   setTimeout(() => {
     setLoading(false);
-  }, 3000);
+  }, 500);
 
   return (
     <Body>
@@ -87,7 +87,7 @@ const ConteinerBox = styled.TouchableOpacity`
 const TitleBox = styled.Text`
   font-size: 12px;
   color: white;
-  font-family: "montserrat";
+  font-family: "montserratMedium";
 `;
 
 const ContentNota = styled.View`

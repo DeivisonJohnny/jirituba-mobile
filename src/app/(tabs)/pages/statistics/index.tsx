@@ -4,7 +4,7 @@ import { BarChart } from "react-native-gifted-charts";
 import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import ProfileCard from "../../../../components/profile";
 import { Icon } from "react-native-elements";
-import Tooltip from "react-native-walkthrough-tooltip";
+import ToolipInfomation from "../../../../components/custom-toolip";
 import { useRef, useEffect } from "react";
 
 interface AvaliationDayProps {}
@@ -16,9 +16,8 @@ const AvaliationDay = (props: AvaliationDayProps) => {
   const tooltipRefs = useRef([]);
 
   useEffect(() => {
-    // Aqui você pode acessar todos os elementos <Tooltip />
     tooltipRefs.current.forEach((tooltipElement, index) => {
-      console.log(`Tooltip ${index + 1}:, tooltipElement`); // Exibe cada elemento <Tooltip />
+      console.log(`Tooltip ${index + 1}:`, tooltipElement);
     });
   }, [showTooltip]);
 
@@ -67,28 +66,7 @@ const AvaliationDay = (props: AvaliationDayProps) => {
           <BoxInf>
             <BoxTitle>
               <Title>Nº Avaliações</Title>
-              <Tooltip
-                isVisible={showTooltip}
-                content={
-                  <TooltipText>
-                    Informações abaixo diz a quantidade de avaliações(Positivas
-                    e Negativas) acontecidas no dia
-                  </TooltipText>
-                }
-                placement="top"
-                onClose={() => setShowTooltip(false)}
-                contentStyle={style.tooltip}
-              >
-                <TouchableOpacity onPress={() => setShowTooltip(true)}>
-                  <Icon
-                    name="information-circle-outline"
-                    size={14}
-                    type="ionicon"
-                    color={"#828282"}
-                    style={{ paddingTop: 2.5 }}
-                  />
-                </TouchableOpacity>
-              </Tooltip>
+              <ToolipInfomation text="Informações abaixo diz a quantidade de avaliações(Positivas e Negativas) acontecidas no dia" />
             </BoxTitle>
 
             <BoxScore>
@@ -115,28 +93,7 @@ const AvaliationDay = (props: AvaliationDayProps) => {
           <BoxInf>
             <BoxTitle>
               <Title>Destaque</Title>
-              <Tooltip
-                isVisible={false}
-                content={
-                  <TooltipText>
-                    Informações abaixo diz a quantidade de avaliações(Positivas
-                    e Negativas) acontecidas no dia
-                  </TooltipText>
-                }
-                placement="top"
-                onClose={() => setShowTooltip(false)}
-                contentStyle={style.tooltip}
-              >
-                <TouchableOpacity onPress={() => setShowTooltip(true)}>
-                  <Icon
-                    name="information-circle-outline"
-                    size={14}
-                    type="ionicon"
-                    color={"#828282"}
-                    style={{ paddingTop: 2.5 }}
-                  />
-                </TouchableOpacity>
-              </Tooltip>
+              <ToolipInfomation text="Aqui o funcionario mais avaliado do dia. Média de suas avaliações de hoje" />
             </BoxTitle>
             <BoxUser>
               <ProfileCard size={35} />
