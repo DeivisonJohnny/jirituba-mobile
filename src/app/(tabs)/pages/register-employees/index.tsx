@@ -6,7 +6,6 @@ import * as ImagePicker from "expo-image-picker";
 import Select from "../../../../components/register-employees/modal-select";
 import { useState } from "react";
 import { object, string } from "yup";
-import Input from "../../../../components/register-employees/input";
 
 export type RegisterEmployees = {
   imgProfile: string | null;
@@ -37,34 +36,20 @@ const RegisterEmployees = () => {
   };
 
   const [optionsSector] = useState([
-    { id: "asdasasd", value: "java" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
+    { id: "1", value: "Desenvolvimento" },
+    { id: "2", value: "Design" },
+    { id: "3", value: "Marketing" },
+    { id: "4", value: "Vendas" },
+    { id: "5", value: "Recursos Humanos" },
     // Adicione mais opções conforme necessário
   ]);
 
   const [roles] = useState([
-    { id: "id1", value: "maçã" },
-    { id: "id2", value: "banana" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "asdasg56d3", value: "js" },
-    { id: "id2", value: "banana" },
-    { id: "id2", value: "banana" },
-    { id: "id2", value: "banana" },
+    { id: "1", value: "Desenvolvedor" },
+    { id: "2", value: "Designer" },
+    { id: "3", value: "Gerente de Projetos" },
+    { id: "4", value: "Analista de Marketing" },
+    { id: "5", value: "Vendedor" },
     // Adicione mais opções conforme necessário
   ]);
 
@@ -74,14 +59,25 @@ const RegisterEmployees = () => {
     { id: "asddfdgj23", value: "Noite" },
   ];
 
+  const formatCpf = (text: string) => {
+    let cpfCleaned = text.replace(/\D/g, "");
+
+    if (cpfCleaned.length > 11) {
+      cpfCleaned = cpfCleaned.substring(0, 11);
+    }
+
+    let cpfFormatted = cpfCleaned.replace(/(\d{3})(\d)/, "$1.$2");
+    cpfFormatted = cpfFormatted.replace(/(\d{3})(\d)/, "$1.$2");
+    cpfFormatted = cpfFormatted.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    return cpfFormatted;
+  };
+
   const validateForm = object().shape({
     imgProfile: string().min(10, "Selecione foto").required("Selecione foto"),
     name: string()
       .min(3, "O campo deve ter ao menos 3 caracteres")
-      .when("$isSubmitting", {
-        is: true,
-        then: (schema) => schema.required("O campo deve ser preenchido"),
-      }),
+      .required("O campo deve ser preenchido"),
     surname: string()
       .min(3, "O Campo deve ter ao menos 3 caracteres")
       .required("O campo deve ser preenchido"),
@@ -102,34 +98,35 @@ const RegisterEmployees = () => {
     <Container>
       <ScrollView style={{ width: "100%" }}>
         <Formik
-          initialValues={{
-            imgProfile: null,
-            name: null,
-            surname: null,
-            cpf: null,
-            roles: null,
-            shift: null,
-            sector: null,
-            assessable: null,
-          }}
+          initialValues={
+            {
+              imgProfile: null,
+              name: null,
+              surname: null,
+              cpf: null,
+              roles: null,
+              shift: null,
+              sector: null,
+              assessable: null,
+            } as RegisterEmployees
+          }
+          validateOnChange
           validationSchema={validateForm}
-          onSubmit={(value: RegisterEmployees) => {
-            if (
-              (value.assessable != null && value.cpf != null,
-              value.imgProfile != null &&
-                value.name != null &&
-                value.roles != null &&
-                value.sector != null &&
-                value.shift != null &&
-                value.surname != null)
-            ) {
-              handleSubmit(value);
-              return;
-            }
-          }}
-          context={{ isSubmitting: true }}
+          onSubmit={handleSubmit}
         >
-          {({ values, errors, handleChange, handleSubmit }) => {
+          {({
+            values,
+            errors,
+            handleSubmit,
+            setFieldValue,
+            setFieldTouched,
+            touched,
+          }) => {
+            const handleFieldChange =
+              (field: keyof RegisterEmployees) => (value: string) => {
+                setFieldValue(field, value); // Atualiza o valor do campo
+                setFieldTouched(field, true, false); // Marca o campo como "tocado" para ativar a validação
+              };
             return (
               <>
                 <Container>
@@ -150,7 +147,7 @@ const RegisterEmployees = () => {
                           />
                         </ButtonContainer>
                         <ErrorText>
-                          {errors.imgProfile && errors.imgProfile}
+                          {touched.imgProfile && errors.imgProfile}
                         </ErrorText>
                       </BoxContainerImage>
                     ) : (
@@ -168,24 +165,28 @@ const RegisterEmployees = () => {
 
                     <BoxName>
                       <BoxInputError>
-                        <Input
-                          label="Nome"
-                          value={values.name as string}
-                          onChange={handleChange("name")}
-                          placeholder="Ex: Deivison"
-                        />
-                        <ErrorText>{errors.name && errors.name}</ErrorText>
+                        <BoxLabelInput>
+                          <Label>Nome</Label>
+                          <Input
+                            onChangeText={handleFieldChange("name")}
+                            placeholder="Ex: Deivison"
+                            placeholderTextColor={"gray"}
+                          />
+                        </BoxLabelInput>
+                        <ErrorText>{touched.name && errors.name}</ErrorText>
                       </BoxInputError>
 
                       <BoxInputError>
-                        <Input
-                          label="Sobrenome"
-                          value={values.surname as string}
-                          onChange={handleChange("surname")}
-                          placeholder="Ex: Johnny"
-                        />
+                        <BoxLabelInput>
+                          <Label>Sobrenome</Label>
+                          <Input
+                            onChangeText={handleFieldChange("surname")}
+                            placeholder="Ex: Johnny"
+                            placeholderTextColor={"gray"}
+                          />
+                        </BoxLabelInput>
                         <ErrorText>
-                          {errors.surname && errors.surname}
+                          {touched.surname && errors.surname}
                         </ErrorText>
                       </BoxInputError>
                     </BoxName>
@@ -193,14 +194,19 @@ const RegisterEmployees = () => {
 
                   <BoxTwo>
                     <BoxInputError>
-                      <Input
-                        label="CPF"
-                        value={values.cpf as string}
-                        onChange={handleChange("cpf")}
-                        isCpf={true}
-                        placeholder="111.222.333-54"
-                      />
-                      <ErrorText>{errors.cpf && errors.cpf}</ErrorText>
+                      <BoxLabelInput>
+                        <Label>CPF</Label>
+                        <Input
+                          onChangeText={(text) => {
+                            const formattedText = formatCpf(text as any);
+                            handleFieldChange("cpf")(formattedText);
+                          }}
+                          value={values.cpf as string}
+                          placeholder="Ex: 234.167.398-84"
+                          placeholderTextColor={"gray"}
+                        />
+                      </BoxLabelInput>
+                      <ErrorText>{touched.cpf && errors.cpf}</ErrorText>
                     </BoxInputError>
                   </BoxTwo>
 
@@ -211,18 +217,18 @@ const RegisterEmployees = () => {
                           <Select
                             label="Função"
                             options={roles}
-                            onChange={handleChange("roles")}
+                            onChange={handleFieldChange("roles")}
                           />
-                          <ErrorText>{errors.roles && errors.roles}</ErrorText>
+                          <ErrorText>{touched.roles && errors.roles}</ErrorText>
                         </BoxInputError>
                       </BoxInput>
                       <BoxInput>
                         <Select
                           label="Turno"
                           options={shift}
-                          onChange={handleChange("shift")}
+                          onChange={handleFieldChange("shift")}
                         />
-                        <ErrorText>{errors.shift && errors.shift}</ErrorText>
+                        <ErrorText>{touched.shift && errors.shift}</ErrorText>
                       </BoxInput>
                     </BoxContainer>
 
@@ -232,10 +238,10 @@ const RegisterEmployees = () => {
                           <Select
                             label="Setor"
                             options={optionsSector}
-                            onChange={handleChange("sector")}
+                            onChange={handleFieldChange("sector")}
                           />
                           <ErrorText>
-                            {errors.sector && errors.sector}
+                            {touched.sector && errors.sector}
                           </ErrorText>
                         </BoxInputError>
                       </BoxInput>
@@ -244,10 +250,10 @@ const RegisterEmployees = () => {
                           <Select
                             label="Avaliavel"
                             options={[{ value: "Sim" }, { value: "Não" }]}
-                            onChange={handleChange("assessable")}
+                            onChange={handleFieldChange("assessable")}
                           />
                           <ErrorText>
-                            {errors.assessable && errors.assessable}
+                            {touched.assessable && errors.assessable}
                           </ErrorText>
                         </BoxInputError>
                       </BoxInput>
@@ -255,7 +261,7 @@ const RegisterEmployees = () => {
                   </BoxMain>
                   <ButtonSubmit
                     style={{ borderRadius: 100 }}
-                    onPress={() => handleSubmit()}
+                    onPress={() => handleSubmit(values as any)}
                   >
                     <TextSubmit>Cadastrar</TextSubmit>
                   </ButtonSubmit>
@@ -270,6 +276,27 @@ const RegisterEmployees = () => {
 };
 
 export default RegisterEmployees;
+
+// INPUTS
+
+const BoxLabelInput = styled.View`
+  width: 100%;
+  gap: 3px;
+`;
+
+const Label = styled.Text`
+  color: white;
+  font-size: 12px;
+`;
+
+const Input = styled.TextInput`
+  background-color: #1c1c23;
+  padding: 2px 5px;
+  width: 100%;
+  border: 1.4px solid #353542;
+  border-radius: 5px;
+  color: white;
+`;
 
 const BoxContainerImage = styled.View`
   transition: all 300ms;
@@ -360,6 +387,8 @@ const BoxInput = styled.View`
 `;
 
 const BoxInputError = styled.View`
+  transition: all;
+  transition-duration: 300ms;
   width: 100%;
 `;
 
