@@ -18,20 +18,19 @@ const ToolipInfomation = ({ text }: ToolipInfomationProps) => {
         content={<TooltipText>{text}</TooltipText>}
         placement="top"
         onClose={() => {
-            setShowTooltip(false);
+          setShowTooltip(false);
         }}
         contentStyle={style.tooltip}
       >
-
-<TouchableOpacity onPress={() => setShowTooltip(true)}>
-                  <Icon
-                    name="information-circle-outline"
-                    size={14}
-                    type="ionicon"
-                    color={"#828282"}
-                    style={{ paddingTop: 2.5 }}
-                  />
-                </TouchableOpacity>
+        <TouchableOpacity onPress={() => setShowTooltip(true)}>
+          <Icon
+            name="information-circle-outline"
+            size={14}
+            type="ionicon"
+            color={"#828282"}
+            style={{ paddingTop: 2.5 }}
+          />
+        </TouchableOpacity>
       </Tooltip>
     </View>
   );

@@ -67,7 +67,9 @@ const SubTitle = styled.Text`
   font-size: 10px;
   margin-right: 5px;
 `;
-const BodyBox = styled.ScrollView`
+const BodyBox = styled.ScrollView.attrs({
+  nestedScrollEnabled: true
+})`
   padding: 10px;
   height: 100px;
 `;

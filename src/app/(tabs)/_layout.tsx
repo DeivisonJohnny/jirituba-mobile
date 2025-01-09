@@ -25,7 +25,7 @@ const Layout = () => {
 
   return (
     <>
-      <StatusBar style="light" backgroundColor="#1c1c23"/>
+      <StatusBar style="light" backgroundColor="#1c1c23" />
       <ContainerMain
         screenOptions={{
           header: () => <Header></Header>,
@@ -130,7 +130,10 @@ const Layout = () => {
         />
 
         <Tabs.Screen name="pages/details-user/[id]" options={{ href: null }} />
-        <Tabs.Screen name="pages/details-avaliation/[id]" options={{ href: null }} />
+        <Tabs.Screen
+          name="pages/details-avaliation/[id]"
+          options={{ href: null }}
+        />
         <Tabs.Screen name="pages/users/index" options={{ href: null }} />
         <Tabs.Screen name="pages/statistics/index" options={{ href: null }} />
       </ContainerMain>

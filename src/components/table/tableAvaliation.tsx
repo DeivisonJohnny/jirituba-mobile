@@ -31,7 +31,7 @@ const TableValidation = (props: TableValidationProps) => {
           <TitleCol>Data</TitleCol>
         </HeadRow>
       </HeadTable>
-      <ScrollView>
+      <ScrollView nestedScrollEnabled>
         {Array.from({ length: 20 }, (_, index) => (
           <Row key={index} index={index} onPress={directPage}>
             <Cell>34</Cell>
