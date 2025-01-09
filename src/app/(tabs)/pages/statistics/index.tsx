@@ -114,7 +114,8 @@ const AvaliationDay = (props: AvaliationDayProps) => {
             data={barData}
             barWidth={16}
             initialSpacing={12}
-            barBorderRadius={4}
+            barBorderTopLeftRadius={3}
+            barBorderTopRightRadius={3}
             xAxisType={"solid"}
             xAxisColor={"lightgray"}
             yAxisTextStyle={{ color: "lightgray" }}
@@ -158,11 +159,6 @@ const AvaliationDay = (props: AvaliationDayProps) => {
 };
 
 export default AvaliationDay;
-
-const TooltipText = styled.Text`
-  color: white;
-  font-size: 12px;
-`;
 
 const ContainerMain = styled.ScrollView`
   background-color: #0e0e12;

@@ -301,6 +301,7 @@ const Container = styled.View`
   flex-direction: column;
   align-items: center;
   padding: 0px 10px;
+  margin-bottom: 80px;
 `;
 
 const BoxPrimary = styled.View`
