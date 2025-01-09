@@ -4,6 +4,7 @@ import { Icon } from "react-native-elements";
 import TableAvaliation from "../../components/table/tableAvaliation";
 import { useState } from "react";
 import SkeletonLoad from "../../components/loading/SkeletonLoad";
+import { router } from "expo-router";
 
 const Dashboard = () => {
   const [fontLoad] = useFonts({
@@ -23,7 +24,7 @@ const Dashboard = () => {
         {loading ? (
           <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
         ) : (
-          <ConteinerBox>
+          <ConteinerBox onPress={() => router.push('pages/statistics/')}>
             <TitleBox>N° Avaliações do dia</TitleBox>
             <ContentText>15</ContentText>
           </ConteinerBox>
