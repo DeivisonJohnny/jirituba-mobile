@@ -6,7 +6,6 @@ import * as ImagePicker from "expo-image-picker";
 import Select from "../../../../components/register-employees/modal-select";
 import { useState } from "react";
 import { object, string } from "yup";
-import * as FileSystem from "expo-file-system";
 
 export type RegisterEmployees = {
   imgProfile: string | null;
@@ -31,20 +30,9 @@ const RegisterEmployees = () => {
     });
 
     if (!result.canceled) {
-      const uri = result.assets[0].uri;
-      setImage(uri);
-      await saveImageToStorage(uri);
-      return uri;
+      setImage(result.assets[0].uri);
+      return result.assets[0].uri;
     }
-  };
-
-  const saveImageToStorage = async (uri: string) => {
-    const fileName = uri.split('/').pop();
-    const directory = `${FileSystem.documentDirectory}minha_pasta/`;
-    await FileSystem.makeDirectoryAsync(directory, { intermediates: true });
-    const newPath = `${directory}${fileName}`;
-    await FileSystem.moveAsync({ from: uri, to: newPath });
-    console.log(`Imagem salva em: ${newPath}`);
   };
 
   const [optionsSector] = useState([
@@ -328,7 +316,7 @@ const BoxImage = styled.TouchableOpacity`
   justify-content: center;
 `;
 const ImageProfile = styled.Image`
-  border-radius: 4px;
+  border-radius: 6px;
   width: 96px;
   height: 96px;
 `;
