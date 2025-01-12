@@ -197,7 +197,7 @@ const RegisterEmployees = () => {
                       <BoxLabelInput>
                         <Label>CPF</Label>
                         <Input
-                          onChangeText={(text) => {
+                          onChangeText={(text: string) => {
                             const formattedText = formatCpf(text as any);
                             handleFieldChange("cpf")(formattedText);
                           }}
