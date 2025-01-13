@@ -1,14 +1,15 @@
 import * as React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import Tooltip from "react-native-walkthrough-tooltip";
 import styled from "styled-components/native";
 
 interface ToolipInfomationProps {
   text: string;
+  iconSize?: number;
 }
 
-const ToolipInfomation = ({ text }: ToolipInfomationProps) => {
+const ToolipInfomation = ({ text, iconSize }: ToolipInfomationProps) => {
   const [showTooltip, setShowTooltip] = React.useState(false);
 
   return (
@@ -16,16 +17,17 @@ const ToolipInfomation = ({ text }: ToolipInfomationProps) => {
       <Tooltip
         isVisible={showTooltip}
         content={<TooltipText>{text}</TooltipText>}
-        placement="top"
         onClose={() => {
           setShowTooltip(false);
         }}
         contentStyle={style.tooltip}
+        arrowSize={{ width: 0, height: 0 }}
+        closeOnChildInteraction={false}
       >
         <TouchableOpacity onPress={() => setShowTooltip(true)}>
           <Icon
             name="information-circle-outline"
-            size={14}
+            size={iconSize ? iconSize : 14}
             type="ionicon"
             color={"#828282"}
             style={{ paddingTop: 2.5 }}

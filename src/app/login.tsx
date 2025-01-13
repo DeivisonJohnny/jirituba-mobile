@@ -38,7 +38,7 @@ const Login = (props: LoginProps) => {
       <StatusBar style="dark" />
 
       <Header>
-        <TextTitulo>Jirituba Avaliações</TextTitulo>
+        <TextTitulo>Business Avaliações</TextTitulo>
       </Header>
       <Main>
         <Formik

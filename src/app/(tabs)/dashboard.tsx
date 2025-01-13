@@ -1,4 +1,4 @@
-import { styled } from "styled-components/native";
+import styled from "styled-components/native";
 import { useFonts } from "expo-font";
 import { Icon } from "react-native-elements";
 import TableAvaliation from "../../components/table/tableAvaliation";
@@ -24,7 +24,7 @@ const Dashboard = () => {
         {loading ? (
           <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
         ) : (
-          <ConteinerBox onPress={() => router.push('pages/statistics/')}>
+          <ConteinerBox onPress={() => router.push("pages/statistics/")}>
             <TitleBox>N° Avaliações do dia</TitleBox>
             <ContentText>15</ContentText>
           </ConteinerBox>

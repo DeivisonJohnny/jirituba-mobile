@@ -2,19 +2,20 @@ import * as React from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 import ItemMenu from "../../../../components/menu/ItemMenu";
-import { CategorysMenu, itemMenu, useItemMenu } from "../../../utils/listMenu";
+import { itemMenu, useMenu } from "../../../hooks/useMenu";
 
 interface MenuProps {}
 
 const Menu = (props: MenuProps) => {
-  const { itensMenu, addItemMenu } = useItemMenu();
-  
+  const { itensMenu, addItemMenu } = useMenu();
+
   React.useEffect(() => {
     Array.from({ length: 5 }, (_, index) => {
       addItemMenu({
         title: `Inicio ${index + 1}`,
         icon: "home",
         category: "Principal",
+        uri: "pages/statistics/",
       });
     });
   }, []);
@@ -24,15 +25,16 @@ const Menu = (props: MenuProps) => {
         title: `Inicio ${index + 1}`,
         icon: "home",
         category: "Sobre o App",
+        uri: "pages/statistics/",
       });
     });
   }, []);
-  
+
   const groupedItems = itensMenu.reduce((acc, item) => {
     (acc[item.category] = acc[item.category] || []).push(item);
     return acc;
   }, {} as Record<string, itemMenu[]>);
-  
+
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: "#0e0e12" }}
@@ -48,6 +50,7 @@ const Menu = (props: MenuProps) => {
                 icon={item.icon}
                 title={item.title}
                 category={item.category}
+                uri={item.uri}
               />
             ))}
             <Line />

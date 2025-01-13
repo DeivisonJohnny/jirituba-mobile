@@ -20,7 +20,6 @@ const CardEmployee = (props: CardEmployeeProps) => {
   const directionPage = () => {
     router.push({
       pathname: "/pages/details-user/[id]",
-      // pathname: "/pages/details-user/[id]",
       params: {
         id: props.name + "IDIDIDID",
       },

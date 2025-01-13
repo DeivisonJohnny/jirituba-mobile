@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
-import { itemMenu } from "../../app/utils/listMenu";
+import { itemMenu } from "../../app/hooks/useMenu";
+import { router } from "expo-router";
 
 interface ItemMenuProps {
   title: string;
@@ -11,12 +12,12 @@ interface ItemMenuProps {
   sizeIcon?: number;
   widthIcon?: number;
   category?: string;
-  url?: string;
+  uri?: string;
 }
 
 const ItemMenu = (props: itemMenu) => {
   return (
-    <BodyItemMenu>
+    <BodyItemMenu onPress={() => router.navigate(props.uri)}>
       <Icon
         name={props.icon + "-sharp"}
         size={props.sizeIcon ? props.sizeIcon : 20}
