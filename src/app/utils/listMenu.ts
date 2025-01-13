@@ -7,6 +7,12 @@ const MenuItens = [
     icon: "person",
     uri: "pages/roles-employees/",
   },
+  {
+    title: "Setores",
+    category: "Principal",
+    icon: "file-tray-stacked",
+    uri: "pages/sector-employees/",
+  },
 ] as itemMenu[];
 
 export default MenuItens;
