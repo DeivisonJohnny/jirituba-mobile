@@ -1,55 +1,77 @@
 import * as React from "react";
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import styled from "styled-components/native";
 import InputSearch from "../../../../components/input-search";
 import { Icon } from "react-native-elements";
 import { router } from "expo-router";
 import CardSector from "../../../../components/card-sector";
+import LoadingPage from "../../../../components/loading/LoadingPage";
 
 const SectorEmployees = () => {
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        setLoading(false); 
+      } catch (error) {
+        console.error("Erro ao carregar os dados:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <ContainerMain>
-      <BoxButtons>
-        <ButtonBack onPress={() => router.back()}>
-          <Icon
-            name="arrow-back-outline"
-            type="ionicon"
-            size={24}
-            color={"white"}
-            style={{ width: "fit-content" }}
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <>
+          <BoxButtons>
+            <ButtonBack onPress={() => router.back()}>
+              <Icon
+                name="arrow-back-outline"
+                type="ionicon"
+                size={24}
+                color={"white"}
+                style={{ width: "fit-content" }}
+              />
+            </ButtonBack>
+            <ButtonAdd>
+              <Text style={{ color: "white", fontSize: 14, width: "auto" }}>
+                Setor
+              </Text>
+              <Icon
+                name="add"
+                type="ionicon"
+                size={16}
+                color={"white"}
+                style={{ width: "fit-content" }}
+              />
+            </ButtonAdd>
+          </BoxButtons>
+          <InputSearch
+            style={{ marginTop: 10, marginBottom: 10 }}
+            placeholder="Recepcionista, Pintor, Gerente..."
           />
-        </ButtonBack>
-        <ButtonAdd>
-          <Text style={{ color: "white", fontSize: 14, width: "auto" }}>
-            Setor
-          </Text>
-          <Icon
-            name="add"
-            type="ionicon"
-            size={16}
-            color={"white"}
-            style={{ width: "fit-content" }}
-          />
-        </ButtonAdd>
-      </BoxButtons>
-      <InputSearch
-        style={{ marginTop: 10, marginBottom: 10 }}
-        placeholder="Recepcionista, Pintor, Gerente..."
-      />
-      <BoxScroll>
-        <ScrollView
-          contentContainerStyle={{
-            alignItems: "center",
-            gap: 10,
-            width: "100%",
-            paddingBottom: 120,
-          }}
-        >
-          {Array.from({ length: 3 }).map((_, index) => {
-            return <CardSector key={index}></CardSector>;
-          })}
-        </ScrollView>
-      </BoxScroll>
+          <BoxScroll>
+            <ScrollView
+              contentContainerStyle={{
+                alignItems: "center",
+                gap: 10,
+                width: "100%",
+                paddingBottom: 120,
+              }}
+            >
+              {Array.from({ length: 3 }).map((_, index) => {
+                return <CardSector key={index}></CardSector>;
+              })}
+            </ScrollView>
+          </BoxScroll>
+        </>
+      )}
     </ContainerMain>
   );
 };
