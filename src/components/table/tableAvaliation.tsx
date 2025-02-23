@@ -49,8 +49,9 @@ export default TableValidation;
 const Table = styled.View<{ width: string | number; height: string | number }>`
   border: 1px solid #353542;
   border-radius: 7px;
-  width: ${({ width }) => (typeof width === "number" ? `${width}%` : width)};
-  height: ${({ height }) =>
+  width: ${({ width }: { width: string | number }) =>
+    typeof width === "number" ? `${width}%` : width};
+  height: ${({ height }: { height: string | number }) =>
     typeof height === "number" ? `${height}%` : height};
 `;
 
@@ -74,7 +75,7 @@ const Row = styled.TouchableOpacity<{ index: number }>`
   flex-direction: row;
   justify-content: space-evenly;
   padding: 10px 0px;
-  background-color: ${({ index }) =>
+  background-color: ${({ index }: { index: number }) =>
     index % 2 === 0 ? "#1c1c23" : "#35354278"};
 `;
 
