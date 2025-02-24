@@ -36,7 +36,7 @@ const CardRoles = (props: CardRolesProps) => {
             <Icon
               name="pencil-outline"
               type="ionicon"
-              size={11}
+              size={14}
               color={"#53c5fa"}
             ></Icon>
           </ButtonUpdate>
@@ -44,7 +44,7 @@ const CardRoles = (props: CardRolesProps) => {
             <Icon
               name="trash-outline"
               type="ionicon"
-              size={11}
+              size={14}
               color={"#ff0004"}
             ></Icon>
           </ButtonDelete>
@@ -64,7 +64,6 @@ const ContainerMain = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 10px;
   flex: 2;
 `;
 
@@ -88,6 +87,7 @@ const Role = styled.Text`
 const BoxNuEmployees = styled.View`
   display: flex;
   align-items: center;
+  gap: 4px;
 `;
 
 const TitleNuEmployees = styled.Text`
@@ -102,9 +102,10 @@ const NuEmployees = styled.Text`
 `;
 
 const BoxActions = styled.View`
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
   gap: 10px;
 `;
 

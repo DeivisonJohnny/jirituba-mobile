@@ -31,12 +31,10 @@ const CardEmployee = (props: CardEmployeeProps) => {
       <ProfileCard />
       <BoxCenter>
         <BoxTitle>
-          <Title>Nome:</Title>
           <Name>{props.name}</Name>
         </BoxTitle>
 
         <BoxTitle>
-          <Title>Função:</Title>
           <Name>{props.roles}</Name>
         </BoxTitle>
       </BoxCenter>
@@ -55,7 +53,7 @@ const Container = styled.TouchableOpacity`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  width: 90%;
+  width: 100%;
 
   border-radius: 10px;
   background-color: #262631;
@@ -81,7 +79,7 @@ const Box = styled.View`
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 10px;
+  gap: 5px;
   margin-right: 10px;
 `;
 
@@ -100,7 +98,7 @@ const Name = styled.Text`
 const TitleNota = styled.Text`
   font-family: "montserratMedium";
   color: white;
-  font-size: 13px;
+  font-size: 12px;
 `;
 
 const Nota = styled.Text`

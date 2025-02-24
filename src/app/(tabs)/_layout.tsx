@@ -29,26 +29,16 @@ const Layout = () => {
       <ContainerMain
         screenOptions={{
           header: () => <Header></Header>,
+
           headerShadowVisible: false,
           tabBarStyle: {
-            borderTopWidth: 1,
-            borderRightWidth: 1,
-            borderBottomWidth: 1,
-            borderLeftWidth: 1,
             position: "absolute",
-            left: "auto",
-            right: "auto",
-            bottom: "2%",
-            width: "87%",
-            marginHorizontal: "auto",
-            borderRadius: 10,
+            width: "100%",
             alignSelf: "center",
-            borderWidth: 1,
-            borderTopColor: "#ff9789",
-            borderRightColor: "#ff9789",
-            borderBottomColor: "#ff9789",
-            borderLeftColor: "#ff9789",
-            shadowColor: "#ff9789ca",
+            borderWidth: 0,
+            borderWidthTop: 1,
+            borderColor: "#1c1c23",
+
             shadowOpacity: 0.3,
             shadowOffset: { height: 4, width: 0 },
             backgroundColor: "#262630",
@@ -136,8 +126,14 @@ const Layout = () => {
         />
         <Tabs.Screen name="pages/users/index" options={{ href: null }} />
         <Tabs.Screen name="pages/statistics/index" options={{ href: null }} />
-        <Tabs.Screen name="pages/roles-employees/index" options={{ href: null }} />
-        <Tabs.Screen name="pages/sector-employees/index" options={{ href: null }} />
+        <Tabs.Screen
+          name="pages/roles-employees/index"
+          options={{ href: null }}
+        />
+        <Tabs.Screen
+          name="pages/sector-employees/index"
+          options={{ href: null }}
+        />
       </ContainerMain>
     </>
   );
@@ -146,5 +142,11 @@ const Layout = () => {
 export default Layout;
 
 const ContainerMain = styled(Tabs)`
-  flex: 1;
+  /* flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background-color: red;
+  width: 100%; */
 `;

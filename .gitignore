@@ -34,6 +34,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+
+# Custom 
+feature.txt
 =======
 ### AL ###
 #Template for AL projects for Dynamics 365 Business Central

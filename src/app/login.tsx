@@ -52,6 +52,7 @@ const Login = (props: LoginProps) => {
                 <Input
                   value={values.usuario}
                   onChangeText={handleChange("usuario")}
+                  placeholder={"Ex: adalbertoadmin"}
                 />
               </BoxInput>
 
@@ -61,6 +62,7 @@ const Login = (props: LoginProps) => {
                   value={values.senha}
                   onChangeText={handleChange("senha")}
                   secureTextEntry
+                  placeholder={" * * * * * * * *"}
                 />
               </BoxInput>
               <BoxInput>
@@ -83,7 +85,7 @@ const Login = (props: LoginProps) => {
       </Main>
 
       <Footer>
-        <FooterTitulo>Dev Johnny</FooterTitulo>
+        <FooterTitulo>© By Dev Johnny - 2025</FooterTitulo>
       </Footer>
     </BodyContent>
   );
@@ -105,7 +107,7 @@ const Header = styled.View`
 
 const TextTitulo = styled.Text`
   color: white;
-  font-size: 30px;
+  font-size: 20px;
   font-family: "montserrat";
   font-weight: bold;
   letter-spacing: 2px;
@@ -137,8 +139,8 @@ const Label = styled.Text`
 
 const Input = styled.TextInput`
   border: 1px solid #353542;
-  padding: 8px 10px;
-  border-radius: 10px;
+  padding: 10px 10px;
+  border-radius: 5px;
   background-color: transparent;
   color: white;
   letter-spacing: 0.8px;
@@ -163,6 +165,6 @@ const FooterTitulo = styled.Text`
   color: white;
   font-family: "montserratMedium";
   letter-spacing: 0.8px;
-  font-size: 20px;
+  font-size: 12px;
   font-weight: bold;
 `;

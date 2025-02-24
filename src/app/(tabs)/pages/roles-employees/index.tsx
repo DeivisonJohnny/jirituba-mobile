@@ -10,7 +10,7 @@ const RolesEmployees = () => {
   return (
     <ContainerMain>
       <BoxButtons>
-        <ButtonBack onPress={() => router.back()} >
+        <ButtonBack onPress={() => router.back()}>
           <Icon
             name="arrow-back-outline"
             type="ionicon"
@@ -42,7 +42,7 @@ const RolesEmployees = () => {
             alignItems: "center",
             gap: 10,
             width: "100%",
-            paddingBottom: 120,
+            paddingBottom: 200,
           }}
         >
           {Array.from({ length: 20 }).map((_, index) => {
@@ -65,11 +65,12 @@ const ContainerMain = styled.View`
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 80px;
+  padding: 0px 15px;
 `;
 
 const BoxScroll = styled.View`
+  padding: 10px 0px 0px 0px;
   width: 100%;
-  padding: 10px 20px;
 `;
 
 const BoxButtons = styled.View`
@@ -78,8 +79,8 @@ const BoxButtons = styled.View`
   align-items: end;
   justify-content: space-between;
   flex-direction: row;
-  width: 90%;
-  margin: 0px 20px;
+  width: 100%;
+  margin: 10px 20px;
 `;
 
 const ButtonAdd = styled.TouchableOpacity`
@@ -88,7 +89,7 @@ const ButtonAdd = styled.TouchableOpacity`
   flex-direction: row;
   gap: 5px;
   background-color: #ff6e5b;
-  padding: 4px 10px;
+  padding: 7px 15px;
   border-radius: 50px;
   right: 0px;
 `;

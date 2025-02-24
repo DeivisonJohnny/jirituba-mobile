@@ -124,8 +124,8 @@ const RegisterEmployees = () => {
           }) => {
             const handleFieldChange =
               (field: keyof RegisterEmployees) => (value: string) => {
-                setFieldValue(field, value); // Atualiza o valor do campo
-                setFieldTouched(field, true, false); // Marca o campo como "tocado" para ativar a validação
+                setFieldValue(field, value);
+                setFieldTouched(field, true, false);
               };
             return (
               <>
@@ -277,8 +277,6 @@ const RegisterEmployees = () => {
 
 export default RegisterEmployees;
 
-// INPUTS
-
 const BoxLabelInput = styled.View`
   width: 100%;
   gap: 3px;
@@ -291,18 +289,16 @@ const Label = styled.Text`
 
 const Input = styled.TextInput`
   background-color: #1c1c23;
-  padding: 2px 5px;
+  padding: 10px;
   width: 100%;
   border: 1.4px solid #353542;
   border-radius: 5px;
   color: white;
+  font-size: 12px;
 `;
 
 const BoxContainerImage = styled.View`
   transition: all 300ms;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 5px;
 `;
 
@@ -329,6 +325,7 @@ const Container = styled.View`
   align-items: center;
   padding: 0px 10px;
   margin-bottom: 80px;
+  gap: 10px;
 `;
 
 const BoxPrimary = styled.View`
@@ -355,8 +352,8 @@ const ButtonContainer = styled.TouchableOpacity`
   padding: 20px;
   background-color: #1c1c23;
   border-radius: 7px;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -39,22 +39,26 @@ const DetailsUser = () => {
             <Icon type="ionicon" name="star" size={15} color={"yellow"} />
           </BoxScore>
           <BoxButtons>
-            <Button>
-              <Icon
-                type="ionicon"
-                name="trash-outline"
-                size={20}
-                color={"red"}
-              />
-            </Button>
-            <Button>
-              <Icon
-                type="ionicon"
-                name="create-outline"
-                size={20}
-                color="#7b9aff"
-              />
-            </Button>
+            <ButtonDelete>
+              <Button>
+                <Icon
+                  type="ionicon"
+                  name="trash-outline"
+                  size={15}
+                  color={"red"}
+                />
+              </Button>
+            </ButtonDelete>
+            <ButtonUpdate>
+              <Button>
+                <Icon
+                  type="ionicon"
+                  name="create-outline"
+                  size={15}
+                  color="#53c5fa"
+                />
+              </Button>
+            </ButtonUpdate>
           </BoxButtons>
         </BoxActions>
       </BoxEmployee>
@@ -125,8 +129,9 @@ const BoxEmployee = styled.View`
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
-  padding: 0px 20px;
-  gap: 20px;
+  flex-wrap: wrap;
+  padding: 0px 10px;
+  gap: 10px;
 `;
 
 const BoxName = styled.View`
@@ -139,7 +144,7 @@ const ContentData = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  width: 45%;
+  width: fit-content;
   height: 100%;
 `;
 
@@ -150,7 +155,7 @@ const Label = styled.Text`
   letter-spacing: 0.5px;
 `;
 const Name = styled.Text`
-  font-size: 14px;
+  font-size: 13px;
   color: white;
 `;
 
@@ -161,7 +166,7 @@ const BoxCpf = styled.View`
 `;
 
 const Cpf = styled.Text`
-  font-size: 14px;
+  font-size: 13px;
   color: white;
 `;
 
@@ -201,6 +206,7 @@ const BoxButtons = styled.View`
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 10px;
 `;
 
@@ -259,4 +265,16 @@ const ContainerTable = styled.View`
   gap: 10px;
   width: 100%;
   margin: 10px 0px 30px 0px;
+`;
+
+const ButtonUpdate = styled.TouchableOpacity`
+  padding: 4px;
+  border-radius: 4px;
+  border: 0.8px dashed #53c5fa;
+`;
+
+const ButtonDelete = styled.TouchableOpacity`
+  padding: 4px;
+  border-radius: 4px;
+  border: 0.8px dashed #ff0004;
 `;
