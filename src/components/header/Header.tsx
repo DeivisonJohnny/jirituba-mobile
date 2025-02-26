@@ -16,18 +16,28 @@ const Header = () => {
   };
 
   return (
-    <HeaderContainer>
-      <ProfileCard></ProfileCard>
-      <TextLogo>Jirituba</TextLogo>
-      <ButtonLogout onPress={logout}>
+    <HeaderContainer
+      style={{
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.0,
+
+        elevation: 24,
+      }}
+    >
+      <ButtonLogout onPress={() => router.back()}>
         <Icon
-          name="log-out-outline"
+          name="arrow-back-outline"
           type="ionicon"
           size={23}
           color={"white"}
         ></Icon>
-        <TextLogout>Sair</TextLogout>
       </ButtonLogout>
+      <ProfileCard></ProfileCard>
     </HeaderContainer>
   );
 };
@@ -36,7 +46,7 @@ const HeaderContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 25px;
+  padding: 15px 25px 15px 25px;
   background-color: #0e0e12;
   width: 100%;
 `;
