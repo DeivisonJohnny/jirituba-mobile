@@ -35,6 +35,13 @@ const Menu = (props: MenuProps) => {
             <Line />
           </React.Fragment>
         ))}
+        <ItemMenu
+          icon={"log-out"}
+          title={"Logout"}
+          category={"Principal"}
+          sizeIcon={23}
+          uri={"/login"}
+        />
       </MainMenu>
     </ScrollView>
   );
