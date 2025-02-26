@@ -25,7 +25,7 @@ const Layout = () => {
 
   return (
     <>
-      <StatusBar style="light" backgroundColor="#1c1c23" />
+      <StatusBar style="light" backgroundColor="#0e0e12" />
       <ContainerMain
         screenOptions={{
           header: () => <Header></Header>,
