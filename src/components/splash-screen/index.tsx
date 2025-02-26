@@ -31,7 +31,7 @@ const SplashScreen = ({ children }: any) => {
 export default SplashScreen;
 
 const Splash = styled(LottieView)`
-background-color: #0e0e12;
+  background-color: #0e0e12;
   position: absolute;
   left: 0;
   top: 0;
