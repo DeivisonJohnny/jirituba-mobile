@@ -19,7 +19,7 @@ const ItemMenu = (props: itemMenu) => {
   return (
     <BodyItemMenu onPress={() => router.navigate(props.uri)}>
       <Icon
-        name={props.icon + "-sharp"}
+        name={props.icon + "-outline"}
         size={props.sizeIcon ? props.sizeIcon : 20}
         color={"white"}
         type="ionicon"
@@ -49,6 +49,6 @@ const BodyItemMenu = styled.TouchableOpacity`
 `;
 
 const Title = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   color: white;
 `;
