@@ -277,13 +277,14 @@ const TitleScroll = styled.Text`
 
 const BoxGrafic = styled.View`
   width: 100%;
-  padding: 0px 10px 0px 20px;
+  padding: 0px 10px 0px 13px;
   gap: 10px;
 `;
 
 const BoxLabelGrafic = styled.View`
   flex-direction: row;
   align-items: center;
+  padding-left: 8px;
   gap: 5px;
 `;
 
