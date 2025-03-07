@@ -3,17 +3,13 @@ import { Icon } from "react-native-elements";
 import { useState } from "react";
 import SkeletonLoad from "../../components/loading/SkeletonLoad";
 import { router } from "expo-router";
-import { Dimensions, Text } from "react-native";
+import { Dimensions, Text, View } from "react-native";
 import { LineChart, lineDataItem } from "react-native-gifted-charts";
 
 const Dashboard = () => {
   const { width } = Dimensions.get("window");
 
   const [loading, setLoading] = useState(true);
-
-  setTimeout(() => {
-    setLoading(false);
-  }, 500);
 
   const generateRandomData = (length: number, maxValue: number) => {
     return Array.from({ length }, () => ({
@@ -23,106 +19,153 @@ const Dashboard = () => {
 
   const dataGrafic = generateRandomData(27, 100);
 
-  const renderBoxItem = (
-    iconName: string,
-    iconType: string,
-    iconColor: string,
-    title: string,
-    onPress?: () => void
-  ) => {
-    return (
-      <ConteinerBox onPress={onPress}>
-        <Icon name={iconName} type={iconType} color={iconColor} />
-        <TitleBox>{title}</TitleBox>
-      </ConteinerBox>
-    );
-  };
+  setTimeout(() => {
+    setLoading(false);
+  }, 500);
 
   return (
     <Body>
       <Main>
-        <SectionContainer>
-          <SectionHeader>
+        <View
+          style={{
+            flex: 0,
+            width: "100%",
+            alignSelf: "flex-start",
+          }}
+        >
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              paddingHorizontal: 10,
+            }}
+          >
             <TitleScroll>Hoje - </TitleScroll>
             <ContentNota>
               <ContentText>5.0</ContentText>
-              <Icon type="ionicon" name="star" color={"yellow"} size={10} />
+              <Icon
+                type="ionicon"
+                name="star"
+                color={"yellow"}
+                size={10}
+              ></Icon>
             </ContentNota>
-          </SectionHeader>
+          </View>
 
           <BoxStatistics horizontal>
             <BoxScrollContent>
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"} />
+                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
               ) : (
-                renderBoxItem(
-                  "analytics-outline",
-                  "ionicon",
-                  "#00ff91",
-                  "Análise",
-                  () => router.push("pages/analysis-day/")
-                )
+                <ConteinerBox
+                  onPress={() => router.push("pages/analysis-day/")}
+                >
+                  <Icon
+                    name="analytics-outline"
+                    type="ionicon"
+                    color={"#00ff91"}
+                  />
+                  <TitleBox>Análise</TitleBox>
+                </ConteinerBox>
               )}
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"} />
+                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
               ) : (
-                renderBoxItem(
-                  "chatbubble-outline",
-                  "ionicon",
-                  "#52F7E0",
-                  "Avaliações"
-                )
+                <ConteinerBox>
+                  <Icon
+                    type="ionicon"
+                    name="chatbubble-outline"
+                    color={"#52F7E0"}
+                  ></Icon>
+
+                  <TitleBox style={{ color: "white" }}>Avaliações</TitleBox>
+                </ConteinerBox>
               )}
-              {renderBoxItem("person", "ionicon", "#52B1F7", "Destaque", () =>
-                router.push({
-                  pathname: `pages/emphasis-employee/[id]`,
-                  params: { id: "adasdsda" },
-                })
-              )}
+              <ConteinerBox
+                onPress={() =>
+                  router.push({
+                    pathname: `pages/emphasis-employee/[id]`,
+                    params: { id: "adasdsda" },
+                  })
+                }
+              >
+                <Icon type="ionicon" name="person" color={"#52B1F7"}></Icon>
+
+                <TitleBox style={{ color: "white" }}>Destaque</TitleBox>
+              </ConteinerBox>
             </BoxScrollContent>
           </BoxStatistics>
-        </SectionContainer>
-
-        <SectionContainer>
-          <SectionHeader>
+        </View>
+        <View
+          style={{
+            flex: 0,
+            width: "100%",
+            alignSelf: "flex-start",
+            paddingHorizontal: 10,
+          }}
+        >
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
             <TitleScroll>Ações</TitleScroll>
-          </SectionHeader>
+          </View>
 
           <BoxStatistics horizontal>
             <BoxScrollContent>
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"} />
+                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
               ) : (
-                renderBoxItem(
-                  "person-add-outline",
-                  "ionicon",
-                  "#00ff91",
-                  "Registrar",
-                  () => router.push("pages/register-employees/")
-                )
+                <ConteinerBox
+                  onPress={() => router.push("pages/register-employees/")}
+                >
+                  <Icon
+                    name="person-add-outline"
+                    type="ionicon"
+                    color={"#00ff91"}
+                  />
+                  <TitleBox>Registrar</TitleBox>
+                </ConteinerBox>
               )}
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"} />
+                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
               ) : (
-                renderBoxItem(
-                  "people-circle-outline",
-                  "ionicon",
-                  "yellow",
-                  "Funcionarios",
-                  () => router.push("pages/list-employees/")
-                )
+                <ConteinerBox
+                  onPress={() => router.push("pages/list-employees/")}
+                >
+                  <Icon
+                    type="ionicon"
+                    name="people-circle-outline"
+                    color={"yellow"}
+                  ></Icon>
+
+                  <TitleBox style={{ color: "white" }}>Funcionarios</TitleBox>
+                </ConteinerBox>
               )}
-              {renderBoxItem("badge", "material", "#5B52F7", "Funções")}
-              {renderBoxItem(
-                "briefcase-outline",
-                "ionicon",
-                "#52B1F7",
-                "Setor"
-              )}
+              <ConteinerBox
+                onPress={() => router.push("pages/roles-employees/")}
+              >
+                <Icon type="material" name="badge" color={"#5B52F7"}></Icon>
+
+                <TitleBox style={{ color: "white" }}>Funções</TitleBox>
+              </ConteinerBox>
+
+              <ConteinerBox
+                onPress={() => router.push("pages/sector-employees/")}
+              >
+                <Icon
+                  type="ionicon"
+                  name="briefcase-outline"
+                  color={"#52B1F7"}
+                ></Icon>
+
+                <TitleBox style={{ color: "white" }}>Setor</TitleBox>
+              </ConteinerBox>
             </BoxScrollContent>
           </BoxStatistics>
-        </SectionContainer>
-
+        </View>
         <BoxGrafic>
           <BoxLabelGrafic>
             <Text style={{ color: "white", fontSize: 12 }}>
@@ -182,18 +225,6 @@ const Main = styled.View`
   display: flex;
   flex: 1;
   gap: 20px;
-`;
-
-const SectionContainer = styled.View`
-  flex: 0;
-  width: 100%;
-  align-self: flex-start;
-`;
-
-const SectionHeader = styled.View`
-  display: flex;
-  flex-direction: row;
-  padding: 0px 10px;
 `;
 
 const BoxStatistics = styled.ScrollView`
