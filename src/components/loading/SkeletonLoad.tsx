@@ -1,14 +1,12 @@
 import { Skeleton } from "@rneui/themed";
 import { LinearGradient } from "expo-linear-gradient";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ViewStyle } from "react-native";
 
 interface propsSkeleton {
-  height: number | "auto" | `${number}%`;
-  width: number | "auto" | `${number}%`;
-  key?: string;
+  style: ViewStyle;
 }
 
-const SkeletonLoad = (props: propsSkeleton) => {
+const SkeletonLoad = ({ style }: propsSkeleton) => {
   const Gradient = () => {
     return (
       <LinearGradient
@@ -23,10 +21,10 @@ const SkeletonLoad = (props: propsSkeleton) => {
   return (
     <Skeleton
       animation="wave"
-      width={props.width}
-      height={props.height}
+      width={style.width}
+      height={style.height}
       skeletonStyle={styles.bar}
-      style={styles.skeleton}
+      style={[styles.skeleton, style]}
       LinearGradientComponent={Gradient}
     ></Skeleton>
   );

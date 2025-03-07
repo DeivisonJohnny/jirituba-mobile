@@ -19,9 +19,9 @@ const Dashboard = () => {
 
   const dataGrafic = generateRandomData(27, 100);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 500);
+  // setTimeout(() => {
+  //   setLoading(false);
+  // }, 500);
 
   return (
     <Body>
@@ -55,7 +55,9 @@ const Dashboard = () => {
           <BoxStatistics horizontal>
             <BoxScrollContent>
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+                <SkeletonLoad
+                  style={{ width: 70, height: 65, borderRadius: 5 }}
+                ></SkeletonLoad>
               ) : (
                 <ConteinerBox
                   onPress={() => router.push("pages/analysis-day/")}
@@ -69,7 +71,9 @@ const Dashboard = () => {
                 </ConteinerBox>
               )}
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+                <SkeletonLoad
+                  style={{ width: 70, height: 65, borderRadius: 5 }}
+                ></SkeletonLoad>
               ) : (
                 <ConteinerBox>
                   <Icon
@@ -81,18 +85,24 @@ const Dashboard = () => {
                   <TitleBox style={{ color: "white" }}>Avaliações</TitleBox>
                 </ConteinerBox>
               )}
-              <ConteinerBox
-                onPress={() =>
-                  router.push({
-                    pathname: `pages/emphasis-employee/[id]`,
-                    params: { id: "adasdsda" },
-                  })
-                }
-              >
-                <Icon type="ionicon" name="person" color={"#52B1F7"}></Icon>
+              {loading ? (
+                <SkeletonLoad
+                  style={{ width: 70, height: 65, borderRadius: 5 }}
+                ></SkeletonLoad>
+              ) : (
+                <ConteinerBox
+                  onPress={() =>
+                    router.push({
+                      pathname: `pages/emphasis-employee/[id]`,
+                      params: { id: "adasdsda" },
+                    })
+                  }
+                >
+                  <Icon type="ionicon" name="person" color={"#52B1F7"}></Icon>
 
-                <TitleBox style={{ color: "white" }}>Destaque</TitleBox>
-              </ConteinerBox>
+                  <TitleBox style={{ color: "white" }}>Destaque</TitleBox>
+                </ConteinerBox>
+              )}
             </BoxScrollContent>
           </BoxStatistics>
         </View>
@@ -116,7 +126,9 @@ const Dashboard = () => {
           <BoxStatistics horizontal>
             <BoxScrollContent>
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+                <SkeletonLoad
+                  style={{ width: 70, height: 65, borderRadius: 5 }}
+                ></SkeletonLoad>
               ) : (
                 <ConteinerBox
                   onPress={() => router.push("pages/register-employees/")}
@@ -130,7 +142,9 @@ const Dashboard = () => {
                 </ConteinerBox>
               )}
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+                <SkeletonLoad
+                  style={{ width: 70, height: 65, borderRadius: 5 }}
+                ></SkeletonLoad>
               ) : (
                 <ConteinerBox
                   onPress={() => router.push("pages/list-employees/")}
@@ -144,25 +158,36 @@ const Dashboard = () => {
                   <TitleBox style={{ color: "white" }}>Funcionarios</TitleBox>
                 </ConteinerBox>
               )}
-              <ConteinerBox
-                onPress={() => router.push("pages/roles-employees/")}
-              >
-                <Icon type="material" name="badge" color={"#5B52F7"}></Icon>
+              {loading ? (
+                <SkeletonLoad
+                  style={{ width: 70, height: 65, borderRadius: 5 }}
+                ></SkeletonLoad>
+              ) : (
+                <ConteinerBox
+                  onPress={() => router.push("pages/roles-employees/")}
+                >
+                  <Icon type="material" name="badge" color={"#5B52F7"}></Icon>
 
-                <TitleBox style={{ color: "white" }}>Funções</TitleBox>
-              </ConteinerBox>
+                  <TitleBox style={{ color: "white" }}>Funções</TitleBox>
+                </ConteinerBox>
+              )}
+              {loading ? (
+                <SkeletonLoad
+                  style={{ width: 70, height: 65, borderRadius: 5 }}
+                ></SkeletonLoad>
+              ) : (
+                <ConteinerBox
+                  onPress={() => router.push("pages/sector-employees/")}
+                >
+                  <Icon
+                    type="ionicon"
+                    name="briefcase-outline"
+                    color={"#52B1F7"}
+                  ></Icon>
 
-              <ConteinerBox
-                onPress={() => router.push("pages/sector-employees/")}
-              >
-                <Icon
-                  type="ionicon"
-                  name="briefcase-outline"
-                  color={"#52B1F7"}
-                ></Icon>
-
-                <TitleBox style={{ color: "white" }}>Setor</TitleBox>
-              </ConteinerBox>
+                  <TitleBox style={{ color: "white" }}>Setor</TitleBox>
+                </ConteinerBox>
+              )}
             </BoxScrollContent>
           </BoxStatistics>
         </View>
