@@ -1,32 +1,22 @@
-// components/Accordion.js
 import React, { ReactNode, useState, useEffect } from "react";
 import {
   View,
-  Text,
-  TouchableOpacity,
+  ScrollView,
   Animated,
   StyleSheet,
+  StyleProp,
+  ViewStyle,
 } from "react-native";
-import { Icon } from "react-native-elements";
-import {
-  ScrollView,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 
-const Accordion = ({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) => {
+const Accordion = ({ children }: { children: ReactNode }) => {
   const [expanded, setExpanded] = useState(false);
   const [animation] = useState(new Animated.Value(0));
 
   const toggleAccordion = () => {
     const toValue = expanded ? 0 : 1;
-    setExpanded(!expanded);
+    setExpanded((prev) => !prev);
 
     Animated.timing(animation, {
       toValue,
@@ -36,33 +26,39 @@ const Accordion = ({
   };
 
   useEffect(() => {
-    // Lógica que pode causar a atualização do estado
     return () => {
       // Limpeza se necessário
     };
-  }, [expanded]); // Dependência para monitorar mudanças
+  }, [expanded]);
 
   const heightInterpolation = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 100], // Ajuste conforme necessário
+    outputRange: [0, 200],
   });
+
+  const accordionTrigger = React.Children.toArray(children).find(
+    (child: any) => child.type === AccordionTrigger
+  );
+  const accordionContent = React.Children.toArray(children).find(
+    (child: any) => child.type === AccordionContent
+  );
 
   return (
     <GestureHandlerRootView>
       <Container>
         <Header onPress={toggleAccordion}>
-          <ContainerTitle>
-            <Title>{title}</Title>
-            <Icon
-              name="chevron-down-outline"
-              type="ionicon"
-              color={"#909090"}
-              size={15}
-            />
-          </ContainerTitle>
+          {React.isValidElement(accordionTrigger) && (
+            <View style={accordionTrigger.props.style}>{accordionTrigger}</View>
+          )}
         </Header>
         <Content style={{ height: heightInterpolation }} expanded={expanded}>
-          <View>{children}</View>
+          <ScrollView nestedScrollEnabled={true}>
+            {React.isValidElement(accordionContent) && (
+              <View style={accordionContent.props.style}>
+                {accordionContent}
+              </View>
+            )}
+          </ScrollView>
         </Content>
       </Container>
     </GestureHandlerRootView>
@@ -71,40 +67,29 @@ const Accordion = ({
 
 export default Accordion;
 
-const ContainerTitle = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  padding: 4px 7px;
-`;
+export const AccordionTrigger = ({
+  children,
+  style,
+}: {
+  children: ReactNode;
+  style?: StyleProp<ViewStyle>;
+}) => {
+  return <>{children}</>;
+};
 
-const Container = styled.View`
-  border-width: 1px;
-  border-color: #1c1c24;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  overflow: hidden;
-`;
+export const AccordionContent = ({
+  children,
+  style,
+}: {
+  children: ReactNode;
+  style?: StyleProp<ViewStyle>;
+}) => {
+  return <>{children}</>;
+};
 
-const Header = styled.TouchableOpacity`
-  padding: 15px;
-  background-color: #1c1c24;
-  border-radius: 5px;
-`;
+// Estilos padrão removidos (resetados)
+const Container = styled.View``;
 
-const Title = styled.Text`
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-`;
+const Header = styled.TouchableOpacity``;
 
-const Content = styled(Animated.View)<{ expanded: boolean }>`
-  background-color: #1c1c24;
-  padding: ${({ expanded }: { expanded: boolean }) =>
-    expanded ? "10px" : "0"};
-`;
-
-const Scroll = styled.ScrollView.attrs({
-  nestedScrollEnabled: true,
-})``;
+const Content = styled(Animated.View)<{ expanded: boolean }>``;
