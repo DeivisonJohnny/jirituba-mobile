@@ -134,6 +134,10 @@ const Layout = () => {
           name="pages/sector-employees/index"
           options={{ href: null }}
         />
+        <Tabs.Screen
+          name="pages/emphasis-employee/[id]"
+          options={{ href: null }}
+        />
       </ContainerMain>
     </>
   );
