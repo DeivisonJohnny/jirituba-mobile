@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { Icon } from "react-native-elements";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import SkeletonLoad from "../../components/loading/SkeletonLoad";
 import { router } from "expo-router";
 import { Dimensions, Text, View } from "react-native";
@@ -8,31 +8,27 @@ import { LineChart, lineDataItem } from "react-native-gifted-charts";
 
 const Dashboard = () => {
   const { width } = Dimensions.get("window");
-
   const [loading, setLoading] = useState(true);
 
-  const generateRandomData = (length: number, maxValue: number) => {
+  const generateRandomData = (length: number) => {
     return Array.from({ length }, () => ({
-      value: Math.floor(Math.random() * maxValue),
+      value: Number((Math.random() * 5).toFixed(1)),
     })) as lineDataItem[];
   };
 
-  const dataGrafic = generateRandomData(27, 100);
+  const dataGrafic = useMemo(() => generateRandomData(200), []);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 500);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Body>
       <Main>
-        <View
-          style={{
-            flex: 0,
-            width: "100%",
-            alignSelf: "flex-start",
-          }}
-        >
+        <View style={{ flex: 0, width: "100%", alignSelf: "flex-start" }}>
           <View
             style={{
               display: "flex",
@@ -43,12 +39,7 @@ const Dashboard = () => {
             <TitleScroll>Hoje - </TitleScroll>
             <ContentNota>
               <ContentText>5.0</ContentText>
-              <Icon
-                type="ionicon"
-                name="star"
-                color={"yellow"}
-                size={10}
-              ></Icon>
+              <Icon type="ionicon" name="star" color={"yellow"} size={10} />
             </ContentNota>
           </View>
 
@@ -57,7 +48,7 @@ const Dashboard = () => {
               {loading ? (
                 <SkeletonLoad
                   style={{ width: 70, height: 65, borderRadius: 5 }}
-                ></SkeletonLoad>
+                />
               ) : (
                 <ConteinerBox
                   onPress={() => router.push("pages/analysis-day/")}
@@ -73,22 +64,21 @@ const Dashboard = () => {
               {loading ? (
                 <SkeletonLoad
                   style={{ width: 70, height: 65, borderRadius: 5 }}
-                ></SkeletonLoad>
+                />
               ) : (
                 <ConteinerBox>
                   <Icon
                     type="ionicon"
                     name="chatbubble-outline"
                     color={"#52F7E0"}
-                  ></Icon>
-
+                  />
                   <TitleBox style={{ color: "white" }}>Avaliações</TitleBox>
                 </ConteinerBox>
               )}
               {loading ? (
                 <SkeletonLoad
                   style={{ width: 70, height: 65, borderRadius: 5 }}
-                ></SkeletonLoad>
+                />
               ) : (
                 <ConteinerBox
                   onPress={() =>
@@ -98,8 +88,7 @@ const Dashboard = () => {
                     })
                   }
                 >
-                  <Icon type="ionicon" name="person" color={"#52B1F7"}></Icon>
-
+                  <Icon type="ionicon" name="person" color={"#52B1F7"} />
                   <TitleBox style={{ color: "white" }}>Destaque</TitleBox>
                 </ConteinerBox>
               )}
@@ -114,12 +103,7 @@ const Dashboard = () => {
             paddingHorizontal: 10,
           }}
         >
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
+          <View style={{ display: "flex", flexDirection: "row" }}>
             <TitleScroll>Ações</TitleScroll>
           </View>
 
@@ -128,7 +112,7 @@ const Dashboard = () => {
               {loading ? (
                 <SkeletonLoad
                   style={{ width: 70, height: 65, borderRadius: 5 }}
-                ></SkeletonLoad>
+                />
               ) : (
                 <ConteinerBox
                   onPress={() => router.push("pages/register-employees/")}
@@ -144,7 +128,7 @@ const Dashboard = () => {
               {loading ? (
                 <SkeletonLoad
                   style={{ width: 70, height: 65, borderRadius: 5 }}
-                ></SkeletonLoad>
+                />
               ) : (
                 <ConteinerBox
                   onPress={() => router.push("pages/list-employees/")}
@@ -153,28 +137,26 @@ const Dashboard = () => {
                     type="ionicon"
                     name="people-circle-outline"
                     color={"yellow"}
-                  ></Icon>
-
+                  />
                   <TitleBox style={{ color: "white" }}>Funcionarios</TitleBox>
                 </ConteinerBox>
               )}
               {loading ? (
                 <SkeletonLoad
                   style={{ width: 70, height: 65, borderRadius: 5 }}
-                ></SkeletonLoad>
+                />
               ) : (
                 <ConteinerBox
                   onPress={() => router.push("pages/roles-employees/")}
                 >
-                  <Icon type="material" name="badge" color={"#5B52F7"}></Icon>
-
+                  <Icon type="material" name="badge" color={"#5B52F7"} />
                   <TitleBox style={{ color: "white" }}>Funções</TitleBox>
                 </ConteinerBox>
               )}
               {loading ? (
                 <SkeletonLoad
                   style={{ width: 70, height: 65, borderRadius: 5 }}
-                ></SkeletonLoad>
+                />
               ) : (
                 <ConteinerBox
                   onPress={() => router.push("pages/sector-employees/")}
@@ -183,8 +165,7 @@ const Dashboard = () => {
                     type="ionicon"
                     name="briefcase-outline"
                     color={"#52B1F7"}
-                  ></Icon>
-
+                  />
                   <TitleBox style={{ color: "white" }}>Setor</TitleBox>
                 </ConteinerBox>
               )}
@@ -206,6 +187,7 @@ const Dashboard = () => {
           <LineChart
             endSpacing={5}
             initialSpacing={0}
+            maxValue={5}
             animationDuration={1000}
             onDataChangeAnimationDuration={1000}
             areaChart
@@ -215,20 +197,56 @@ const Dashboard = () => {
             startOpacity={0.6}
             endFillColor="#0e0e12"
             endOpacity={0.3}
-            dataPointsColor1="#c2d8ff"
+            dataPointsColor="#c2d8ff"
             color1="white"
             yAxisColor={"gray"}
             xAxisColor={"gray"}
             yAxisTextStyle={{ color: "white" }}
             dashGap={0}
             horizontalRulesStyle={{ opacity: 0.2 }}
-            spacing={50}
             thickness={2}
             noOfSections={5}
             xAxisThickness={0}
             width={width * 0.8}
             showYAxisIndices
             isAnimated
+            pointerConfig={{
+              pointerStripHeight: 200,
+              pointerStripColor: "white",
+              pointerStripWidth: 2,
+              pointerColor: "#b9d3ff",
+              radius: 6,
+              pointerLabelWidth: 100,
+              pointerLabelHeight: 100,
+              activatePointersOnLongPress: true,
+              autoAdjustPointerLabelPosition: true,
+              pointerLabelComponent: (items: { value: number }[]) => {
+                return (
+                  <View
+                    style={{
+                      height: 90,
+                      width: 100,
+                      justifyContent: "center",
+                      marginTop: -30,
+                      marginLeft: -40,
+                    }}
+                  >
+                    <View
+                      style={{
+                        paddingVertical: 6,
+                        paddingHorizontal: 4,
+                        borderRadius: 16,
+                        backgroundColor: "white",
+                      }}
+                    >
+                      <Text style={{ fontWeight: "bold", textAlign: "center" }}>
+                        {items[0].value}
+                      </Text>
+                    </View>
+                  </View>
+                );
+              },
+            }}
           />
         </BoxGrafic>
       </Main>
