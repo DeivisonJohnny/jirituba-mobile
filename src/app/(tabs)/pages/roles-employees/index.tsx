@@ -4,24 +4,14 @@ import styled from "styled-components/native";
 import InputSearch from "../../../../components/input-search";
 import CardRoles from "../../../../components/card-roles";
 import { Icon } from "react-native-elements";
-import { router } from "expo-router";
 
 const RolesEmployees = () => {
   return (
     <ContainerMain>
       <BoxButtons>
-        <ButtonBack onPress={() => router.back()}>
-          <Icon
-            name="arrow-back-outline"
-            type="ionicon"
-            size={24}
-            color={"white"}
-            style={{ width: "fit-content" }}
-          />
-        </ButtonBack>
         <ButtonAdd>
           <Text style={{ color: "white", fontSize: 14, width: "auto" }}>
-            Adicionar
+            Função
           </Text>
           <Icon
             name="add"
@@ -77,7 +67,7 @@ const BoxButtons = styled.View`
   position: relative;
   display: flex;
   align-items: end;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-direction: row;
   width: 100%;
   margin: 10px 20px;
@@ -89,7 +79,7 @@ const ButtonAdd = styled.TouchableOpacity`
   flex-direction: row;
   gap: 5px;
   background-color: #ff6e5b;
-  padding: 7px 15px;
+  padding: 4px 10px;
   border-radius: 50px;
   right: 0px;
 `;

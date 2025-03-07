@@ -74,33 +74,9 @@ const Layout = () => {
           }}
         />
         <Tabs.Screen
-          name="pages/register-employees/index"
-          options={{
-            title: "Registrar",
-
-            tabBarIcon: (props) => (
-              <Icon
-                name="person-add"
-                size={iconSize}
-                type="ionicon"
-                color={props.color}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
           name="pages/list-employees/index"
           options={{
-            title: "Funcionarios",
-            tabBarIcon: (props) => (
-              <Icon
-                name="person"
-                size={iconSize}
-                type="ionicon"
-                color={props.color}
-                aria-hidden={false}
-              />
-            ),
+            href: null,
           }}
         />
         <Tabs.Screen
@@ -118,7 +94,10 @@ const Layout = () => {
             ),
           }}
         />
-
+        <Tabs.Screen
+          name="pages/register-employees/index"
+          options={{ href: null }}
+        />
         <Tabs.Screen name="pages/details-user/[id]" options={{ href: null }} />
         <Tabs.Screen
           name="pages/details-avaliation/[id]"

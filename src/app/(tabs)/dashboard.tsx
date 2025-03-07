@@ -133,7 +133,7 @@ const Dashboard = () => {
                 <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
               ) : (
                 <ConteinerBox
-                  onPress={() => router.push("pages/analysis-day/")}
+                  onPress={() => router.push("pages/register-employees/")}
                 >
                   <Icon
                     name="person-add-outline"
@@ -146,7 +146,9 @@ const Dashboard = () => {
               {loading ? (
                 <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
               ) : (
-                <ConteinerBox>
+                <ConteinerBox
+                  onPress={() => router.push("pages/list-employees/")}
+                >
                   <Icon
                     type="ionicon"
                     name="people-circle-outline"

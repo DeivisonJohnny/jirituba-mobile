@@ -14,7 +14,7 @@ const SectorEmployees = () => {
     const fetchData = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        setLoading(false); 
+        setLoading(false);
       } catch (error) {
         console.error("Erro ao carregar os dados:", error);
       }
@@ -30,15 +30,6 @@ const SectorEmployees = () => {
       ) : (
         <>
           <BoxButtons>
-            <ButtonBack onPress={() => router.back()}>
-              <Icon
-                name="arrow-back-outline"
-                type="ionicon"
-                size={24}
-                color={"white"}
-                style={{ width: "fit-content" }}
-              />
-            </ButtonBack>
             <ButtonAdd>
               <Text style={{ color: "white", fontSize: 14, width: "auto" }}>
                 Setor
@@ -52,10 +43,12 @@ const SectorEmployees = () => {
               />
             </ButtonAdd>
           </BoxButtons>
-          <InputSearch
-            style={{ marginTop: 10, marginBottom: 10 }}
-            placeholder="Recepcionista, Pintor, Gerente..."
-          />
+          <View style={{ paddingHorizontal: 20 }}>
+            <InputSearch
+              style={{ marginTop: 10, marginBottom: 10 }}
+              placeholder="Recepcionista, Pintor, Gerente..."
+            />
+          </View>
           <BoxScroll>
             <ScrollView
               contentContainerStyle={{
@@ -65,7 +58,7 @@ const SectorEmployees = () => {
                 paddingBottom: 120,
               }}
             >
-              {Array.from({ length: 3 }).map((_, index) => {
+              {Array.from({ length: 10 }).map((_, index) => {
                 return <CardSector key={index}></CardSector>;
               })}
             </ScrollView>
@@ -86,6 +79,8 @@ const ContainerMain = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  gap: 4px;
+  padding-top: 20px;
   margin-bottom: 80px;
 `;
 
@@ -98,7 +93,7 @@ const BoxButtons = styled.View`
   position: relative;
   display: flex;
   align-items: end;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-direction: row;
   width: 90%;
   margin: 0px 20px;
