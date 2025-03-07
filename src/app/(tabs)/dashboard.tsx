@@ -9,18 +9,7 @@ import { LineChart, lineDataItem } from "react-native-gifted-charts";
 import Accordion from "../../components/accordion";
 
 const Dashboard = () => {
-  const [fontLoad] = useFonts({
-    montserrat: require("../assets/fonts/Montserrat.ttf"),
-    montserratMedium: require("../assets/fonts/Montserrat-Medium.ttf"),
-    montserratBold: require("../assets/fonts/Montserrat-Bold.ttf"),
-  });
-
-  const window = Dimensions.get("window");
-  console.log(window);
-
-  const data = Array.from({ length: 27 }, () => ({
-    value: Math.floor(Math.random() * 100),
-  })) as lineDataItem[];
+  const { width } = Dimensions.get("window");
 
   const listData = [] as { id: number; title: string; message: string }[];
   Array.from({ length: 20 }).forEach((_, index) => {
@@ -32,6 +21,14 @@ const Dashboard = () => {
     });
   });
   const [loading, setLoading] = useState(true);
+
+  const generateRandomData = (length: number, maxValue: number) => {
+    return Array.from({ length }, () => ({
+      value: Math.floor(Math.random() * maxValue),
+    })) as lineDataItem[];
+  };
+
+  const dataGrafic = generateRandomData(27, 100);
 
   setTimeout(() => {
     setLoading(false);
@@ -177,31 +174,25 @@ const Dashboard = () => {
           </BoxStatistics>
         </View>
         <BoxGrafic>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginBottom: 15,
-              marginTop: 15,
-              marginLeft: 15,
-            }}
-          >
-            <TitleGrafic>01/02/2025 - 26/02/2025 </TitleGrafic>
+          <BoxLabelGrafic>
+            <Text style={{ color: "white", fontSize: 12 }}>
+              Análise do usuário
+            </Text>
             <Icon
               type="ionicon"
               name="trending-up-outline"
               color={"#37ff00"}
               size={15}
-            ></Icon>
-          </View>
+            />
+          </BoxLabelGrafic>
           <LineChart
-            endSpacing={0}
+            endSpacing={5}
             initialSpacing={0}
             animationDuration={1000}
             onDataChangeAnimationDuration={1000}
             areaChart
             curved
-            data={data}
+            data={dataGrafic}
             startFillColor="#2ed9ff"
             startOpacity={0.6}
             endFillColor="#0e0e12"
@@ -217,7 +208,7 @@ const Dashboard = () => {
             thickness={2}
             noOfSections={5}
             xAxisThickness={0}
-            width={window.width * 0.7}
+            width={width * 0.8}
             showYAxisIndices
             isAnimated
           />
@@ -298,6 +289,7 @@ const TitleGrafic = styled.Text`
 const BoxGrafic = styled.View`
   width: 100%;
   padding: 0px 10px 0px 20px;
+  gap: 10px;
 `;
 
 const BoxListAvaliation = styled.View`
@@ -306,6 +298,12 @@ const BoxListAvaliation = styled.View`
   border-radius: 30px 30px 0px 0px;
   width: 100%;
   max-height: 592px;
+`;
+
+const BoxLabelGrafic = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
 `;
 
 export default Dashboard;
