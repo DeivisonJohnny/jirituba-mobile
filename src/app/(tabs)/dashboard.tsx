@@ -71,7 +71,9 @@ const Dashboard = () => {
               {loading ? (
                 <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
               ) : (
-                <ConteinerBox onPress={() => router.push("pages/statistics/")}>
+                <ConteinerBox
+                  onPress={() => router.push("pages/analysis-day/")}
+                >
                   <Icon
                     name="analytics-outline"
                     type="ionicon"
@@ -130,7 +132,9 @@ const Dashboard = () => {
               {loading ? (
                 <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
               ) : (
-                <ConteinerBox onPress={() => router.push("pages/statistics/")}>
+                <ConteinerBox
+                  onPress={() => router.push("pages/analysis-day/")}
+                >
                   <Icon
                     name="person-add-outline"
                     type="ionicon"
