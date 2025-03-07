@@ -19,9 +19,9 @@ const Dashboard = () => {
 
   const dataGrafic = generateRandomData(27, 100);
 
-  // setTimeout(() => {
-  //   setLoading(false);
-  // }, 500);
+  setTimeout(() => {
+    setLoading(false);
+  }, 500);
 
   return (
     <Body>
