@@ -18,36 +18,9 @@ const Dashboard = () => {
   const window = Dimensions.get("window");
   console.log(window);
 
-  const data = [
-    { value: 15 },
-    { value: 30 },
-    { value: 26 },
-
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-    { value: 40 },
-  ] as lineDataItem[];
+  const data = Array.from({ length: 27 }, () => ({
+    value: Math.floor(Math.random() * 100),
+  })) as lineDataItem[];
 
   const listData = [] as { id: number; title: string; message: string }[];
   Array.from({ length: 20 }).forEach((_, index) => {
@@ -120,7 +93,14 @@ const Dashboard = () => {
                   <TitleBox style={{ color: "white" }}>Avaliações</TitleBox>
                 </ConteinerBox>
               )}
-              <ConteinerBox>
+              <ConteinerBox
+                onPress={() =>
+                  router.push({
+                    pathname: `pages/emphasis-employee/[id]`,
+                    params: { id: "adasdsda" },
+                  })
+                }
+              >
                 <Icon type="ionicon" name="person" color={"#52B1F7"}></Icon>
 
                 <TitleBox style={{ color: "white" }}>Destaque</TitleBox>
