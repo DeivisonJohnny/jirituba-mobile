@@ -11,16 +11,11 @@ import Accordion from "../../components/accordion";
 const Dashboard = () => {
   const { width } = Dimensions.get("window");
 
-  const listData = [] as { id: number; title: string; message: string }[];
-  Array.from({ length: 20 }).forEach((_, index) => {
-    listData.push({
-      id: index,
-      title: "Avaliações",
-      message:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos officia odio nisi deleniti harum. Commodi ea iusto consequatur id alias? Odit asperiores voluptatum deserunt illum at vel aperiam labore consequuntur. Lorem ipsum dolor sit amet consectetur adipisicing elit. In, facilis debitis quae officiis laboriosam voluptatem officia inventore illo ducimus pariatur dolore quaerat consequatur sequi quia? Quisquam ipsum itaque eos nihil. Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis rerum quasi facere perspiciatis similique provident veniam odit! Recusandae natus rem veniam, explicabo illum blanditiis amet cupiditate tempore non illo? Pariatur.",
-    });
-  });
   const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 500);
 
   const generateRandomData = (length: number, maxValue: number) => {
     return Array.from({ length }, () => ({
@@ -30,149 +25,106 @@ const Dashboard = () => {
 
   const dataGrafic = generateRandomData(27, 100);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 500);
+  const renderBoxItem = (
+    iconName: string,
+    iconType: string,
+    iconColor: string,
+    title: string,
+    onPress?: () => void
+  ) => {
+    return (
+      <ConteinerBox onPress={onPress}>
+        <Icon name={iconName} type={iconType} color={iconColor} />
+        <TitleBox>{title}</TitleBox>
+      </ConteinerBox>
+    );
+  };
 
   return (
     <Body>
       <Main>
-        <View
-          style={{
-            flex: 0,
-            width: "100%",
-            alignSelf: "flex-start",
-          }}
-        >
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              paddingHorizontal: 10,
-            }}
-          >
+        <SectionContainer>
+          <SectionHeader>
             <TitleScroll>Hoje - </TitleScroll>
             <ContentNota>
               <ContentText>5.0</ContentText>
-              <Icon
-                type="ionicon"
-                name="star"
-                color={"yellow"}
-                size={10}
-              ></Icon>
+              <Icon type="ionicon" name="star" color={"yellow"} size={10} />
             </ContentNota>
-          </View>
+          </SectionHeader>
 
           <BoxStatistics horizontal>
             <BoxScrollContent>
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+                <SkeletonLoad height={85} width={"45%"} />
               ) : (
-                <ConteinerBox
-                  onPress={() => router.push("pages/analysis-day/")}
-                >
-                  <Icon
-                    name="analytics-outline"
-                    type="ionicon"
-                    color={"#00ff91"}
-                  />
-                  <TitleBox>Análise</TitleBox>
-                </ConteinerBox>
+                renderBoxItem(
+                  "analytics-outline",
+                  "ionicon",
+                  "#00ff91",
+                  "Análise",
+                  () => router.push("pages/analysis-day/")
+                )
               )}
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+                <SkeletonLoad height={85} width={"45%"} />
               ) : (
-                <ConteinerBox>
-                  <Icon
-                    type="ionicon"
-                    name="chatbubble-outline"
-                    color={"#52F7E0"}
-                  ></Icon>
-
-                  <TitleBox style={{ color: "white" }}>Avaliações</TitleBox>
-                </ConteinerBox>
+                renderBoxItem(
+                  "chatbubble-outline",
+                  "ionicon",
+                  "#52F7E0",
+                  "Avaliações"
+                )
               )}
-              <ConteinerBox
-                onPress={() =>
-                  router.push({
-                    pathname: `pages/emphasis-employee/[id]`,
-                    params: { id: "adasdsda" },
-                  })
-                }
-              >
-                <Icon type="ionicon" name="person" color={"#52B1F7"}></Icon>
-
-                <TitleBox style={{ color: "white" }}>Destaque</TitleBox>
-              </ConteinerBox>
+              {renderBoxItem("person", "ionicon", "#52B1F7", "Destaque", () =>
+                router.push({
+                  pathname: `pages/emphasis-employee/[id]`,
+                  params: { id: "adasdsda" },
+                })
+              )}
             </BoxScrollContent>
           </BoxStatistics>
-        </View>
-        <View
-          style={{
-            flex: 0,
-            width: "100%",
-            alignSelf: "flex-start",
-            paddingHorizontal: 10,
-          }}
-        >
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
+        </SectionContainer>
+
+        <SectionContainer>
+          <SectionHeader>
             <TitleScroll>Ações</TitleScroll>
-          </View>
+          </SectionHeader>
 
           <BoxStatistics horizontal>
             <BoxScrollContent>
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+                <SkeletonLoad height={85} width={"45%"} />
               ) : (
-                <ConteinerBox
-                  onPress={() => router.push("pages/register-employees/")}
-                >
-                  <Icon
-                    name="person-add-outline"
-                    type="ionicon"
-                    color={"#00ff91"}
-                  />
-                  <TitleBox>Registrar</TitleBox>
-                </ConteinerBox>
+                renderBoxItem(
+                  "person-add-outline",
+                  "ionicon",
+                  "#00ff91",
+                  "Registrar",
+                  () => router.push("pages/register-employees/")
+                )
               )}
               {loading ? (
-                <SkeletonLoad height={85} width={"45%"}></SkeletonLoad>
+                <SkeletonLoad height={85} width={"45%"} />
               ) : (
-                <ConteinerBox
-                  onPress={() => router.push("pages/list-employees/")}
-                >
-                  <Icon
-                    type="ionicon"
-                    name="people-circle-outline"
-                    color={"yellow"}
-                  ></Icon>
-
-                  <TitleBox style={{ color: "white" }}>Funcionarios</TitleBox>
-                </ConteinerBox>
+                renderBoxItem(
+                  "people-circle-outline",
+                  "ionicon",
+                  "yellow",
+                  "Funcionarios",
+                  () => router.push("pages/list-employees/")
+                )
               )}
-              <ConteinerBox>
-                <Icon type="material" name="badge" color={"#5B52F7"}></Icon>
-
-                <TitleBox style={{ color: "white" }}>Funções</TitleBox>
-              </ConteinerBox>
-
-              <ConteinerBox>
-                <Icon
-                  type="ionicon"
-                  name="briefcase-outline"
-                  color={"#52B1F7"}
-                ></Icon>
-
-                <TitleBox style={{ color: "white" }}>Setor</TitleBox>
-              </ConteinerBox>
+              {renderBoxItem("badge", "material", "#5B52F7", "Funções")}
+              {renderBoxItem(
+                "briefcase-outline",
+                "ionicon",
+                "#52B1F7",
+                "Setor"
+              )}
             </BoxScrollContent>
           </BoxStatistics>
-        </View>
+        </SectionContainer>
+
         <BoxGrafic>
           <BoxLabelGrafic>
             <Text style={{ color: "white", fontSize: 12 }}>
@@ -234,6 +186,18 @@ const Main = styled.View`
   gap: 20px;
 `;
 
+const SectionContainer = styled.View`
+  flex: 0;
+  width: 100%;
+  align-self: flex-start;
+`;
+
+const SectionHeader = styled.View`
+  display: flex;
+  flex-direction: row;
+  padding: 0px 10px;
+`;
+
 const BoxStatistics = styled.ScrollView`
   padding: 10px 10px;
   gap: 10px;
@@ -281,23 +245,11 @@ const TitleScroll = styled.Text`
   padding-left: 10px;
   color: #5d5d77;
 `;
-const TitleGrafic = styled.Text`
-  color: #7c7c93;
-  font-size: 12px;
-`;
 
 const BoxGrafic = styled.View`
   width: 100%;
   padding: 0px 10px 0px 20px;
   gap: 10px;
-`;
-
-const BoxListAvaliation = styled.View`
-  background-color: red;
-  padding: 30px 10px 10px 10px;
-  border-radius: 30px 30px 0px 0px;
-  width: 100%;
-  max-height: 592px;
 `;
 
 const BoxLabelGrafic = styled.View`
