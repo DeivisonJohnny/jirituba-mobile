@@ -1,12 +1,10 @@
 import styled from "styled-components/native";
-import { useFonts } from "expo-font";
 import { Icon } from "react-native-elements";
 import { useState } from "react";
 import SkeletonLoad from "../../components/loading/SkeletonLoad";
 import { router } from "expo-router";
-import { Dimensions, FlatList, Text, View } from "react-native";
+import { Dimensions, Text } from "react-native";
 import { LineChart, lineDataItem } from "react-native-gifted-charts";
-import Accordion from "../../components/accordion";
 
 const Dashboard = () => {
   const { width } = Dimensions.get("window");
