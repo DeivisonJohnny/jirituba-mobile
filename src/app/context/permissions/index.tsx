@@ -28,8 +28,6 @@ export const PermissionsProvider = ({ children }: any) => {
             console.log(`Permissão negada - ${permission}`);
           }
         }
-
-        console.log("result ->>>", PermissionsAndroid.RESULTS.GRANTED);
       } catch (error) {
         console.warn(error);
       }
