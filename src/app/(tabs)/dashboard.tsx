@@ -115,7 +115,9 @@ const Dashboard = () => {
                 />
               ) : (
                 <ConteinerBox
-                  onPress={() => router.push("pages/register-employees/")}
+                  onPress={() =>
+                    router.push(`pages/register-employees/asdasdasd`)
+                  }
                 >
                   <Icon
                     name="person-add-outline"

@@ -6,6 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import Select from "../../../../components/register-employees/modal-select";
 import { useState } from "react";
 import { object, string } from "yup";
+import { router, useLocalSearchParams } from "expo-router";
 
 export type RegisterEmployees = {
   imgProfile: string | null;
@@ -21,9 +22,13 @@ export type RegisterEmployees = {
 const RegisterEmployees = () => {
   const [image, setImage] = useState<string | null>(null);
 
+  const { id } = useLocalSearchParams<{ id: string }>();
+
+  const isNew = id == "new";
+
   const handleCollectPhoto = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ["images"],
       allowsEditing: true,
       aspect: [4, 4],
       quality: 1,
@@ -41,7 +46,6 @@ const RegisterEmployees = () => {
     { id: "3", value: "Marketing" },
     { id: "4", value: "Vendas" },
     { id: "5", value: "Recursos Humanos" },
-    // Adicione mais opções conforme necessário
   ]);
 
   const [roles] = useState([
@@ -50,7 +54,6 @@ const RegisterEmployees = () => {
     { id: "3", value: "Gerente de Projetos" },
     { id: "4", value: "Analista de Marketing" },
     { id: "5", value: "Vendedor" },
-    // Adicione mais opções conforme necessário
   ]);
 
   const shift = [
@@ -91,6 +94,28 @@ const RegisterEmployees = () => {
     assessable: string().required("O campo deve ser preenchido"),
   });
 
+  const initialValues = isNew
+    ? ({
+        imgProfile: null,
+        name: null,
+        surname: null,
+        cpf: null,
+        roles: null,
+        shift: null,
+        sector: null,
+        assessable: null,
+      } as RegisterEmployees)
+    : ({
+        imgProfile: "https://robohash.org/JohnDoe.png",
+        name: "Carlos",
+        surname: "Silva",
+        cpf: "123.456.789-00",
+        roles: "Desenvolvedor",
+        shift: "Tarde",
+        sector: "Desenvolvimento",
+        assessable: "Sim",
+      } as RegisterEmployees);
+
   function handleSubmit(values: RegisterEmployees) {
     console.log("submit", values);
   }
@@ -98,18 +123,7 @@ const RegisterEmployees = () => {
     <Container>
       <ScrollView style={{ width: "100%" }}>
         <Formik
-          initialValues={
-            {
-              imgProfile: null,
-              name: null,
-              surname: null,
-              cpf: null,
-              roles: null,
-              shift: null,
-              sector: null,
-              assessable: null,
-            } as RegisterEmployees
-          }
+          initialValues={initialValues}
           validateOnChange
           validationSchema={validateForm}
           onSubmit={handleSubmit}
@@ -131,7 +145,7 @@ const RegisterEmployees = () => {
               <>
                 <Container>
                   <BoxPrimary>
-                    {!image ? (
+                    {!image && !values.imgProfile ? (
                       <BoxContainerImage>
                         <ButtonContainer
                           onPress={async () => {
@@ -158,7 +172,9 @@ const RegisterEmployees = () => {
                         }}
                       >
                         <ImageProfile
-                          source={{ uri: image as string }}
+                          source={{
+                            uri: (image as string) || values.imgProfile,
+                          }}
                         ></ImageProfile>
                       </BoxImage>
                     )}
@@ -169,6 +185,7 @@ const RegisterEmployees = () => {
                           <Label>Nome</Label>
                           <Input
                             onChangeText={handleFieldChange("name")}
+                            value={values.name || ""}
                             placeholder="Ex: Deivison"
                             placeholderTextColor={"gray"}
                           />
@@ -181,6 +198,7 @@ const RegisterEmployees = () => {
                           <Label>Sobrenome</Label>
                           <Input
                             onChangeText={handleFieldChange("surname")}
+                            value={values.surname || ""}
                             placeholder="Ex: Johnny"
                             placeholderTextColor={"gray"}
                           />
@@ -201,7 +219,7 @@ const RegisterEmployees = () => {
                             const formattedText = formatCpf(text as any);
                             handleFieldChange("cpf")(formattedText);
                           }}
-                          value={values.cpf as string}
+                          value={values.cpf || ""}
                           placeholder="Ex: 234.167.398-84"
                           placeholderTextColor={"gray"}
                         />
@@ -218,6 +236,7 @@ const RegisterEmployees = () => {
                             label="Função"
                             options={roles}
                             onChange={handleFieldChange("roles")}
+                            value={values.roles ? values.roles : null}
                           />
                           <ErrorText>{touched.roles && errors.roles}</ErrorText>
                         </BoxInputError>
@@ -227,6 +246,7 @@ const RegisterEmployees = () => {
                           label="Turno"
                           options={shift}
                           onChange={handleFieldChange("shift")}
+                          value={values.shift ? values.shift : null}
                         />
                         <ErrorText>{touched.shift && errors.shift}</ErrorText>
                       </BoxInput>
@@ -239,6 +259,7 @@ const RegisterEmployees = () => {
                             label="Setor"
                             options={optionsSector}
                             onChange={handleFieldChange("sector")}
+                            value={values.sector ? values.sector : null}
                           />
                           <ErrorText>
                             {touched.sector && errors.sector}
@@ -249,6 +270,7 @@ const RegisterEmployees = () => {
                         <BoxInputError>
                           <Select
                             label="Avaliavel"
+                            value={values.assessable ? values.assessable : null}
                             options={[{ value: "Sim" }, { value: "Não" }]}
                             onChange={handleFieldChange("assessable")}
                           />

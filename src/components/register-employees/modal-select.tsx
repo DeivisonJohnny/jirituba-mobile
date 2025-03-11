@@ -16,11 +16,12 @@ interface SelectProps {
   label: string;
   options?: OptionsValues[];
   onChange: (value: string) => void;
+  value?: any | null;
 }
 
 const Select = (props: SelectProps) => {
   const [visible, setVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<any>(null);
+  const [selectedValue, setSelectedValue] = useState<any>(props.value);
 
   const handleSelect = (value: string) => {
     setSelectedValue(value);
@@ -49,16 +50,15 @@ const Select = (props: SelectProps) => {
         <ContainerSelect>
           <BoxSelect>
             <BoxCloseButton>
-
-            <ButtonClose onPress={() => setVisible(false)}>
-              <IconClose
-                type="ionicon"
-                name="close"
-                color={"white"}
-                size={20}
+              <ButtonClose onPress={() => setVisible(false)}>
+                <IconClose
+                  type="ionicon"
+                  name="close"
+                  color={"white"}
+                  size={20}
                 ></IconClose>
-            </ButtonClose>
-                </BoxCloseButton>
+              </ButtonClose>
+            </BoxCloseButton>
             <FlatList
               data={props.options as any}
               keyExtractor={(item, index) =>
@@ -74,7 +74,11 @@ const Select = (props: SelectProps) => {
                         : { backgroundColor: "transparent" }
                     }
                   >
-                    <NameOptions value={item.value} onChangeText={props.onChange} editable={false} />
+                    <NameOptions
+                      value={item.value}
+                      onChangeText={props.onChange}
+                      editable={false}
+                    />
                   </SelectOptions>
                 );
               }}
@@ -141,11 +145,10 @@ const BoxSelect = styled.View`
 `;
 
 const BoxCloseButton = styled.View`
-
   width: 100%;
   position: relative;
   background-color: blue;
-`
+`;
 
 const ButtonClose = styled.TouchableOpacity`
   position: absolute;

@@ -95,7 +95,7 @@ const Layout = () => {
           }}
         />
         <Tabs.Screen
-          name="pages/register-employees/index"
+          name="pages/register-employees/[id]"
           options={{ href: null }}
         />
         <Tabs.Screen name="pages/details-user/[id]" options={{ href: null }} />
