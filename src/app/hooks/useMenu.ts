@@ -18,7 +18,7 @@ export type itemMenu = {
 
 export const CategorysMenu = ["Principal", "Sobre o App"] as Categorys[];
 
-export function useMenu() {
+export default function useMenu() {
   const [itensMenu, setItensMenu] = useState<itemMenu[]>(MenuItens);
 
   const addItemMenu = (item: itemMenu) => {
