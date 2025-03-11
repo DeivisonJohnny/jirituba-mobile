@@ -16,7 +16,7 @@ const Dashboard = () => {
     })) as lineDataItem[];
   };
 
-  const dataGrafic = useMemo(() => generateRandomData(200), []);
+  const dataGrafic = useMemo(() => generateRandomData(100), []);
 
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -34,6 +34,7 @@
       ],
       "expo-router",
       "expo-font"
-    ]
+    ],
+    "newArchEnabled": true
   }
 }

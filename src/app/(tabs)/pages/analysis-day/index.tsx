@@ -42,7 +42,7 @@ const AnalysisDay = () => {
   };
 
   const dataGrafic = generateRandomData(27, 100);
-  const data = generateEmployeeData(20);
+  const data = generateEmployeeData(5);
 
   const renderProfileIcons = (index: number) => {
     switch (index) {
@@ -125,7 +125,7 @@ const AnalysisDay = () => {
                 type="ionicon"
               />
             </IAResumeHeader>
-            {Array.from({ length: 30 }).map((_, index) => (
+            {Array.from({ length: 5 }).map((_, index) => (
               <ResumeItem key={index}>
                 <Accordion>
                   <AccordionTrigger style={accordionTriggerStyle}>
@@ -133,6 +133,12 @@ const AnalysisDay = () => {
                     <RatingInfo>
                       <RatingLabel>Média</RatingLabel>
                       <RatingValue>3.7</RatingValue>
+                      <Icon
+                        name="star"
+                        type="ionicon"
+                        color={"yellow"}
+                        size={10}
+                      />
                     </RatingInfo>
                     <Icon
                       name="chevron-down-outline"
@@ -286,13 +292,12 @@ const RatingInfo = styled.View`
 
 const RatingLabel = styled.Text`
   color: #3d3d4b;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
 `;
 
 const RatingValue = styled.Text`
   color: white;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
 `;
 
@@ -303,6 +308,5 @@ const ResumeContent = styled.View`
 const ResumeText = styled.Text`
   color: #fff;
   padding: 0px 15px;
-  padding-bottom: 15px;
   text-align: justify;
 `;
