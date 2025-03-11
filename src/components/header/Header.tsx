@@ -11,21 +11,21 @@ const Header = () => {
     montserratMedium: require("../../app/assets/fonts/Montserrat-Medium.ttf"),
   });
 
-  const logout = () => {
-    router.replace("../../login");
+  const handleBack = () => {
+    router.back();
   };
 
   return (
     <HeaderContainer>
-      <ButtonLogout onPress={() => router.back()}>
+      <BackButton onPress={handleBack}>
         <Icon
           name="arrow-back-outline"
           type="ionicon"
           size={23}
-          color={"white"}
-        ></Icon>
-      </ButtonLogout>
-      <ProfileCard></ProfileCard>
+          color="white"
+        />
+      </BackButton>
+      <ProfileCard />
     </HeaderContainer>
   );
 };
@@ -34,32 +34,15 @@ const HeaderContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 25px 15px 25px;
+  padding: 15px 25px;
   background-color: #0e0e12;
   width: 100%;
 `;
 
-const TextLogo = styled.Text`
-  color: white;
-  font-size: 18px;
-  font-family: "montserratMedium";
-  letter-spacing: 0.5px;
-`;
-
-const ButtonLogout = styled.TouchableOpacity`
-  color: white;
-  font-size: 20px;
-  letter-spacing: 1.2px;
-  display: flex;
-  flex-direction: column;
+const BackButton = styled.TouchableOpacity`
   align-items: center;
+  justify-content: center;
   width: 30px;
-`;
-
-const TextLogout = styled.Text`
-  color: white;
-  font-size: 9px;
-  margin-right: 4px;
 `;
 
 export default Header;
