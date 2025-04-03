@@ -7,9 +7,9 @@ const App = () => {
   return (
     <PermissionsProvider>
       <AppThemeContext>
-        <SplashScreen>
-          <Login></Login>
-        </SplashScreen>
+        {/* <SplashScreen> */}
+        <Login></Login>
+        {/* </SplashScreen> */}
       </AppThemeContext>
     </PermissionsProvider>
   );
