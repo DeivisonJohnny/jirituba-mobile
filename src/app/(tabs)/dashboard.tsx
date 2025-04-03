@@ -66,7 +66,9 @@ const Dashboard = () => {
                   style={{ width: 70, height: 65, borderRadius: 5 }}
                 />
               ) : (
-                <ConteinerBox>
+                <ConteinerBox
+                  onPress={() => router.push("pages/avaliation-list/")}
+                >
                   <Icon
                     type="ionicon"
                     name="chatbubble-outline"
