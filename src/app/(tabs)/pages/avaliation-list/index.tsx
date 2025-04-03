@@ -42,7 +42,6 @@ const AvaliationList = (props: ListEmployeesProps) => {
   const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetY = e.nativeEvent.contentOffset.y;
     const pullDistance = scrollStartY.current - offsetY;
-    console.log(pullDistance);
 
     const triggerCondition = Platform.select({
       ios: offsetY < TRIGGER_OFFSET,
