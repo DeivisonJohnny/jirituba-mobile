@@ -1,10 +1,11 @@
+import React from "react";
 import styled from "styled-components/native";
 import Header from "../../components/header/Header";
 import { Icon } from "react-native-elements";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../context/theme-context";
 import { BlurView } from "expo-blur";
-import { router, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 const Layout = () => {
@@ -117,6 +118,10 @@ const Layout = () => {
           name="pages/emphasis-employee/[id]"
           options={{ href: null }}
         />
+        <Tabs.Screen
+          name="pages/avaliation-list/index"
+          options={{ href: null }}
+        />
       </ContainerMain>
     </>
   );
@@ -124,12 +129,4 @@ const Layout = () => {
 
 export default Layout;
 
-const ContainerMain = styled(Tabs)`
-  /* flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  background-color: red;
-  width: 100%; */
-`;
+const ContainerMain = styled(Tabs)``;
