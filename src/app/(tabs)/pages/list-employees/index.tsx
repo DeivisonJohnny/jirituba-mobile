@@ -3,12 +3,12 @@ import CardEmployee from "../../../../components/card-employee/CardEmployee";
 import SkeletonLoad from "../../../../components/loading/SkeletonLoad";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
-import InputSearch from "../../../../components/input-search";
+import Search from "../../../../components/search";
 
 interface ListEmployeesProps {}
 
 const ListEmployees = (props: ListEmployeesProps) => {
-  const [isLoading, setLoading] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(true);
 
   setTimeout(() => {
     setLoading(false);
@@ -16,7 +16,7 @@ const ListEmployees = (props: ListEmployeesProps) => {
 
   return (
     <BoxMain>
-      <InputSearch
+      <Search
         placeholder="Nome, função, setor, cpf..."
         style={{ marginTop: 10, marginBottom: 10 }}
       />
@@ -32,10 +32,9 @@ const ListEmployees = (props: ListEmployeesProps) => {
           {isLoading
             ? Array.from({ length: 20 }).map((_, index) => (
                 <SkeletonLoad
-                  key={index.toString()}
-                  height={50}
-                  width={"90%"}
-                ></SkeletonLoad>
+                  key={index}
+                  style={{ width: "100%", height: 60, borderRadius: 10 }}
+                />
               ))
             : Array.from({ length: 20 }).map((_, index) => (
                 <CardEmployee
