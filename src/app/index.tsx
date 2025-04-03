@@ -1,16 +1,13 @@
-import AppThemeContext from "./context/theme-context";
+import ConfigApp from "./context/config";
 import Login from "./login";
-import SplashScreen from "../components/splash-screen";
 import { PermissionsProvider } from "./context/permissions";
 
 const App = () => {
   return (
     <PermissionsProvider>
-      <AppThemeContext>
-        {/* <SplashScreen> */}
+      <ConfigApp>
         <Login></Login>
-        {/* </SplashScreen> */}
-      </AppThemeContext>
+      </ConfigApp>
     </PermissionsProvider>
   );
 };

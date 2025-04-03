@@ -16,7 +16,7 @@ interface AppContextTheme {
   children: React.ReactNode;
 }
 
-const AppThemeContext = ({ children }: AppContextTheme) => {
+const ConfigApp = ({ children }: AppContextTheme) => {
   const theme = "dark";
 
   const [currentTheme, setCurrentTheme] = useState(theme);
@@ -37,4 +37,4 @@ const AppThemeContext = ({ children }: AppContextTheme) => {
   );
 };
 
-export default AppThemeContext;
+export default ConfigApp;

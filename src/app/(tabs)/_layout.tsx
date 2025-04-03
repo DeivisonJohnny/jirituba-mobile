@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import Header from "../../components/header/Header";
 import { Icon } from "react-native-elements";
 import { useContext, useState } from "react";
-import { ThemeContext } from "../context/theme-context";
+import { ThemeContext } from "../context/config";
 import { BlurView } from "expo-blur";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
