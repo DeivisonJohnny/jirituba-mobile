@@ -1,7 +1,14 @@
 import * as React from "react";
 import styled from "styled-components/native";
 import { lineDataItem } from "react-native-gifted-charts";
-import { Dimensions, ScrollView, Text, View, ViewStyle } from "react-native";
+import {
+  Dimensions,
+  FlatList,
+  ScrollView,
+  Text,
+  View,
+  ViewStyle,
+} from "react-native";
 import ProfileCard from "../../../../components/profile";
 import { useRef, useEffect } from "react";
 import { Icon } from "react-native-elements";
@@ -41,8 +48,8 @@ const AnalysisDay = () => {
     }));
   };
 
-  const dataGrafic = generateRandomData(27, 100);
-  const data = generateEmployeeData(5);
+  // const dataGrafic = generateRandomData(27, 100);
+  const data = generateEmployeeData(30);
 
   const renderProfileIcons = (index: number) => {
     switch (index) {
@@ -114,7 +121,7 @@ const AnalysisDay = () => {
             </ProfilesContainer>
           </ScrollView>
         </HeaderPage>
-        <ScrollView>
+        <BoxFlastlist>
           <ListResumeComment>
             <IAResumeHeader>
               <IAResumeText>Resumo - IA</IAResumeText>
@@ -125,58 +132,63 @@ const AnalysisDay = () => {
                 type="ionicon"
               />
             </IAResumeHeader>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <ResumeItem key={index}>
-                <Accordion>
-                  <AccordionTrigger style={accordionTriggerStyle}>
-                    <ProfileCard borderColor="transparent" />
-                    <RatingInfo>
-                      <RatingLabel>Média</RatingLabel>
-                      <RatingValue>3.7</RatingValue>
+
+            <FlatList
+              data={data}
+              renderItem={({ item }) => (
+                <ResumeItem key={item.id}>
+                  <Accordion>
+                    <AccordionTrigger style={accordionTriggerStyle}>
+                      <ProfileCard borderColor="transparent" />
+                      <RatingInfo>
+                        <RatingLabel>Média</RatingLabel>
+                        <RatingValue>3.7</RatingValue>
+                        <Icon
+                          name="star"
+                          type="ionicon"
+                          color={"yellow"}
+                          size={10}
+                        />
+                      </RatingInfo>
                       <Icon
-                        name="star"
+                        name="chevron-down-outline"
                         type="ionicon"
-                        color={"yellow"}
-                        size={10}
+                        size={17}
+                        color={"#444444"}
                       />
-                    </RatingInfo>
-                    <Icon
-                      name="chevron-down-outline"
-                      type="ionicon"
-                      size={17}
-                      color={"#444444"}
-                    />
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ResumeContent>
-                      <ResumeText>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Laboriosam voluptates perspiciatis ullam suscipit rerum,
-                        laborum adipisci maxime beatae quaerat, soluta quis
-                        assumenda magnam exercitationem labore quas veniam
-                        officia fugit voluptate. Lorem ipsum, dolor sit amet
-                        consectetur adipisicing elit. Esse quas saunt
-                        repudiandae explicabo atque ipsam? Rem repudiandae,
-                        aperiam deserunt consequatur numquam placeat esse,
-                        accusamus quos temporibus ratione corporis dignissimos
-                        veniam. Lorem ipsum, dolor sit amet consectetur
-                        adipisicing elit. Laborum iure quae voluptates qui eaque
-                        omnis vel maiores aut dignissimos tempore ad, nulla quos
-                        ipsa, asperiores exercitationem sunt porro, fugit
-                        consequuntur? Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Culpa, doloremque distinctio ullam
-                        ducimus, explicabo numquam laboriosam voluptate
-                        assumenda perferendis illo impedit consequuntur
-                        quibusdam a? Corporis atque provident nam architecto
-                        consequuntur?
-                      </ResumeText>
-                    </ResumeContent>
-                  </AccordionContent>
-                </Accordion>
-              </ResumeItem>
-            ))}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ResumeContent>
+                        <ResumeText>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Laboriosam voluptates perspiciatis ullam
+                          suscipit rerum, laborum adipisci maxime beatae
+                          quaerat, soluta quis assumenda magnam exercitationem
+                          labore quas veniam officia fugit voluptate. Lorem
+                          ipsum, dolor sit amet consectetur adipisicing elit.
+                          Esse quas saunt repudiandae explicabo atque ipsam? Rem
+                          repudiandae, aperiam deserunt consequatur numquam
+                          placeat esse, accusamus quos temporibus ratione
+                          corporis dignissimos veniam. Lorem ipsum, dolor sit
+                          amet consectetur adipisicing elit. Laborum iure quae
+                          voluptates qui eaque omnis vel maiores aut dignissimos
+                          tempore ad, nulla quos ipsa, asperiores exercitationem
+                          sunt porro, fugit consequuntur? Lorem ipsum dolor sit
+                          amet consectetur adipisicing elit. Culpa, doloremque
+                          distinctio ullam ducimus, explicabo numquam laboriosam
+                          voluptate assumenda perferendis illo impedit
+                          consequuntur quibusdam a? Corporis atque provident nam
+                          architecto consequuntur?
+                        </ResumeText>
+                      </ResumeContent>
+                    </AccordionContent>
+                  </Accordion>
+                </ResumeItem>
+              )}
+              keyExtractor={(item) => item.id}
+            />
           </ListResumeComment>
-        </ScrollView>
+        </BoxFlastlist>
       </Container>
     </ContainerMain>
   );
@@ -185,7 +197,7 @@ const AnalysisDay = () => {
 export default AnalysisDay;
 
 // Styles
-const ContainerMain = styled.ScrollView`
+const ContainerMain = styled.View`
   height: 100%;
   background-color: #0e0e12;
 `;
@@ -200,12 +212,17 @@ const Container = styled.View`
 `;
 
 const HeaderPage = styled.View`
+  position: absolute;
+  background-color: #0e0e12;
+  top: 0px;
+  left: 0px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   gap: 10px;
   width: 100%;
   padding: 0px 0px 5px 0px;
+  z-index: 10;
 `;
 
 const HeaderTitle = styled.Text`
@@ -249,10 +266,13 @@ const RatingText = styled.Text`
   color: white;
 `;
 
+const BoxFlastlist = styled.View``;
+
 const ListResumeComment = styled.View`
   width: 100%;
-  padding: 20px 10px;
   gap: 10px;
+  padding: 180px 10px 0px 10px;
+  margin-bottom: 30px;
 `;
 
 const IAResumeHeader = styled.View`
@@ -270,10 +290,11 @@ const IAResumeText = styled.Text`
 const ResumeItem = styled.View`
   background-color: #15151b;
   border-radius: 7px;
+  margin: 5px 0px;
 `;
 
 const accordionTriggerStyle: ViewStyle = {
-  backgroundColor: "#15151b",
+  backgroundColor: "#191920",
   borderColor: "#191920",
   width: "100%",
   justifyContent: "space-between",
@@ -291,7 +312,7 @@ const RatingInfo = styled.View`
 `;
 
 const RatingLabel = styled.Text`
-  color: #3d3d4b;
+  color: #4c4c5e;
   font-size: 12px;
 `;
 
