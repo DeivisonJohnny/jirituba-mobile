@@ -3,12 +3,14 @@ import ProfileCard from "../profile";
 import styled from "styled-components/native";
 import { useFonts } from "expo-font";
 import { useRouter } from "expo-router";
+import { TouchableOpacity, ViewStyle } from "react-native";
 
 interface CardEmployeeProps {
   key: string;
   name: string;
   roles: string;
   score: number;
+  style?: ViewStyle;
 }
 
 const CardEmployee = (props: CardEmployeeProps) => {
@@ -27,7 +29,7 @@ const CardEmployee = (props: CardEmployeeProps) => {
   };
 
   return (
-    <Container onPress={directionPage}>
+    <Container onPress={directionPage} style={props.style}>
       <ProfileCard />
       <BoxCenter>
         <BoxTitle>
