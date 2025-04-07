@@ -1,10 +1,8 @@
 import * as React from "react";
-import CardEmployee from "../../../../components/card-employee/CardEmployee";
 import SkeletonLoad from "../../../../components/loading/SkeletonLoad";
 import {
   Animated,
   Easing,
-  ScrollView,
   NativeScrollEvent,
   Platform,
   NativeSyntheticEvent,
@@ -13,10 +11,9 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import Search from "../../../../components/search";
+import CardAvaliation from "../../../../components/card-avaliation/CardAvaliation";
 
-interface ListEmployeesProps {}
-
-const AvaliationList = (props: ListEmployeesProps) => {
+const AvaliationList = () => {
   const [isLoading, setLoading] = React.useState(false);
   const [isRefreshing, setIsRefreshing] = React.useState(false);
   const [showSearch, setShowSearch] = React.useState(false);
@@ -126,21 +123,27 @@ const AvaliationList = (props: ListEmployeesProps) => {
       <BoxScroll>
         <FlatList
           data={data}
-          keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <CardEmployee
-              key={item.id}
-              name="Deivison Johnny"
-              roles="Recepcionista"
-              score={4.9}
+            <CardAvaliation
+              score={4.7}
+              comment="        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Laboriosam voluptates perspiciatis ullam suscipit rerum, laborum
+              adipisci maxime beatae quaerat, soluta quis assumenda magnam
+              exercitationem labore quas veniam officia fugit voluptate. Lorem
+              ipsum, dolor sit amet consectetur adipisicing elit. Esse quas
+              saunt repudiandae explicabo atque ipsam? Rem repudiandae, aperiam
+              deserunt consequatur numquam placeat esse, accusamus quos
+              temporibus ratione corporis dignissimos veniam. Lorem ipsum, dolor
+              sit amet consectetur adipisicing elit. Laborum iure quae
+              voluptates qui eaque omnis vel maiores aut dignissimos tempore ad,
+              nulla quos ipsa, asperiores exercitationem sunt porro, fugit
+              consequuntur? Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Culpa, doloremque distinctio ullam ducimus, explicabo
+              numquam laboriosam voluptate assumenda perferendis illo impedit
+              consequuntur quibusdam a? Corporis atque provident nam architecto
+              consequuntur?"
             />
           )}
-          contentContainerStyle={{
-            alignItems: "center",
-            gap: 10,
-            width: "100%",
-            paddingBottom: 140,
-          }}
           scrollEventThrottle={16}
           onScrollBeginDrag={handleScrollBeginDrag}
           onScrollEndDrag={handleScrollEndDrag}
@@ -152,6 +155,7 @@ const AvaliationList = (props: ListEmployeesProps) => {
               progressViewOffset={60}
             />
           }
+          keyExtractor={(item) => item.id}
         />
       </BoxScroll>
     </BoxMain>

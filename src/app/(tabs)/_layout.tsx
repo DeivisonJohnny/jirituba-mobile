@@ -2,16 +2,14 @@ import React from "react";
 import styled from "styled-components/native";
 import Header from "../../components/header/Header";
 import { Icon } from "react-native-elements";
-import { useContext, useState } from "react";
-import { ThemeContext } from "../context/config";
+import { useState } from "react";
+import ConfigApp, { AppConfigContext } from "../context/config";
 import { BlurView } from "expo-blur";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 const Layout = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
-  const [iconSize, setIconSize] = useState(16);
-  const [colorIcon, setcolorIcon] = useState("white");
+  const [iconSize] = useState(16);
 
   const TabBargGradient = () => {
     return (
@@ -25,7 +23,7 @@ const Layout = () => {
   };
 
   return (
-    <>
+    <ConfigApp>
       <StatusBar style="light" backgroundColor="#0e0e12" />
       <ContainerMain
         screenOptions={{
@@ -123,7 +121,7 @@ const Layout = () => {
           options={{ href: null }}
         />
       </ContainerMain>
-    </>
+    </ConfigApp>
   );
 };
 

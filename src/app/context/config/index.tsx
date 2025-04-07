@@ -2,38 +2,39 @@ import React, { createContext, useState } from "react";
 
 type ThemeType = "dark" | "light";
 
-type ThemeContextType = {
+type AppConfigType = {
   theme: ThemeType;
   setTheme: (theme: ThemeType) => void;
+  titlePage: string | null;
+  setTitlePage: (title: string | null) => void;
 };
 
-export const ThemeContext = createContext<ThemeContextType>({
+export const AppConfigContext = createContext<AppConfigType>({
   theme: "dark",
   setTheme: () => {},
+  titlePage: null,
+  setTitlePage: () => {},
 });
 
-interface AppContextTheme {
+interface AppConfigProps {
   children: React.ReactNode;
 }
 
-const ConfigApp = ({ children }: AppContextTheme) => {
-  const theme = "dark";
+const ConfigApp = ({ children }: AppConfigProps) => {
+  const [currentTheme, setCurrentTheme] = useState<ThemeType>("dark");
+  const [titlePage, setTitlePage] = useState<string | null>(null);
 
-  const [currentTheme, setCurrentTheme] = useState(theme);
-
-  const setTheme = (theme: ThemeType) => {
-    setCurrentTheme(theme);
-  };
-
-  const value = {
+  const value: AppConfigType = {
     theme: currentTheme,
-    setTheme,
+    setTheme: setCurrentTheme,
+    titlePage,
+    setTitlePage,
   };
 
   return (
-    <ThemeContext.Provider value={value as ThemeContextType}>
+    <AppConfigContext.Provider value={value}>
       {children}
-    </ThemeContext.Provider>
+    </AppConfigContext.Provider>
   );
 };
 
