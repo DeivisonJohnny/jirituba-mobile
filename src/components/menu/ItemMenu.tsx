@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
-import { itemMenu } from "../../app/hooks/useMenu";
+
 import { router } from "expo-router";
+import { itemMenu } from "../../app/hooks/useMenu";
 
 interface ItemMenuProps {
   title: string;
@@ -15,7 +16,7 @@ interface ItemMenuProps {
   uri?: string;
 }
 
-const ItemMenu = (props: itemMenu) => {
+const MenuItem = (props: itemMenu) => {
   return (
     <BodyItemMenu onPress={() => router.navigate(props.uri)}>
       <Icon
@@ -36,7 +37,7 @@ const ItemMenu = (props: itemMenu) => {
   );
 };
 
-export default ItemMenu;
+export default MenuItem;
 
 const BodyItemMenu = styled.TouchableOpacity`
   width: 100%;

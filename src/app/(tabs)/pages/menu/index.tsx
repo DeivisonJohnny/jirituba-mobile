@@ -2,7 +2,7 @@ import * as React from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 import ItemMenu from "../../../../components/menu/ItemMenu";
-import { itemMenu, useMenu } from "../../../hooks/useMenu";
+import useMenu, { itemMenu } from "../../../hooks/useMenu";
 
 interface MenuProps {}
 
