@@ -22,7 +22,9 @@ const TextIA = ({ children }: TextIAProps) => {
         ></Icon>
       </HeaderBox>
       <BodyBox>
-        <Text>{children}</Text>
+        <Text style={{ lineHeight: 17, padding: 10, textAlign: "justify" }}>
+          {children}
+        </Text>
       </BodyBox>
     </ContainerMain>
   );
@@ -68,8 +70,7 @@ const SubTitle = styled.Text`
   margin-right: 5px;
 `;
 const BodyBox = styled.ScrollView.attrs({
-  nestedScrollEnabled: true
+  nestedScrollEnabled: true,
 })`
-  padding: 10px;
-  height: 100px;
+  height: 200px;
 `;

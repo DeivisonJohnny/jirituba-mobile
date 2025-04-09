@@ -1,12 +1,12 @@
 import styled from "styled-components/native";
 import { Formik } from "formik";
 import { Icon } from "react-native-elements";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Select from "../../../../components/register-employees/modal-select";
 import { useState } from "react";
 import { object, string } from "yup";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 
 export type RegisterEmployees = {
   imgProfile: string | null;
@@ -142,7 +142,7 @@ const RegisterEmployees = () => {
                 setFieldTouched(field, true, false);
               };
             return (
-              <>
+              <View>
                 <Container>
                   <BoxPrimary>
                     {!image && !values.imgProfile ? (
@@ -288,7 +288,7 @@ const RegisterEmployees = () => {
                     <TextSubmit>Cadastrar</TextSubmit>
                   </ButtonSubmit>
                 </Container>
-              </>
+              </View>
             );
           }}
         </Formik>

@@ -2,8 +2,7 @@ import * as React from "react";
 import styled from "styled-components/native";
 import { useLocalSearchParams } from "expo-router";
 import { Icon } from "react-native-elements";
-import TableValidation from "../../../../components/table/tableAvaliation";
-import { Dimensions, Text } from "react-native";
+import { Dimensions, Text, TouchableOpacity } from "react-native";
 import TextIA from "../../../../components/text-ia";
 
 interface DetailsUserProps {}
@@ -38,28 +37,6 @@ const DetailsUser = () => {
             <Score>4.5</Score>
             <Icon type="ionicon" name="star" size={15} color={"yellow"} />
           </BoxScore>
-          <BoxButtons>
-            <ButtonDelete>
-              <Button>
-                <Icon
-                  type="ionicon"
-                  name="trash-outline"
-                  size={15}
-                  color={"red"}
-                />
-              </Button>
-            </ButtonDelete>
-            <ButtonUpdate>
-              <Button>
-                <Icon
-                  type="ionicon"
-                  name="create-outline"
-                  size={15}
-                  color="#53c5fa"
-                />
-              </Button>
-            </ButtonUpdate>
-          </BoxButtons>
         </BoxActions>
       </BoxEmployee>
       <ContainerAttributes>
@@ -81,11 +58,41 @@ const DetailsUser = () => {
           </Attribute>
         </BoxAttributes>
       </ContainerAttributes>
-      <ContainerTable>
-        <TitleTable>Histórico de avaliações</TitleTable>
-        <TableValidation width={100} height={`${halfHeight}px`} />
-      </ContainerTable>
 
+      <ContainerActions>
+        <Text style={{ color: "#797979", marginLeft: 10 }}>Ações</Text>
+        <ContainerButtons>
+          <ButtonAvaliations>
+            <Icon
+              name="reader-outline"
+              type="ionicon"
+              size={25}
+              color={"#00d62e"}
+            />
+
+            <Text style={{ color: "#00d62e", fontSize: 12 }}>Avaliações</Text>
+          </ButtonAvaliations>
+          <ButtonEdit>
+            <Icon
+              name="create-outline"
+              type="ionicon"
+              size={25}
+              color={"#53c5fa"}
+            />
+            <Text style={{ color: "#53c5fa", fontSize: 12 }}>Editar</Text>
+          </ButtonEdit>
+
+          <ButtonDelete>
+            <Icon
+              name="trash-outline"
+              type="ionicon"
+              size={25}
+              color={"#ff4d4d"}
+            />
+            <Text style={{ color: "#ff4d4d", fontSize: 12 }}>Deletar</Text>
+          </ButtonDelete>
+        </ContainerButtons>
+      </ContainerActions>
       <TextIA>
         <Text style={{ color: "#fff" }}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
@@ -201,20 +208,6 @@ const Score = styled.Text`
   font-size: 18px;
   color: white;
 `;
-
-const BoxButtons = styled.View`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
-const Button = styled.TouchableOpacity`
-  padding: 3px;
-  border-radius: 3px;
-`;
-
 const ProfessionalAttributes = styled.View``;
 
 const ContainerAttributes = styled.View`
@@ -259,22 +252,47 @@ const TitleTable = styled.Text`
   color: #797979;
 `;
 
-const ContainerTable = styled.View`
-  display: flex;
-  align-items: center;
-  gap: 10px;
+const ContainerActions = styled.View`
   width: 100%;
-  margin: 10px 0px 30px 0px;
+  flex-direction: column;
+  margin: 40px 0px;
+  gap: 15px;
 `;
 
-const ButtonUpdate = styled.TouchableOpacity`
-  padding: 4px;
-  border-radius: 4px;
-  border: 0.8px dashed #53c5fa;
+const ContainerButtons = styled.View`
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: row;
+`;
+
+const ButtonAvaliations = styled.TouchableOpacity`
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  background-color: #1c1c23;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  padding: 10px;
+`;
+
+const ButtonEdit = styled.TouchableOpacity`
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  background-color: #1c1c23;
+  padding: 10px 20px;
+  border-radius: 5px;
 `;
 
 const ButtonDelete = styled.TouchableOpacity`
-  padding: 4px;
-  border-radius: 4px;
-  border: 0.8px dashed #ff0004;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  background-color: #1c1c23;
+  padding: 10px 20px;
+  border-radius: 5px;
 `;
