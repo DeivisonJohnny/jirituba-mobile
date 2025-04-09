@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import styled from "styled-components/native";
 import InputSearch from "../../../../components/input-search";
@@ -6,11 +7,29 @@ import { Icon } from "react-native-elements";
 import { router } from "expo-router";
 import CardSector from "../../../../components/card-sector";
 import LoadingPage from "../../../../components/loading/LoadingPage";
+import { ModalSector } from "../../../../components/modal-sector/ModalSector";
 
 const SectorEmployees = () => {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  React.useEffect(() => {
+  const [sector, setSector] = useState<string | null>(null);
+
+  function handleAddSector(name: string) {
+    setSector(name);
+    setModalVisible(false);
+  }
+
+  function handleVisibleModal() {
+    if (modalVisible) {
+      setModalVisible(false);
+      return;
+    }
+
+    setModalVisible(true);
+  }
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -29,8 +48,13 @@ const SectorEmployees = () => {
         <LoadingPage />
       ) : (
         <>
+          <ModalSector
+            visible={modalVisible}
+            onClose={handleVisibleModal}
+            onSubmit={handleAddSector}
+          />
           <BoxButtons>
-            <ButtonAdd>
+            <ButtonAdd onPress={() => handleVisibleModal()}>
               <Text style={{ color: "white", fontSize: 14, width: "auto" }}>
                 Setor
               </Text>

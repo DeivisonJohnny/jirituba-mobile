@@ -1,15 +1,38 @@
-import * as React from "react";
 import { ScrollView, Text } from "react-native";
 import styled from "styled-components/native";
 import InputSearch from "../../../../components/input-search";
 import CardRoles from "../../../../components/card-roles";
 import { Icon } from "react-native-elements";
+import { useState } from "react";
+import { ModalRole } from "../../../../components/modal-role/ModalRole";
 
 const RolesEmployees = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  function handleAddRole(name: string) {
+    const [role, setRole] = useState<string | null>(null);
+    setRole(name);
+    setModalVisible(false);
+  }
+
+  function handleVisibleModal() {
+    if (modalVisible) {
+      setModalVisible(false);
+      return;
+    }
+
+    setModalVisible(true);
+  }
+
   return (
     <ContainerMain>
+      <ModalRole
+        visible={modalVisible}
+        onClose={handleVisibleModal}
+        onSubmit={handleAddRole}
+      />
       <BoxButtons>
-        <ButtonAdd>
+        <ButtonAdd onPress={() => handleVisibleModal()}>
           <Text style={{ color: "white", fontSize: 14, width: "auto" }}>
             Função
           </Text>
