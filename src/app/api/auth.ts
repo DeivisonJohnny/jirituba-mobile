@@ -10,7 +10,6 @@ export default class Auth {
   static async login(dataLogin: Login) {
     try {
       const { data } = await api.post("/auth/login", dataLogin as Login);
-      console.log(data);
 
       await AsyncStorage.setItem("token", data.token);
 
