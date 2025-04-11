@@ -3,10 +3,10 @@ import ProfileCard from "../profile";
 import styled from "styled-components/native";
 import { useFonts } from "expo-font";
 import { useRouter } from "expo-router";
-import { TouchableOpacity, ViewStyle } from "react-native";
+import { ViewStyle } from "react-native";
 
 interface CardEmployeeProps {
-  key: string;
+  idUser: string;
   name: string;
   roles: string;
   score: number;
@@ -21,7 +21,7 @@ const CardEmployee = (props: CardEmployeeProps) => {
   const router = useRouter();
   const directionPage = () => {
     router.push({
-      pathname: "/pages/details-user/[id]",
+      pathname: `/pages/details-user/[${props.idUser}]`,
       params: {
         id: props.name + "IDIDIDID",
       },
@@ -37,7 +37,7 @@ const CardEmployee = (props: CardEmployeeProps) => {
         </BoxTitle>
 
         <BoxTitle>
-          <Name>{props.roles}</Name>
+          <NameRole>{props.roles}</NameRole>
         </BoxTitle>
       </BoxCenter>
       <Box>
@@ -63,6 +63,7 @@ const Container = styled.TouchableOpacity`
   gap: 10px;
 
   padding: 10px 15px;
+  margin-bottom: 10px;
 `;
 
 const BoxCenter = styled.View`
@@ -94,6 +95,13 @@ const Title = styled.Text`
 const Name = styled.Text`
   font-family: "montserratMedium";
   color: white;
+  font-size: 13px;
+  font-weight: bold;
+`;
+
+const NameRole = styled.Text`
+  font-family: "montserratMedium";
+  color: #b8b8b88b;
   font-size: 12px;
 `;
 
