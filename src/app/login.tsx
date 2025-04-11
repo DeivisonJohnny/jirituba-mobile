@@ -2,14 +2,14 @@ import { useFonts } from "expo-font";
 import { Formik } from "formik";
 import * as React from "react";
 import { Text, useColorScheme, View } from "react-native";
-import { router } from "expo-router";
+import { router, useRouter } from "expo-router";
 import styled from "styled-components/native";
 import { StatusBar } from "expo-status-bar";
+import Auth from "./api/auth";
 
 interface LoginProps {}
 
 const Login = (props: LoginProps) => {
-  const handleLogin = () => {};
   const deviceTheme = useColorScheme();
 
   const [fontsLoaded] = useFonts({
@@ -17,6 +17,19 @@ const Login = (props: LoginProps) => {
     montserratMedium: require("./assets/fonts/Montserrat-Medium.ttf"),
     montserratBold: require("./assets/fonts/Montserrat-Bold.ttf"),
   });
+
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    const { message } = await Auth.login({
+      username: "deivisonjohnny",
+      password: "93186145",
+    });
+
+    if (message === "Successful") {
+      router.replace("/dashboard");
+    }
+  };
 
   if (!fontsLoaded) {
     return (
@@ -66,7 +79,7 @@ const Login = (props: LoginProps) => {
                 />
               </BoxInput>
               <BoxInput>
-                <ButtomSubmit onPress={() => router.replace("./dashboard")}>
+                <ButtomSubmit onPress={async () => await handleLogin()}>
                   <Text
                     style={{
                       textAlign: "center",
