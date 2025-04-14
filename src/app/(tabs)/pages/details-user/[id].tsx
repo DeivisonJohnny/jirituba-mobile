@@ -1,17 +1,36 @@
-import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components/native";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, usePathname, useRouter } from "expo-router";
 import { Icon } from "react-native-elements";
-import { Dimensions, Text, TouchableOpacity } from "react-native";
+import { Text } from "react-native";
 import TextIA from "../../../../components/text-ia";
-
-interface DetailsUserProps {}
+import EmployeeApi, { EmployeeType } from "../../../api/employee";
 
 const DetailsUser = () => {
-  const { id } = useLocalSearchParams();
+  const [data, setData] = useState<EmployeeType | null>(null);
 
-  const { height } = Dimensions.get("window");
-  const halfHeight = height / 2 - height * 0.15;
+  const { id } = useLocalSearchParams();
+  const router = useRouter();
+
+  if (!id) {
+    router.back();
+  }
+
+  const fetchData = useCallback(async () => {
+    try {
+      const data = await EmployeeApi.getByIdOrCPF(id as string);
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    const loadData = async () => {
+      await fetchData();
+    };
+    loadData();
+  }, []);
 
   return (
     <ContainerMain>
@@ -22,14 +41,18 @@ const DetailsUser = () => {
         <ContentData>
           <BoxName>
             <Label>Nome</Label>
-            <Name>Deivison Johnny</Name>
+            <Name>
+              {data?.name} {data?.surname}
+            </Name>
           </BoxName>
           <BoxCpf>
             <Label>CPF</Label>
-            <Cpf>102.584.434.30</Cpf>
+            <Cpf>{data?.cpf}</Cpf>
           </BoxCpf>
           <BoxAssessable>
-            <Assessable>Perfil avaliável</Assessable>
+            <Assessable>
+              {data?.assessable ? "Perfil avaliável" : "Não avaliável"}
+            </Assessable>
           </BoxAssessable>
         </ContentData>
         <BoxActions>
@@ -46,15 +69,15 @@ const DetailsUser = () => {
         <BoxAttributes>
           <Attribute>
             <LabelAttribute>Função</LabelAttribute>
-            <TextAttribute>Recepcionista</TextAttribute>
+            <TextAttribute> {data?.rolesEmployee.roles.name} </TextAttribute>
           </Attribute>
           <Attribute>
             <LabelAttribute>Setor</LabelAttribute>
-            <TextAttribute>Atendimento</TextAttribute>
+            <TextAttribute> {data?.sector.name} </TextAttribute>
           </Attribute>
           <Attribute>
             <LabelAttribute>Turno</LabelAttribute>
-            <TextAttribute>Noite</TextAttribute>
+            <TextAttribute> {data?.shift} </TextAttribute>
           </Attribute>
         </BoxAttributes>
       </ContainerAttributes>
