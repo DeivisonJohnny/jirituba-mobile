@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import styled from "styled-components/native";
 import InputSearch from "../../../../components/input-search";
 import { Icon } from "react-native-elements";
-import { router } from "expo-router";
 import CardSector from "../../../../components/card-sector";
 import LoadingPage from "../../../../components/loading/LoadingPage";
 import { ModalSector } from "../../../../components/modal-sector/ModalSector";
+import { usePathname } from "expo-router";
+import EmployeeApi from "../../../api/employee";
 
 const SectorEmployees = () => {
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
+  const [data, setData] = useState(null);
 
   const [sector, setSector] = useState<string | null>(null);
+  const pathname = usePathname();
 
   function handleAddSector(name: string) {
     setSector(name);
@@ -29,18 +32,25 @@ const SectorEmployees = () => {
     setModalVisible(true);
   }
 
+  const fetchData = useCallback(async () => {
+    try {
+      const data = await EmployeeApi.getAll();
+      console.log(data);
+      setData(data);
+    } catch (error) {
+      console.error("Erro ao buscar funcionários:", error);
+    }
+  }, []);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        setLoading(false);
-      } catch (error) {
-        console.error("Erro ao carregar os dados:", error);
-      }
+    setLoading(true);
+    const loadData = async () => {
+      await fetchData();
+      setTimeout(() => setLoading(false), 1000);
     };
 
-    fetchData();
-  }, []);
+    loadData();
+  }, [pathname, fetchData]);
 
   return (
     <ContainerMain>
