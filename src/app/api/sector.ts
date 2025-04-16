@@ -1,7 +1,8 @@
 import api from "../config/api/client";
 
 export default class SectorApi {
-  async getAll() {
-    return await api.get("/sector");
+  static async getAll() {
+    const { data } = await api.get("/sector");
+    return data;
   }
 }
