@@ -5,9 +5,11 @@ import { Icon } from "react-native-elements";
 import { Text } from "react-native";
 import TextIA from "../../../../components/text-ia";
 import EmployeeApi, { EmployeeType } from "../../../api/employee";
+import SkeletonLoad from "../../../../components/loading/SkeletonLoad";
 
 const DetailsUser = () => {
   const [data, setData] = useState<EmployeeType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useLocalSearchParams();
   const router = useRouter();
@@ -20,6 +22,11 @@ const DetailsUser = () => {
     try {
       const data = await EmployeeApi.getByIdOrCPF(id);
       setData(data);
+      if (data) {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -37,31 +44,53 @@ const DetailsUser = () => {
   return (
     <ContainerMain>
       <BoxEmployee>
-        <ImageProfile
-          source={require("../../../assets/img/foto-perfil.jpg")}
-        ></ImageProfile>
+        {isLoading ? (
+          <SkeletonLoad
+            style={{ marginTop: 3, width: 100, height: 100, borderRadius: 5 }}
+          />
+        ) : (
+          <ImageProfile
+            source={require("../../../assets/img/foto-perfil.jpg")}
+          ></ImageProfile>
+        )}
         <ContentData>
           <BoxName>
             <Label>Nome</Label>
-            <Name>
-              {data?.name} {data?.surname}
-            </Name>
+            {isLoading ? (
+              <SkeletonLoad style={{ marginTop: 3, width: 100, height: 18 }} />
+            ) : (
+              <Name>
+                {data?.name} {data?.surname}
+              </Name>
+            )}
           </BoxName>
           <BoxCpf>
             <Label>CPF</Label>
-            <Cpf>{data?.cpf}</Cpf>
+            {isLoading ? (
+              <SkeletonLoad style={{ marginTop: 3, width: 100, height: 18 }} />
+            ) : (
+              <Cpf>{data?.cpf}</Cpf>
+            )}
           </BoxCpf>
           <BoxAssessable>
-            <Assessable>
-              {data?.assessable ? "Perfil avaliável" : "Não avaliável"}
-            </Assessable>
+            {isLoading ? (
+              <SkeletonLoad style={{ marginTop: 3, width: 100, height: 18 }} />
+            ) : (
+              <Assessable>
+                {data?.assessable ? "Perfil avaliável" : "Não avaliável"}
+              </Assessable>
+            )}
           </BoxAssessable>
         </ContentData>
         <BoxActions>
-          <BoxScore>
-            <Score>4.5</Score>
-            <Icon type="ionicon" name="star" size={15} color={"yellow"} />
-          </BoxScore>
+          {isLoading ? (
+            <SkeletonLoad style={{ marginTop: 3, width: 60, height: 35 }} />
+          ) : (
+            <BoxScore>
+              <Score>4.5</Score>
+              <Icon type="ionicon" name="star" size={15} color={"yellow"} />
+            </BoxScore>
+          )}
         </BoxActions>
       </BoxEmployee>
       <ContainerAttributes>
@@ -71,15 +100,27 @@ const DetailsUser = () => {
         <BoxAttributes>
           <Attribute>
             <LabelAttribute>Função</LabelAttribute>
-            <TextAttribute> {data?.rolesEmployee.roles.name} </TextAttribute>
+            {isLoading ? (
+              <SkeletonLoad style={{ marginTop: 3, width: 90, height: 20 }} />
+            ) : (
+              <TextAttribute> {data?.rolesEmployee.roles.name} </TextAttribute>
+            )}
           </Attribute>
           <Attribute>
             <LabelAttribute>Setor</LabelAttribute>
-            <TextAttribute> {data?.sector.name} </TextAttribute>
+            {isLoading ? (
+              <SkeletonLoad style={{ marginTop: 3, width: 90, height: 20 }} />
+            ) : (
+              <TextAttribute> {data?.sector.name} </TextAttribute>
+            )}
           </Attribute>
           <Attribute>
             <LabelAttribute>Turno</LabelAttribute>
-            <TextAttribute> {data?.shift} </TextAttribute>
+            {isLoading ? (
+              <SkeletonLoad style={{ marginTop: 3, width: 80, height: 20 }} />
+            ) : (
+              <TextAttribute> {data?.shift} </TextAttribute>
+            )}
           </Attribute>
         </BoxAttributes>
       </ContainerAttributes>
@@ -87,52 +128,78 @@ const DetailsUser = () => {
       <ContainerActions>
         <Text style={{ color: "#797979", marginLeft: 10 }}>Ações</Text>
         <ContainerButtons>
-          <ButtonAvaliations>
-            <Icon
-              name="reader-outline"
-              type="ionicon"
-              size={25}
-              color={"#00d62e"}
+          {isLoading ? (
+            <SkeletonLoad
+              style={{ marginTop: 3, width: 80, height: 60, borderRadius: 5 }}
             />
+          ) : (
+            <ButtonAvaliations>
+              <Icon
+                name="reader-outline"
+                type="ionicon"
+                size={25}
+                color={"#00d62e"}
+              />
 
-            <Text style={{ color: "#00d62e", fontSize: 12 }}>Avaliações</Text>
-          </ButtonAvaliations>
-          <ButtonEdit>
-            <Icon
-              name="create-outline"
-              type="ionicon"
-              size={25}
-              color={"#53c5fa"}
-            />
-            <Text style={{ color: "#53c5fa", fontSize: 12 }}>Editar</Text>
-          </ButtonEdit>
+              <Text style={{ color: "#00d62e", fontSize: 12 }}>Avaliações</Text>
+            </ButtonAvaliations>
+          )}
 
-          <ButtonDelete>
-            <Icon
-              name="trash-outline"
-              type="ionicon"
-              size={25}
-              color={"#ff4d4d"}
+          {isLoading ? (
+            <SkeletonLoad
+              style={{ marginTop: 3, width: 70, height: 60, borderRadius: 5 }}
             />
-            <Text style={{ color: "#ff4d4d", fontSize: 12 }}>Deletar</Text>
-          </ButtonDelete>
+          ) : (
+            <ButtonEdit>
+              <Icon
+                name="create-outline"
+                type="ionicon"
+                size={25}
+                color={"#53c5fa"}
+              />
+              <Text style={{ color: "#53c5fa", fontSize: 12 }}>Editar</Text>
+            </ButtonEdit>
+          )}
+
+          {isLoading ? (
+            <SkeletonLoad
+              style={{ marginTop: 3, width: 70, height: 60, borderRadius: 5 }}
+            />
+          ) : (
+            <ButtonDelete>
+              <Icon
+                name="trash-outline"
+                type="ionicon"
+                size={25}
+                color={"#ff4d4d"}
+              />
+              <Text style={{ color: "#ff4d4d", fontSize: 12 }}>Deletar</Text>
+            </ButtonDelete>
+          )}
         </ContainerButtons>
       </ContainerActions>
-      <TextIA>
-        <Text style={{ color: "#fff" }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          quia, esse porro dolores ad qui dicta labore vel, consequuntur,
-          consectetur quibusdam. Nihil doloribus quasi sit, facere provident
-          voluptatum soluta recusandae! Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Voluptatibus fuga blanditiis repellat optio at
-          consequatur quod sapiente ab saepe omnis eveniet animi minima
-          temporibus, vero, non illo ducimus distinctio provident. Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. Ullam explicabo in
-          maiores, incidunt sit provident quisquam, laudantium asperiores ex
-          obcaecati consectetur officiis! Modi inventore rerum expedita
-          voluptatem ut nemo aliquam?
-        </Text>
-      </TextIA>
+
+      {isLoading ? (
+        <SkeletonLoad
+          style={{ marginTop: 3, width: "100%", height: 190, borderRadius: 10 }}
+        />
+      ) : (
+        <TextIA>
+          <Text style={{ color: "#fff" }}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+            quia, esse porro dolores ad qui dicta labore vel, consequuntur,
+            consectetur quibusdam. Nihil doloribus quasi sit, facere provident
+            voluptatum soluta recusandae! Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Voluptatibus fuga blanditiis repellat optio at
+            consequatur quod sapiente ab saepe omnis eveniet animi minima
+            temporibus, vero, non illo ducimus distinctio provident. Lorem ipsum
+            dolor sit amet consectetur adipisicing elit. Ullam explicabo in
+            maiores, incidunt sit provident quisquam, laudantium asperiores ex
+            obcaecati consectetur officiis! Modi inventore rerum expedita
+            voluptatem ut nemo aliquam?
+          </Text>
+        </TextIA>
+      )}
     </ContainerMain>
   );
 };
