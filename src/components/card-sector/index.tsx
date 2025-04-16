@@ -1,4 +1,4 @@
-import { Modal, Text, TextInput, View } from "react-native";
+import { Modal, Text, TextInput, View, ViewStyle } from "react-native";
 import styled from "styled-components/native";
 import ToolipInfomation from "../custom-toolip";
 import { Icon } from "react-native-elements";
@@ -6,7 +6,11 @@ import { useState } from "react";
 import { Formik } from "formik";
 import { object, string } from "yup";
 
-interface CardSectorProps {}
+interface CardSectorProps {
+  name: string;
+  nuEmployee: number;
+  style?: ViewStyle;
+}
 
 const CardSector = (props: CardSectorProps) => {
   const [visibleUpdate, setVisibleUpdate] = useState(false);
@@ -23,7 +27,7 @@ const CardSector = (props: CardSectorProps) => {
   });
 
   return (
-    <ContainerMain>
+    <ContainerMain style={props.style}>
       <Modal
         animationType="fade"
         transparent={true}
@@ -83,8 +87,7 @@ const CardSector = (props: CardSectorProps) => {
       <Modal
         animationType="slide"
         transparent={true}
-        
-        style={{backgroundColor: 'red'}}
+        style={{ backgroundColor: "red" }}
         visible={visibleDelete}
         onTouchEnd={() => {
           console.log("fora");
@@ -111,10 +114,9 @@ const CardSector = (props: CardSectorProps) => {
           </ContentConfirm>
         </BoxConfirm>
       </Modal>
-      <BoxRoles>
-        {/* <TitleRoles>Setor</TitleRoles> */}
-        <Role>Desenvolvimento</Role>
-      </BoxRoles>
+      <BoxSector>
+        <Sector>{props.name}</Sector>
+      </BoxSector>
       <View
         style={{
           width: "49%",
@@ -126,7 +128,7 @@ const CardSector = (props: CardSectorProps) => {
         <BoxNuEmployees>
           <TitleNuEmployees>Nº funcionarios</TitleNuEmployees>
           <View style={{ alignItems: "center", flexDirection: "row", gap: 5 }}>
-            <NuEmployees>24</NuEmployees>
+            <NuEmployees>{props.nuEmployee}</NuEmployees>
             <ToolipInfomation
               text="Informa a quantidade de funcionarios com a função"
               iconSize={17}
@@ -264,19 +266,14 @@ const ButtonCancel = styled.TouchableOpacity`
   background-color: #5c9eff;
 `;
 
-const BoxRoles = styled.View`
+const BoxSector = styled.View`
   width: 49%;
   display: flex;
   flex-direction: column;
   gap: 6px;
 `;
 
-const TitleRoles = styled.Text`
-  color: gray;
-  font-size: 11px;
-`;
-
-const Role = styled.Text`
+const Sector = styled.Text`
   color: white;
   font-size: 15px;
 `;

@@ -1,19 +1,32 @@
 import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import styled from "styled-components/native";
 import InputSearch from "../../../../components/input-search";
 import { Icon } from "react-native-elements";
 import CardSector from "../../../../components/card-sector";
-import LoadingPage from "../../../../components/loading/LoadingPage";
 import { ModalSector } from "../../../../components/modal-sector/ModalSector";
 import { usePathname } from "expo-router";
-import EmployeeApi from "../../../api/employee";
+import SectorApi from "../../../api/sector";
+import SkeletonLoad from "../../../../components/loading/SkeletonLoad";
+
+type SectorWithEmployeeCount = {
+  id: string;
+  name: string;
+  _count: {
+    employees: number;
+  };
+};
+
+type SectorResponse = {
+  sector: SectorWithEmployeeCount[];
+  countSector: number;
+};
 
 const SectorEmployees = () => {
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<SectorWithEmployeeCount[] | null>();
 
   const [sector, setSector] = useState<string | null>(null);
   const pathname = usePathname();
@@ -34,9 +47,9 @@ const SectorEmployees = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const data = await EmployeeApi.getAll();
+      const data: SectorResponse = await SectorApi.getAll();
       console.log(data);
-      setData(data);
+      setData(data.sector);
     } catch (error) {
       console.error("Erro ao buscar funcionários:", error);
     }
@@ -54,51 +67,58 @@ const SectorEmployees = () => {
 
   return (
     <ContainerMain>
-      {loading ? (
-        <LoadingPage />
-      ) : (
-        <>
-          <ModalSector
-            visible={modalVisible}
-            onClose={handleVisibleModal}
-            onSubmit={handleAddSector}
-          />
-          <BoxButtons>
-            <ButtonAdd onPress={() => handleVisibleModal()}>
-              <Text style={{ color: "white", fontSize: 14, width: "auto" }}>
-                Setor
-              </Text>
-              <Icon
-                name="add"
-                type="ionicon"
-                size={16}
-                color={"white"}
-                style={{ width: "fit-content" }}
-              />
-            </ButtonAdd>
-          </BoxButtons>
-          <View style={{ paddingHorizontal: 20 }}>
-            <InputSearch
-              style={{ marginTop: 10, marginBottom: 10 }}
-              placeholder="Recepcionista, Pintor, Gerente..."
+      <>
+        <ModalSector
+          visible={modalVisible}
+          onClose={handleVisibleModal}
+          onSubmit={handleAddSector}
+        />
+        <BoxButtons>
+          <ButtonAdd onPress={() => handleVisibleModal()}>
+            <Text style={{ color: "white", fontSize: 14, width: "auto" }}>
+              Setor
+            </Text>
+            <Icon
+              name="add"
+              type="ionicon"
+              size={16}
+              color={"white"}
+              style={{ width: "fit-content" }}
             />
-          </View>
-          <BoxScroll>
-            <ScrollView
-              contentContainerStyle={{
-                alignItems: "center",
-                gap: 10,
-                width: "100%",
-                paddingBottom: 120,
-              }}
-            >
-              {Array.from({ length: 10 }).map((_, index) => {
-                return <CardSector key={index}></CardSector>;
-              })}
-            </ScrollView>
-          </BoxScroll>
-        </>
-      )}
+          </ButtonAdd>
+        </BoxButtons>
+        <View style={{ paddingHorizontal: 20 }}>
+          <InputSearch
+            style={{ marginTop: 10, marginBottom: 10 }}
+            placeholder="Recepcionista, Pintor, Gerente..."
+          />
+        </View>
+        <BoxScroll>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              return loading ? (
+                <SkeletonLoad
+                  style={{
+                    width: "100%",
+                    height: 80,
+                    marginBottom: 10,
+                    borderRadius: 5,
+                  }}
+                />
+              ) : (
+                <CardSector
+                  key={item.id}
+                  name={item.name}
+                  nuEmployee={item._count.employees}
+                  style={{ marginBottom: 10 }}
+                />
+              );
+            }}
+          />
+        </BoxScroll>
+      </>
     </ContainerMain>
   );
 };
@@ -121,6 +141,11 @@ const ContainerMain = styled.View`
 const BoxScroll = styled.View`
   width: 100%;
   padding: 10px 20px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 0px;
+  margin-bottom: 140px;
 `;
 
 const BoxButtons = styled.View`
