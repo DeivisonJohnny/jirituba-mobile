@@ -2,7 +2,7 @@ import * as React from "react";
 import ProfileCard from "../profile";
 import styled from "styled-components/native";
 import { useFonts } from "expo-font";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import { ViewStyle } from "react-native";
 
 interface CardEmployeeProps {
@@ -18,14 +18,8 @@ const CardEmployee = (props: CardEmployeeProps) => {
     montserratMedium: require("../../app/assets/fonts/Montserrat-Medium.ttf"),
   });
 
-  const router = useRouter();
   const directionPage = () => {
-    router.push({
-      pathname: `/pages/details-user/[id]`,
-      params: {
-        id: props.idUser,
-      },
-    });
+    router.push(`../pages/details-user/${props.idUser}`);
   };
 
   return (

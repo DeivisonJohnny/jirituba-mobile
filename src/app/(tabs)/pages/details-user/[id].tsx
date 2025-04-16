@@ -16,9 +16,9 @@ const DetailsUser = () => {
     router.back();
   }
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (id: string) => {
     try {
-      const data = await EmployeeApi.getByIdOrCPF(id as string);
+      const data = await EmployeeApi.getByIdOrCPF(id);
       setData(data);
     } catch (error) {
       console.log(error);
@@ -26,11 +26,13 @@ const DetailsUser = () => {
   }, []);
 
   useEffect(() => {
-    const loadData = async () => {
-      await fetchData();
-    };
-    loadData();
-  }, []);
+    if (!id) {
+      router.back();
+      return;
+    }
+
+    fetchData(id as string);
+  }, [id]);
 
   return (
     <ContainerMain>
